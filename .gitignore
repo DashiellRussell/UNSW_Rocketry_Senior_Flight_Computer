@@ -1,0 +1,23 @@
+# KiCad backup and autosave files
+*.kicad_prl
+*-backups/
+_autosave-*
+*~
+\#auto_saved_files#
+
+# Netlist files (generated)
+*.net
+
+# Gerber output (regenerate from source)
+gerbers/
+output/
+
+# 3D cache
+*.3dc
+
+# Lock files
+*.lck
+
+# OS junk
+.DS_Store
+Thumbs.db
