@@ -582,12 +582,72 @@
           "label": "Datasheet",
           "name": "Datasheet",
           "show": true
+        },
+        {
+          "group_by": false,
+          "label": "Digikey",
+          "name": "Digikey",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MPN",
+          "name": "MPN",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MPR",
+          "name": "MPR",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PROD_ID",
+          "name": "PROD_ID",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Pins",
+          "name": "Sim.Pins",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Tolerance",
+          "name": "Tolerance",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Voltage",
+          "name": "Voltage",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Digi",
+          "name": "Digi",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Description",
+          "name": "Description",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "#",
+          "name": "${ITEM_NUMBER}",
+          "show": false
         }
       ],
       "filter_string": "",
       "group_symbols": true,
       "include_excluded_from_bom": true,
-      "name": "Default Editing",
+      "name": "",
       "sort_asc": true,
       "sort_field": "Reference"
     },
@@ -632,13 +692,25 @@
         "uuid": "9e0253f5-fba5-4205-8256-7fc47a91dd1e"
       }
     ],
-    "used_designators": "C12-13,R1,Y1,#PWR18-20",
+    "used_designators": "TP1-12,L1-2,U2-8,C12-33,SW1,Y1,#PWR17-68,D1-10,Q1-2,R1-17,J1-4,F1-2",
     "variants": []
   },
   "sheets": [
     [
       "9e0253f5-fba5-4205-8256-7fc47a91dd1e",
       "UNSW_Rocketry_Senior_Flight_Computer"
+    ],
+    [
+      "32dc7f8f-d1cd-4967-8830-7944681bf161",
+      "Power"
+    ],
+    [
+      "e7df30d3-5847-4b99-8916-a8021a668802",
+      "Peripherals"
+    ],
+    [
+      "4243282c-f3ca-4105-833d-42ac8b978054",
+      "Comms"
     ]
   ],
   "text_variables": {},
