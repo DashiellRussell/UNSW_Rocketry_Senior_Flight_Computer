@@ -6748,7 +6748,7 @@
 				)
 			)
 		)
-		(property "Value" "XT60"
+		(property "Value" "BATT_XT60"
 			(at 64.77 48.26 0)
 			(show_name no)
 			(do_not_autoplace no)

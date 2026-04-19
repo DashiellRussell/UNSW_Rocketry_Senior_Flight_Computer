@@ -3697,6 +3697,16 @@
 	)
 	(wire
 		(pts
+			(xy 166.37 106.68) (xy 166.37 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "355ef4d7-df8c-4e15-9dca-e41e3042c5fc")
+	)
+	(wire
+		(pts
 			(xy 187.96 83.82) (xy 198.12 83.82)
 		)
 		(stroke
@@ -3797,6 +3807,16 @@
 	)
 	(wire
 		(pts
+			(xy 100.33 106.68) (xy 100.33 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57d6f187-add3-4769-b302-88047ea40a0c")
+	)
+	(wire
+		(pts
 			(xy 130.81 66.04) (xy 130.81 71.12)
 		)
 		(stroke
@@ -3817,6 +3837,16 @@
 	)
 	(wire
 		(pts
+			(xy 97.79 106.68) (xy 97.79 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5bdd6496-e5a3-40d1-b9d9-7762f3fe864a")
+	)
+	(wire
+		(pts
 			(xy 135.89 66.04) (xy 135.89 71.12)
 		)
 		(stroke
@@ -3824,6 +3854,16 @@
 			(type default)
 		)
 		(uuid "602de608-8606-4017-ad6f-1176d915506d")
+	)
+	(wire
+		(pts
+			(xy 173.99 106.68) (xy 173.99 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6572aec1-09bb-40b9-9635-4c677f1d9f8c")
 	)
 	(wire
 		(pts
@@ -4077,6 +4117,16 @@
 	)
 	(wire
 		(pts
+			(xy 176.53 106.68) (xy 176.53 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bc4a48a7-4dfb-4bcf-8d0c-58779991da01")
+	)
+	(wire
+		(pts
 			(xy 176.53 41.91) (xy 176.53 43.18)
 		)
 		(stroke
@@ -4154,6 +4204,16 @@
 			(type default)
 		)
 		(uuid "cf418f23-27b9-4673-b4ab-a777c481952d")
+	)
+	(wire
+		(pts
+			(xy 105.41 106.68) (xy 105.41 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cf9ac322-0319-4185-986d-823c197216ab")
 	)
 	(wire
 		(pts
@@ -4257,6 +4317,16 @@
 	)
 	(wire
 		(pts
+			(xy 95.25 106.68) (xy 95.25 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e184fbce-c0b9-4f92-a0b7-7d9817e4d570")
+	)
+	(wire
+		(pts
 			(xy 185.42 142.24) (xy 190.5 142.24)
 		)
 		(stroke
@@ -4274,6 +4344,16 @@
 			(type default)
 		)
 		(uuid "e7bf2c52-6cea-4cc3-abaf-bb45a9a7027a")
+	)
+	(wire
+		(pts
+			(xy 107.95 106.68) (xy 107.95 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e85c94e9-944f-4caf-a525-c78d2f096567")
 	)
 	(wire
 		(pts
@@ -4499,6 +4579,30 @@
 			)
 		)
 	)
+	(global_label "PYRO_ARM"
+		(shape input)
+		(at 100.33 113.03 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "324c5594-fc9b-44a1-b0c2-5aeadd89e610")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 100.33 125.7519 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+	)
 	(global_label "SDMMC_CMD"
 		(shape input)
 		(at 161.29 66.04 90)
@@ -4520,6 +4624,30 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+			)
+		)
+	)
+	(global_label "PYRO1_CONT"
+		(shape input)
+		(at 176.53 113.03 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "56037d3d-7bbf-4773-9e2b-1603b7896879")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 176.53 128.05 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
 		)
 	)
@@ -4592,6 +4720,78 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+			)
+		)
+	)
+	(global_label "PYRO2_CONT_LED"
+		(shape input)
+		(at 105.41 113.03 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "73acae24-022a-4dce-aeae-a58316e0469a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 105.41 132.4647 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+	)
+	(global_label "PYRO2_CONT"
+		(shape input)
+		(at 173.99 113.03 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "79394a6f-6cb8-49b8-8add-f116c275ba8c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 173.99 128.05 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+	)
+	(global_label "PYRO_BATT_SENSE"
+		(shape input)
+		(at 166.37 113.03 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "7bdf3800-123b-4b82-b681-0af67ceb43be")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 166.37 133.2508 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
 		)
 	)
@@ -4787,6 +4987,54 @@
 			)
 		)
 	)
+	(global_label "PYRO1_GATE"
+		(shape input)
+		(at 97.79 113.03 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b9f5292e-55af-4485-95b4-15ab532082aa")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 97.79 127.6266 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+	)
+	(global_label "PYRO2_GATE"
+		(shape input)
+		(at 95.25 113.03 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c9fed432-af29-47b2-9ff7-62c66d44f4dd")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 95.25 127.6266 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+	)
 	(global_label "SDMMC_D3"
 		(shape input)
 		(at 128.27 66.04 90)
@@ -4856,6 +5104,30 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+			)
+		)
+	)
+	(global_label "PYRO1_CONT_LED"
+		(shape input)
+		(at 107.95 113.03 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "efcc78d8-0918-46ce-872a-0212f3e18939")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 107.95 132.4647 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
 		)
 	)
@@ -8602,6 +8874,52 @@
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
 					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 104.14 180.34)
+		(size 24.13 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "810ac388-79e0-4279-a05f-a2a0b85dc963")
+		(property "Sheetname" "Pyros"
+			(at 104.14 179.6284 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Pyros.kicad_sch"
+			(at 104.14 193.6246 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
+					(page "5")
 				)
 			)
 		)
