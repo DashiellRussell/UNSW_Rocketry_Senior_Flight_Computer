@@ -692,7 +692,7 @@
         "uuid": "9e0253f5-fba5-4205-8256-7fc47a91dd1e"
       }
     ],
-    "used_designators": "TP1-12,L1-2,U2-8,C12-33,SW1,Y1,#PWR17-68,D1-10,Q1-2,R1-17,J1-4,F1-2",
+    "used_designators": "J5-6,U6,TP7,#PWR56,#PWR59-63,#PWR66-70,D1-2,D8,C23,C25,JP1,R2-3,R17",
     "variants": []
   },
   "sheets": [

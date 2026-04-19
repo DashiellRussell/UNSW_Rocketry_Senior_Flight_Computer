@@ -163,6 +163,174 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:D_Schottky_Small"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "D"
+				(at -1.27 2.032 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "D_Schottky_Small"
+				(at -7.112 -2.032 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Schottky diode, small symbol"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "diode Schottky"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "D_Schottky_Small_0_1"
+				(polyline
+					(pts
+						(xy -1.27 0.762) (xy -1.27 1.016) (xy -0.762 1.016) (xy -0.762 -1.016) (xy -0.254 -1.016) (xy -0.254 -0.762)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.762 0) (xy 0.762 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.016) (xy -0.762 0) (xy 0.762 1.016) (xy 0.762 -1.016)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "D_Schottky_Small_1_1"
+				(pin passive line
+					(at -2.54 0 0)
+					(length 1.778)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 0 180)
+					(length 1.778)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:D_Zener"
 			(pin_numbers
 				(hide yes)
@@ -3688,6 +3856,12 @@
 		(uuid "6ba6d103-9764-4735-949f-02378f013ba8")
 	)
 	(junction
+		(at 213.36 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7ea2b470-1a53-4e50-93e4-b0e6f1bcf811")
+	)
+	(junction
 		(at 74.93 119.38)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3730,7 +3904,7 @@
 		(uuid "ab626d3a-9a47-436e-8714-7b9b92ad9dd9")
 	)
 	(junction
-		(at 226.06 52.07)
+		(at 238.76 52.07)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ae929599-bc06-43db-ae25-573382f09fd1")
@@ -3837,7 +4011,7 @@
 	)
 	(wire
 		(pts
-			(xy 222.25 119.38) (xy 242.57 119.38)
+			(xy 222.25 111.76) (xy 242.57 111.76)
 		)
 		(stroke
 			(width 0)
@@ -3927,6 +4101,16 @@
 	)
 	(wire
 		(pts
+			(xy 222.25 52.07) (xy 238.76 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "202fc772-0ec6-4bf4-b385-029a1e93e1fd")
+	)
+	(wire
+		(pts
 			(xy 163.83 119.38) (xy 167.64 119.38)
 		)
 		(stroke
@@ -3987,7 +4171,7 @@
 	)
 	(wire
 		(pts
-			(xy 247.65 127) (xy 251.46 127)
+			(xy 247.65 119.38) (xy 251.46 119.38)
 		)
 		(stroke
 			(width 0)
@@ -4034,6 +4218,16 @@
 			(type default)
 		)
 		(uuid "32bcbdce-ba36-4fdc-9316-fd5a53b0b4f4")
+	)
+	(wire
+		(pts
+			(xy 213.36 52.07) (xy 213.36 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "330db52a-58c8-4b8e-b656-4ed38f599bf6")
 	)
 	(wire
 		(pts
@@ -4087,7 +4281,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 57.15) (xy 226.06 57.15)
+			(xy 241.3 57.15) (xy 238.76 57.15)
 		)
 		(stroke
 			(width 0)
@@ -4127,7 +4321,7 @@
 	)
 	(wire
 		(pts
-			(xy 247.65 119.38) (xy 251.46 119.38)
+			(xy 247.65 111.76) (xy 251.46 111.76)
 		)
 		(stroke
 			(width 0)
@@ -4207,7 +4401,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 52.07) (xy 215.9 52.07)
+			(xy 198.12 52.07) (xy 203.2 52.07)
 		)
 		(stroke
 			(width 0)
@@ -4277,7 +4471,7 @@
 	)
 	(wire
 		(pts
-			(xy 226.06 52.07) (xy 228.6 52.07)
+			(xy 238.76 52.07) (xy 241.3 52.07)
 		)
 		(stroke
 			(width 0)
@@ -4357,13 +4551,33 @@
 	)
 	(wire
 		(pts
-			(xy 223.52 52.07) (xy 226.06 52.07)
+			(xy 213.36 52.07) (xy 217.17 52.07)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "7de6df45-e106-456d-a52f-c4bd957fdbcb")
+		(uuid "7fb40e61-70f8-4ce6-b7d3-779e18e90116")
+	)
+	(wire
+		(pts
+			(xy 247.65 127) (xy 251.46 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "832f2e36-c28c-4287-a567-a210bc58a615")
+	)
+	(wire
+		(pts
+			(xy 213.36 48.26) (xy 213.36 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "88888827-3c1f-43f5-ad06-0acf75636847")
 	)
 	(wire
 		(pts
@@ -4437,6 +4651,16 @@
 	)
 	(wire
 		(pts
+			(xy 222.25 127) (xy 242.57 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9368b643-e2c1-4363-b4e8-e4bd333d630c")
+	)
+	(wire
+		(pts
 			(xy 120.65 130.81) (xy 120.65 127)
 		)
 		(stroke
@@ -4507,7 +4731,7 @@
 	)
 	(wire
 		(pts
-			(xy 226.06 57.15) (xy 226.06 52.07)
+			(xy 238.76 57.15) (xy 238.76 52.07)
 		)
 		(stroke
 			(width 0)
@@ -4527,7 +4751,7 @@
 	)
 	(wire
 		(pts
-			(xy 222.25 127) (xy 242.57 127)
+			(xy 222.25 119.38) (xy 242.57 119.38)
 		)
 		(stroke
 			(width 0)
@@ -4597,7 +4821,7 @@
 	)
 	(wire
 		(pts
-			(xy 226.06 48.26) (xy 226.06 52.07)
+			(xy 238.76 48.26) (xy 238.76 52.07)
 		)
 		(stroke
 			(width 0)
@@ -4627,7 +4851,7 @@
 	)
 	(wire
 		(pts
-			(xy 259.08 119.38) (xy 262.89 119.38)
+			(xy 259.08 111.76) (xy 262.89 111.76)
 		)
 		(stroke
 			(width 0)
@@ -4797,7 +5021,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 48.26) (xy 226.06 48.26)
+			(xy 241.3 48.26) (xy 238.76 48.26)
 		)
 		(stroke
 			(width 0)
@@ -4857,6 +5081,26 @@
 	)
 	(wire
 		(pts
+			(xy 210.82 52.07) (xy 213.36 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dad78eda-2648-4400-b080-dfe9773bfb32")
+	)
+	(wire
+		(pts
+			(xy 213.36 57.15) (xy 215.9 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e09a62e7-267c-4cc5-89c4-0a89302a2d98")
+	)
+	(wire
+		(pts
 			(xy 72.39 58.42) (xy 72.39 54.61)
 		)
 		(stroke
@@ -4864,6 +5108,16 @@
 			(type default)
 		)
 		(uuid "e164b092-4fcc-422f-8c5b-85eb5e45ae68")
+	)
+	(wire
+		(pts
+			(xy 259.08 127) (xy 262.89 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e17df9fe-8e58-496c-ad51-9a62360ba3f2")
 	)
 	(wire
 		(pts
@@ -4877,7 +5131,7 @@
 	)
 	(wire
 		(pts
-			(xy 259.08 127) (xy 262.89 127)
+			(xy 259.08 119.38) (xy 262.89 119.38)
 		)
 		(stroke
 			(width 0)
@@ -4975,6 +5229,16 @@
 		)
 		(uuid "ffa53ee4-4593-4e72-b5cf-65ec7e2e2567")
 	)
+	(label "VBAT_POLY_STATUS"
+		(at 222.25 127 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "16b7f79a-156a-454a-a960-28150fb3cf85")
+	)
 	(label "VBAT_PROT_STATUS"
 		(at 157.48 57.15 0)
 		(effects
@@ -5006,7 +5270,7 @@
 		(uuid "56848647-7852-4ef7-a1a2-f6c9e0cc1d6b")
 	)
 	(label "VBAT_PROT_STATUS"
-		(at 222.25 119.38 0)
+		(at 222.25 111.76 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5016,7 +5280,7 @@
 		(uuid "6ae0a17e-d3f4-4cee-a860-0279f194b750")
 	)
 	(label "VBAT_FUSED_STATUS"
-		(at 228.6 57.15 0)
+		(at 241.3 57.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5024,6 +5288,16 @@
 			(justify left bottom)
 		)
 		(uuid "78bf830e-b17a-48fb-ab06-6020870ca9c8")
+	)
+	(label "VBAT_POLY_STATUS"
+		(at 215.9 57.15 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "822dbeb1-a715-486a-b97d-89a481f054da")
 	)
 	(label "VBAT_LDO_STATUS"
 		(at 222.25 142.24 0)
@@ -5046,7 +5320,7 @@
 		(uuid "c78a3d3c-6db4-462a-91d7-d8187c81112e")
 	)
 	(label "VBAT_FUSED_STATUS"
-		(at 222.25 127 0)
+		(at 222.25 119.38 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5081,7 +5355,7 @@
 	)
 	(global_label "VBAT_PROT"
 		(shape input)
-		(at 209.55 52.07 180)
+		(at 198.12 52.07 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5091,7 +5365,7 @@
 		)
 		(uuid "b95ee293-229a-4447-ba57-a07ae899091a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 196.3443 52.07 0)
+			(at 184.9143 52.07 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5105,7 +5379,7 @@
 	)
 	(global_label "VBAT_FUSED"
 		(shape input)
-		(at 228.6 52.07 0)
+		(at 241.3 52.07 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5115,7 +5389,7 @@
 		)
 		(uuid "c77a4f98-141b-449a-818d-345eb681d026")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 243.0152 52.07 0)
+			(at 255.7152 52.07 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5664,7 +5938,7 @@
 	)
 	(symbol
 		(lib_id "PCM_SparkFun-Resistor:4.7k_0603")
-		(at 245.11 119.38 0)
+		(at 245.11 111.76 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5674,7 +5948,7 @@
 		(dnp no)
 		(uuid "1bd63bdb-6099-42aa-bbc1-1909148a0465")
 		(property "Reference" "R9"
-			(at 245.11 115.316 0)
+			(at 245.11 107.696 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5684,7 +5958,7 @@
 			)
 		)
 		(property "Value" "4.7k"
-			(at 245.11 116.84 0)
+			(at 245.11 109.22 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5694,7 +5968,7 @@
 			)
 		)
 		(property "Footprint" "PCM_SparkFun-Resistor:R_0603_1608Metric"
-			(at 245.11 123.698 0)
+			(at 245.11 116.078 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5705,7 +5979,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
-			(at 245.11 128.27 0)
+			(at 245.11 120.65 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5716,7 +5990,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 245.11 130.81 0)
+			(at 245.11 123.19 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5727,7 +6001,7 @@
 			)
 		)
 		(property "PROD_ID" "RES-07857"
-			(at 245.11 125.984 0)
+			(at 245.11 118.364 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5947,7 +6221,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 262.89 127 90)
+		(at 262.89 119.38 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5958,7 +6232,7 @@
 		(fields_autoplaced yes)
 		(uuid "239cabd3-d888-4a95-bfd5-ef8fd61b4476")
 		(property "Reference" "#PWR043"
-			(at 269.24 127 0)
+			(at 269.24 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5969,7 +6243,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 266.7 126.9999 90)
+			(at 266.7 119.3799 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5980,7 +6254,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 262.89 127 0)
+			(at 262.89 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5991,7 +6265,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 262.89 127 0)
+			(at 262.89 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6002,7 +6276,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 262.89 127 0)
+			(at 262.89 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7103,6 +7377,84 @@
 	)
 	(symbol
 		(lib_id "PCM_SparkFun-Connector:TestPoint_1.0mm")
+		(at 213.36 48.26 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4589ca38-7e6f-44ee-80b8-4452be0d4c39")
+		(property "Reference" "TP7"
+			(at 213.36 43.18 0)
+			(show_name no)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1.0mm"
+			(at 213.36 52.07 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "PCM_SparkFun-Connector:TestPoint-1.0mm"
+			(at 213.36 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 213.36 55.88 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Test Point"
+			(at 213.36 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "55e6cc6e-3a8b-4e95-add7-9e9d29a02ed4")
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/32dc7f8f-d1cd-4967-8830-7944681bf161"
+					(reference "TP7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "PCM_SparkFun-Connector:TestPoint_1.0mm")
 		(at 175.26 133.35 180)
 		(unit 1)
 		(body_style 1)
@@ -7181,7 +7533,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 262.89 119.38 90)
+		(at 262.89 111.76 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7192,7 +7544,7 @@
 		(fields_autoplaced yes)
 		(uuid "493d7396-c3c8-4212-8af1-449d9aa1b073")
 		(property "Reference" "#PWR065"
-			(at 269.24 119.38 0)
+			(at 269.24 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7203,7 +7555,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 266.7 119.3799 90)
+			(at 266.7 111.7599 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7214,7 +7566,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 262.89 119.38 0)
+			(at 262.89 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7225,7 +7577,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 262.89 119.38 0)
+			(at 262.89 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7236,7 +7588,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 262.89 119.38 0)
+			(at 262.89 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7259,8 +7611,88 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:D_Schottky_Small")
+		(at 219.71 52.07 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4b58690b-90ac-48bc-9c36-968423b8209b")
+		(property "Reference" "D2"
+			(at 219.964 45.72 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "B5819W"
+			(at 219.964 48.26 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-123"
+			(at 219.71 52.07 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 219.71 52.07 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Schottky diode, small symbol"
+			(at 219.71 52.07 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a663b0b7-c01a-4f84-903c-8ef7c6459155")
+		)
+		(pin "2"
+			(uuid "142f6bb0-e96e-460c-8ad7-b547636f16ad")
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/32dc7f8f-d1cd-4967-8830-7944681bf161"
+					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "PCM_SparkFun-Resistor:4.7k_0603")
-		(at 245.11 127 0)
+		(at 245.11 119.38 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7270,7 +7702,7 @@
 		(dnp no)
 		(uuid "4bc5f598-b26b-42bb-8fc3-72da74b9db00")
 		(property "Reference" "R15"
-			(at 245.11 122.936 0)
+			(at 245.11 115.316 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7280,7 +7712,7 @@
 			)
 		)
 		(property "Value" "4.7k"
-			(at 245.11 124.46 0)
+			(at 245.11 116.84 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7290,7 +7722,7 @@
 			)
 		)
 		(property "Footprint" "PCM_SparkFun-Resistor:R_0603_1608Metric"
-			(at 245.11 131.318 0)
+			(at 245.11 123.698 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7301,7 +7733,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
-			(at 245.11 135.89 0)
+			(at 245.11 128.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7312,7 +7744,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 245.11 138.43 0)
+			(at 245.11 130.81 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7323,7 +7755,7 @@
 			)
 		)
 		(property "PROD_ID" "RES-07857"
-			(at 245.11 133.604 0)
+			(at 245.11 125.984 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7343,6 +7775,85 @@
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/32dc7f8f-d1cd-4967-8830-7944681bf161"
 					(reference "R15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 262.89 127 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4ea376a9-5cd3-4194-88ce-35ef8448b7ec")
+		(property "Reference" "#PWR063"
+			(at 269.24 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 266.7 126.9999 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 262.89 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 262.89 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 262.89 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "496c804c-f799-40b7-ae27-7f70d06e6d2d")
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/32dc7f8f-d1cd-4967-8830-7944681bf161"
+					(reference "#PWR063")
 					(unit 1)
 				)
 			)
@@ -7784,7 +8295,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED")
-		(at 255.27 127 180)
+		(at 255.27 119.38 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7794,7 +8305,7 @@
 		(dnp no)
 		(uuid "69e4491f-d144-4bd7-86dc-00cd9c94e66e")
 		(property "Reference" "D3"
-			(at 255.27 121.92 0)
+			(at 255.27 114.3 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7804,7 +8315,7 @@
 			)
 		)
 		(property "Value" "Green"
-			(at 255.27 123.952 0)
+			(at 255.27 116.332 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7814,7 +8325,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
-			(at 255.27 127 0)
+			(at 255.27 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7825,7 +8336,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 255.27 127 0)
+			(at 255.27 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7836,7 +8347,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode"
-			(at 255.27 127 0)
+			(at 255.27 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7847,7 +8358,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 255.27 127 0)
+			(at 255.27 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8509,7 +9020,7 @@
 	)
 	(symbol
 		(lib_id "Device:Polyfuse")
-		(at 219.71 52.07 270)
+		(at 207.01 52.07 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8520,7 +9031,7 @@
 		(fields_autoplaced yes)
 		(uuid "8d635aff-6b12-48c8-9f2e-33c04d75653e")
 		(property "Reference" "F2"
-			(at 219.71 45.72 90)
+			(at 207.01 45.72 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8530,7 +9041,7 @@
 			)
 		)
 		(property "Value" "1A"
-			(at 219.71 48.26 90)
+			(at 207.01 48.26 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8540,7 +9051,7 @@
 			)
 		)
 		(property "Footprint" "Fuse_1206_3216Metric"
-			(at 214.63 53.34 0)
+			(at 201.93 53.34 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8552,7 +9063,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 219.71 52.07 0)
+			(at 207.01 52.07 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8563,7 +9074,7 @@
 			)
 		)
 		(property "Description" "Resettable fuse, polymeric positive temperature coefficient"
-			(at 219.71 52.07 0)
+			(at 207.01 52.07 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8746,7 +9257,7 @@
 	)
 	(symbol
 		(lib_id "PCM_SparkFun-Connector:TestPoint_1.0mm")
-		(at 228.6 48.26 270)
+		(at 241.3 48.26 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8757,7 +9268,7 @@
 		(fields_autoplaced yes)
 		(uuid "9abf140f-4c01-4d71-a97d-44045d819549")
 		(property "Reference" "TP3"
-			(at 233.68 48.26 0)
+			(at 246.38 48.26 0)
 			(show_name no)
 			(do_not_autoplace yes)
 			(effects
@@ -8767,7 +9278,7 @@
 			)
 		)
 		(property "Value" "1.0mm"
-			(at 224.79 48.26 0)
+			(at 237.49 48.26 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8778,7 +9289,7 @@
 			)
 		)
 		(property "Footprint" "PCM_SparkFun-Connector:TestPoint-1.0mm"
-			(at 222.25 48.26 0)
+			(at 234.95 48.26 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8789,7 +9300,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 220.98 48.26 0)
+			(at 233.68 48.26 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8800,7 +9311,7 @@
 			)
 		)
 		(property "Description" "Test Point"
-			(at 218.44 48.26 0)
+			(at 231.14 48.26 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9160,7 +9671,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED")
-		(at 255.27 119.38 180)
+		(at 255.27 127 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9168,9 +9679,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "c137b270-ca4b-42a2-9050-f657ab511b9e")
-		(property "Reference" "D7"
-			(at 255.27 114.3 0)
+		(uuid "ba93d750-0119-452f-a954-ec943ece7ec1")
+		(property "Reference" "D8"
+			(at 255.27 121.92 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9180,7 +9691,7 @@
 			)
 		)
 		(property "Value" "Green"
-			(at 255.27 116.332 0)
+			(at 255.27 123.952 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9190,7 +9701,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
-			(at 255.27 119.38 0)
+			(at 255.27 127 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9201,7 +9712,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 255.27 119.38 0)
+			(at 255.27 127 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9212,7 +9723,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode"
-			(at 255.27 119.38 0)
+			(at 255.27 127 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9223,7 +9734,97 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 255.27 119.38 0)
+			(at 255.27 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "34ea0c84-27b3-41e1-b901-7e2de85a80ad")
+		)
+		(pin "2"
+			(uuid "3b2c68da-2619-4a0f-a848-db039ceb7ba2")
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/32dc7f8f-d1cd-4967-8830-7944681bf161"
+					(reference "D8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 255.27 111.76 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c137b270-ca4b-42a2-9050-f657ab511b9e")
+		(property "Reference" "D7"
+			(at 255.27 106.68 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Green"
+			(at 255.27 108.712 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 255.27 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 255.27 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 255.27 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 255.27 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9839,6 +10440,96 @@
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/32dc7f8f-d1cd-4967-8830-7944681bf161"
 					(reference "#PWR032")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "PCM_SparkFun-Resistor:4.7k_0603")
+		(at 245.11 127 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "d9aa7102-3219-4686-9415-0d7f563ea7dd")
+		(property "Reference" "R17"
+			(at 245.11 122.936 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 245.11 124.46 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "PCM_SparkFun-Resistor:R_0603_1608Metric"
+			(at 245.11 131.318 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
+			(at 245.11 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 245.11 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PROD_ID" "RES-07857"
+			(at 245.11 133.604 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1a82cf59-acda-43bb-9abf-32182343aafa")
+		)
+		(pin "2"
+			(uuid "abf0b1c8-dc50-4ae3-911b-9d27b489b117")
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/32dc7f8f-d1cd-4967-8830-7944681bf161"
+					(reference "R17")
 					(unit 1)
 				)
 			)
