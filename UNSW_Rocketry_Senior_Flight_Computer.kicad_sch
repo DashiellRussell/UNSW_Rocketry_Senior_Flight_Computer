@@ -5793,7 +5793,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "17b090a0-0f52-4650-9273-914580662215")
-		(property "Reference" "#PWR011"
+		(property "Reference" "#PWR018"
 			(at 212.09 142.24 0)
 			(hide yes)
 			(show_name no)
@@ -5854,7 +5854,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR011")
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -5871,7 +5871,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "180353e6-4656-4c5c-a411-fa8c51d8680b")
-		(property "Reference" "C10"
+		(property "Reference" "C6"
 			(at 193.294 80.01 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5964,7 +5964,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "C10")
+					(reference "C6")
 					(unit 1)
 				)
 			)
@@ -5982,7 +5982,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "273ba65d-bc79-4b77-a710-893587590edd")
-		(property "Reference" "C12"
+		(property "Reference" "C2"
 			(at 179.07 35.5662 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6079,7 +6079,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "C12")
+					(reference "C2")
 					(unit 1)
 				)
 			)
@@ -6097,7 +6097,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "291abccd-2640-4508-a64a-7694b07068f1")
-		(property "Reference" "#PWR014"
+		(property "Reference" "#PWR05"
 			(at 170.18 134.62 0)
 			(hide yes)
 			(show_name no)
@@ -6158,7 +6158,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR014")
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -6175,7 +6175,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3869a27e-66a7-4883-a6f3-769e0f561923")
-		(property "Reference" "C8"
+		(property "Reference" "C5"
 			(at 185.42 136.906 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6268,7 +6268,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "C8")
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -6286,7 +6286,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4224ab93-66d7-4756-94b2-354af2af9951")
-		(property "Reference" "#PWR010"
+		(property "Reference" "#PWR017"
 			(at 212.09 134.62 0)
 			(hide yes)
 			(show_name no)
@@ -6347,7 +6347,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR010")
+					(reference "#PWR017")
 					(unit 1)
 				)
 			)
@@ -6365,7 +6365,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "426cb8f8-7a90-42d4-8dde-91d1afd75494")
-		(property "Reference" "#PWR04"
+		(property "Reference" "#PWR020"
 			(at 217.17 88.9 0)
 			(hide yes)
 			(show_name no)
@@ -6425,7 +6425,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR04")
+					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -6442,7 +6442,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "42875892-336d-4af0-840d-fd46480508ba")
-		(property "Reference" "C2"
+		(property "Reference" "C13"
 			(at 218.186 97.028 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6539,7 +6539,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "C2")
+					(reference "C13")
 					(unit 1)
 				)
 			)
@@ -6556,7 +6556,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "4da5dbc8-b908-4f52-a670-4bbbac8395cb")
-		(property "Reference" "#PWR018"
+		(property "Reference" "#PWR08"
 			(at 194.31 62.23 0)
 			(hide yes)
 			(show_name no)
@@ -6616,7 +6616,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR018")
+					(reference "#PWR08")
 					(unit 1)
 				)
 			)
@@ -6633,7 +6633,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5c409147-411d-4e24-90ab-f1d12d40e880")
-		(property "Reference" "C7"
+		(property "Reference" "C8"
 			(at 201.93 129.286 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6726,7 +6726,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "C7")
+					(reference "C8")
 					(unit 1)
 				)
 			)
@@ -6744,7 +6744,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "61d0d8e3-8fa5-4a27-a2a2-0ebdcf5a476b")
-		(property "Reference" "#PWR09"
+		(property "Reference" "#PWR016"
 			(at 212.09 127 0)
 			(hide yes)
 			(show_name no)
@@ -6805,7 +6805,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR09")
+					(reference "#PWR016")
 					(unit 1)
 				)
 			)
@@ -6952,7 +6952,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "67a76f00-cfbb-42ef-abe2-241608959ea6")
-		(property "Reference" "#PWR06"
+		(property "Reference" "#PWR014"
 			(at 204.47 74.93 0)
 			(hide yes)
 			(show_name no)
@@ -7012,7 +7012,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR06")
+					(reference "#PWR014")
 					(unit 1)
 				)
 			)
@@ -7109,7 +7109,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "70c8875b-3eac-4efd-ab44-601e74cd49e7")
-		(property "Reference" "#PWR019"
+		(property "Reference" "#PWR03"
 			(at 166.37 53.34 0)
 			(hide yes)
 			(show_name no)
@@ -7169,7 +7169,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR019")
+					(reference "#PWR03")
 					(unit 1)
 				)
 			)
@@ -7186,7 +7186,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "720d8d8a-143f-4f49-864a-f4adbead7706")
-		(property "Reference" "C5"
+		(property "Reference" "C9"
 			(at 201.93 136.652 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7279,7 +7279,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "C5")
+					(reference "C9")
 					(unit 1)
 				)
 			)
@@ -7373,7 +7373,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "7f425802-c0cd-4379-8640-507e32258671")
-		(property "Reference" "#PWR020"
+		(property "Reference" "#PWR04"
 			(at 170.18 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -7433,7 +7433,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR020")
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
@@ -7452,7 +7452,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8bf6a137-ae02-4bf1-a73b-7b0f7f7d7b64")
-		(property "Reference" "#PWR07"
+		(property "Reference" "#PWR012"
 			(at 198.12 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -7512,7 +7512,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR07")
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -7529,7 +7529,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "8cb5aced-7c0f-4e42-9ae3-08211a63613f")
-		(property "Reference" "C6"
+		(property "Reference" "C7"
 			(at 201.93 121.666 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7622,7 +7622,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "C6")
+					(reference "C7")
 					(unit 1)
 				)
 			)
@@ -7639,7 +7639,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "95c7f676-39e2-4a92-a51b-87877e415fb5")
-		(property "Reference" "#PWR017"
+		(property "Reference" "#PWR010"
 			(at 198.12 54.61 0)
 			(hide yes)
 			(show_name no)
@@ -7699,7 +7699,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR017")
+					(reference "#PWR010")
 					(unit 1)
 				)
 			)
@@ -7716,7 +7716,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "98762363-1324-42ed-a007-b5d53d4eba64")
-		(property "Reference" "C11"
+		(property "Reference" "C3"
 			(at 184.15 56.896 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7809,7 +7809,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "C11")
+					(reference "C3")
 					(unit 1)
 				)
 			)
@@ -7918,7 +7918,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "9ecfc19d-aa2a-4fe1-a512-a3384b964a9c")
-		(property "Reference" "C13"
+		(property "Reference" "C1"
 			(at 155.956 35.306 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8015,7 +8015,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "C13")
+					(reference "C1")
 					(unit 1)
 				)
 			)
@@ -8032,7 +8032,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "a3376c79-3b3c-40f0-a096-5afdf920f892")
-		(property "Reference" "C9"
+		(property "Reference" "C4"
 			(at 185.42 129.032 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8125,7 +8125,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "C9")
+					(reference "C4")
 					(unit 1)
 				)
 			)
@@ -8142,7 +8142,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "aac0ed7c-403a-4d18-8688-c10579780091")
-		(property "Reference" "C3"
+		(property "Reference" "C10"
 			(at 207.01 75.692 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8239,7 +8239,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "C3")
+					(reference "C10")
 					(unit 1)
 				)
 			)
@@ -8258,7 +8258,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ad7e714a-93af-4ed0-9592-5b710a6fca12")
-		(property "Reference" "#PWR03"
+		(property "Reference" "#PWR07"
 			(at 189.23 146.05 0)
 			(hide yes)
 			(show_name no)
@@ -8319,7 +8319,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR03")
+					(reference "#PWR07")
 					(unit 1)
 				)
 			)
@@ -8337,7 +8337,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ba34eee7-cf59-44a4-ada8-29c4ffc2ff09")
-		(property "Reference" "C1"
+		(property "Reference" "C11"
 			(at 207.01 101.092 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8434,7 +8434,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "C1")
+					(reference "C11")
 					(unit 1)
 				)
 			)
@@ -8530,7 +8530,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c1dda378-04da-4ccd-b531-ccc2f8669d2b")
-		(property "Reference" "#PWR015"
+		(property "Reference" "#PWR011"
 			(at 198.12 74.93 0)
 			(hide yes)
 			(show_name no)
@@ -8590,7 +8590,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR015")
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -8608,7 +8608,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "dff8d56d-7008-40a4-a05e-83a9b0f9cae1")
-		(property "Reference" "#PWR013"
+		(property "Reference" "#PWR06"
 			(at 170.18 142.24 0)
 			(hide yes)
 			(show_name no)
@@ -8669,7 +8669,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR013")
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)
@@ -8687,7 +8687,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e65278ad-c7d0-43cd-96e8-e39ed8e1b7c2")
-		(property "Reference" "#PWR016"
+		(property "Reference" "#PWR09"
 			(at 187.96 64.77 0)
 			(hide yes)
 			(show_name no)
@@ -8747,7 +8747,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR016")
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -8766,7 +8766,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e8db1220-dde1-47e1-8968-d87728f6467c")
-		(property "Reference" "#PWR012"
+		(property "Reference" "#PWR013"
 			(at 194.31 146.05 0)
 			(hide yes)
 			(show_name no)
@@ -8827,7 +8827,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR012")
+					(reference "#PWR013")
 					(unit 1)
 				)
 			)
@@ -8845,7 +8845,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f48d1a47-7c1d-4c2e-b35a-df416a9ee5c9")
-		(property "Reference" "#PWR08"
+		(property "Reference" "#PWR019"
 			(at 215.9 110.49 0)
 			(hide yes)
 			(show_name no)
@@ -8906,7 +8906,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR08")
+					(reference "#PWR019")
 					(unit 1)
 				)
 			)
@@ -8923,7 +8923,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "fc825366-2ad9-498c-a60e-0aeec2848f5b")
-		(property "Reference" "#PWR05"
+		(property "Reference" "#PWR015"
 			(at 204.47 102.87 0)
 			(hide yes)
 			(show_name no)
@@ -8983,7 +8983,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "#PWR05")
+					(reference "#PWR015")
 					(unit 1)
 				)
 			)
@@ -9000,7 +9000,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "fd59090f-73ed-41d9-a2e1-8d9721f2ae6e")
-		(property "Reference" "C4"
+		(property "Reference" "C12"
 			(at 204.47 114.3 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9093,7 +9093,7 @@
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e"
-					(reference "C4")
+					(reference "C12")
 					(unit 1)
 				)
 			)
