@@ -2395,6 +2395,121 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "power:PWR_FLAG"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#FLG"
+				(at 0 1.905 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "PWR_FLAG"
+				(at 0 3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Special symbol for telling ERC where power comes from"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "flag power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_0"
+				(pin power_out line
+					(at 0 0 90)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(junction
 		(at 236.22 63.5)
@@ -2413,12 +2528,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0950dc78-b29b-4740-9dd8-3618ef2006d8")
-	)
-	(junction
-		(at 30.48 48.26)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1bc4717d-1342-4b88-8124-a1bbd0965d80")
 	)
 	(junction
 		(at 146.05 55.88)
@@ -2475,6 +2584,12 @@
 		(uuid "8c3f2108-992c-4505-8657-f3e88e0606ea")
 	)
 	(junction
+		(at 41.91 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a21defe0-ba5a-49c9-9341-244e07efefad")
+	)
+	(junction
 		(at 243.84 71.12)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2515,6 +2630,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e64aea21-2d65-4ed7-9796-a9d529a723f5")
+	)
+	(junction
+		(at 30.48 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e9b175d2-ac54-4d42-8947-64144b536635")
 	)
 	(junction
 		(at 146.05 76.2)
@@ -2623,6 +2744,16 @@
 			(type default)
 		)
 		(uuid "2278a66c-2ae1-40ed-9e93-fdf5abef9f31")
+	)
+	(wire
+		(pts
+			(xy 41.91 48.26) (xy 45.72 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "23d5b4de-bfe2-4fb7-98ab-a63ed4f5a649")
 	)
 	(wire
 		(pts
@@ -2853,6 +2984,16 @@
 			(type default)
 		)
 		(uuid "5911f218-1fa5-4f49-b883-2223358e2643")
+	)
+	(wire
+		(pts
+			(xy 41.91 45.72) (xy 41.91 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "59364dea-7fcc-43c9-84b1-d5abe130df86")
 	)
 	(wire
 		(pts
@@ -3156,7 +3297,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 48.26) (xy 34.29 48.26)
+			(xy 30.48 48.26) (xy 41.91 48.26)
 		)
 		(stroke
 			(width 0)
@@ -3834,7 +3975,7 @@
 	)
 	(global_label "PYRO_BATT_RAW"
 		(shape input)
-		(at 34.29 48.26 0)
+		(at 45.72 48.26 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3844,7 +3985,7 @@
 		)
 		(uuid "eb992638-4ea3-406e-a77a-120adb4ccc83")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 52.2733 48.26 0)
+			(at 63.7033 48.26 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7898,6 +8039,84 @@
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/810ac388-79e0-4279-a05f-a2a0b85dc963"
 					(reference "#PWR071")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 41.91 45.72 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cab56a6e-4c69-41fe-b862-60126c527f86")
+		(property "Reference" "#FLG02"
+			(at 41.91 43.815 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 41.91 40.64 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 41.91 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 41.91 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 41.91 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1106ea74-14ab-45cd-884f-b97b83386b05")
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/810ac388-79e0-4279-a05f-a2a0b85dc963"
+					(reference "#FLG02")
 					(unit 1)
 				)
 			)

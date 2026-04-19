@@ -1,0 +1,505 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mils",
+    "date": "2026-04-19T17:06:35",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.0",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/9e0253f5-fba5-4205-8256-7fc47a91dd1e",
+            "violations": [
+                {
+                    "description": "Pin not connected",
+                    "items": [
+                        {
+                            "description": "Symbol U1 Pin 4 [PC15, Bidirectional, Line]",
+                            "pos": {
+                                "x": 46.5,
+                                "y": 28.0
+                            },
+                            "uuid": "0567633f-319e-4602-a594-8565b4a6c6a8"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_connected"
+                },
+                {
+                    "description": "Pin not connected",
+                    "items": [
+                        {
+                            "description": "Symbol U1 Pin 3 [PC14, Bidirectional, Line]",
+                            "pos": {
+                                "x": 47.5,
+                                "y": 28.0
+                            },
+                            "uuid": "33fecc21-5960-4968-9c50-058b790f04fb"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_connected"
+                },
+                {
+                    "description": "Pin not connected",
+                    "items": [
+                        {
+                            "description": "Symbol U1 Pin 2 [PC13, Bidirectional, Line]",
+                            "pos": {
+                                "x": 48.5,
+                                "y": 28.0
+                            },
+                            "uuid": "181b72ea-dbdf-4ff2-b979-c0956228bd27"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_connected"
+                },
+                {
+                    "description": "Pin not connected",
+                    "items": [
+                        {
+                            "description": "Symbol U1 Pin 38 [PC7, Bidirectional, Line]",
+                            "pos": {
+                                "x": 54.5,
+                                "y": 28.0
+                            },
+                            "uuid": "8429d31c-34a8-40bf-9da2-975c0a302345"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_connected"
+                },
+                {
+                    "description": "Pin not connected",
+                    "items": [
+                        {
+                            "description": "Symbol U1 Pin 37 [PC6, Bidirectional, Line]",
+                            "pos": {
+                                "x": 55.5,
+                                "y": 28.0
+                            },
+                            "uuid": "5bb935e1-0319-405a-b74d-8f4e5b00de11"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_connected"
+                },
+                {
+                    "description": "Pin not connected",
+                    "items": [
+                        {
+                            "description": "Symbol U1 Pin 25 [PC5, Bidirectional, Line]",
+                            "pos": {
+                                "x": 56.5,
+                                "y": 28.0
+                            },
+                            "uuid": "f4e8ce89-192c-433c-a6d1-77ae0ac8f4e2"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_connected"
+                },
+                {
+                    "description": "Pin not connected",
+                    "items": [
+                        {
+                            "description": "Symbol U1 Pin 57 [PB5, Bidirectional, Line]",
+                            "pos": {
+                                "x": 47.5,
+                                "y": 42.0
+                            },
+                            "uuid": "44d6298f-d846-41d1-a3e9-89316f603d22"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_connected"
+                },
+                {
+                    "description": "Pin not connected",
+                    "items": [
+                        {
+                            "description": "Symbol U1 Pin 56 [PB4, Bidirectional, Line]",
+                            "pos": {
+                                "x": 48.5,
+                                "y": 42.0
+                            },
+                            "uuid": "83654f5f-b420-429c-8e0a-11039caa2798"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_connected"
+                },
+                {
+                    "description": "Pin not connected",
+                    "items": [
+                        {
+                            "description": "Symbol U1 Pin 55 [PB3, Bidirectional, Line]",
+                            "pos": {
+                                "x": 49.5,
+                                "y": 42.0
+                            },
+                            "uuid": "19274819-e21d-40a2-9521-68e607717bbb"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_connected"
+                },
+                {
+                    "description": "Pin not connected",
+                    "items": [
+                        {
+                            "description": "Symbol U1 Pin 50 [PA15, Bidirectional, Line]",
+                            "pos": {
+                                "x": 54.5,
+                                "y": 42.0
+                            },
+                            "uuid": "56de5ecd-4fb1-42d2-8b60-4085a7c89d82"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_not_connected"
+                },
+                {
+                    "description": "Unconnected wire endpoint",
+                    "items": [
+                        {
+                            "description": "Horizontal Wire, length 2.00 mils",
+                            "pos": {
+                                "x": 25.5,
+                                "y": 20.5
+                            },
+                            "uuid": "cd771ae5-6ac4-4047-aa2d-8fbb6f43352a"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "unconnected_wire_endpoint"
+                },
+                {
+                    "description": "Unconnected wire endpoint",
+                    "items": [
+                        {
+                            "description": "Horizontal Wire, length 2.00 mils",
+                            "pos": {
+                                "x": 25.5,
+                                "y": 21.5
+                            },
+                            "uuid": "f86941cc-4854-4bbc-8d8b-c585054dcea3"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "unconnected_wire_endpoint"
+                },
+                {
+                    "description": "The current configuration does not include the footprint library ''",
+                    "items": [
+                        {
+                            "description": "Symbol F2 [Polyfuse]",
+                            "pos": {
+                                "x": 81.5,
+                                "y": 20.5
+                            },
+                            "uuid": "8d635aff-6b12-48c8-9f2e-33c04d75653e"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                },
+                {
+                    "description": "Footprint 'Buzzer_CUI_CMT-8504-SMT-TR' not found in library 'Buzzer_Beeper'",
+                    "items": [
+                        {
+                            "description": "Symbol BZ1 [Buzzer]",
+                            "pos": {
+                                "x": 49.5,
+                                "y": 52.5
+                            },
+                            "uuid": "e0d808e9-8850-4223-ae71-63d018042ffe"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "footprint_link_issues"
+                }
+            ]
+        },
+        {
+            "path": "/Power/",
+            "uuid_path": "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/32dc7f8f-d1cd-4967-8830-7944681bf161",
+            "violations": [
+                {
+                    "description": "Input Power pin not driven by any Output Power pins",
+                    "items": [
+                        {
+                            "description": "Symbol U7 Pin 2 [VIN, Power input, Line]",
+                            "pos": {
+                                "x": 31.0,
+                                "y": 47.0
+                            },
+                            "uuid": "a32919b5-bc86-4a18-8ad5-6769c0084874"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "power_pin_not_driven"
+                },
+                {
+                    "description": "Both VBAT_PROT and VBAT_PROT_STATUS are attached to the same items; VBAT_PROT will be used in the netlist",
+                    "items": [
+                        {
+                            "description": "Global Label 'VBAT_PROT'",
+                            "pos": {
+                                "x": 78.0,
+                                "y": 20.5
+                            },
+                            "uuid": "b95ee293-229a-4447-ba57-a07ae899091a"
+                        },
+                        {
+                            "description": "Label 'VBAT_PROT_STATUS'",
+                            "pos": {
+                                "x": 62.0,
+                                "y": 22.5
+                            },
+                            "uuid": "248c2934-4aa6-4029-9b08-1b53d1e1a862"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "multiple_net_names"
+                },
+                {
+                    "description": "Both VBAT_FUSED and VBAT_FUSED_STATUS are attached to the same items; VBAT_FUSED will be used in the netlist",
+                    "items": [
+                        {
+                            "description": "Global Label 'VBAT_FUSED'",
+                            "pos": {
+                                "x": 97.0,
+                                "y": 20.5
+                            },
+                            "uuid": "c77a4f98-141b-449a-818d-345eb681d026"
+                        },
+                        {
+                            "description": "Label 'VBAT_FUSED_STATUS'",
+                            "pos": {
+                                "x": 97.0,
+                                "y": 22.5
+                            },
+                            "uuid": "78bf830e-b17a-48fb-ab06-6020870ca9c8"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "multiple_net_names"
+                },
+                {
+                    "description": "Both +3.6V and VBAT_BUBO_STATUS are attached to the same items; +3.6V will be used in the netlist",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR035 Pin 1 [Power input, Line]",
+                            "pos": {
+                                "x": 42.5,
+                                "y": 59.5
+                            },
+                            "uuid": "d330dadb-e25c-414e-9e09-38c959a33f79"
+                        },
+                        {
+                            "description": "Label 'VBAT_BUBO_STATUS'",
+                            "pos": {
+                                "x": 87.5,
+                                "y": 53.0
+                            },
+                            "uuid": "3edeb27a-576b-4260-8bca-00b1ecf83beb"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "multiple_net_names"
+                },
+                {
+                    "description": "Both +3.3V and VBAT_LDO_STATUS are attached to the same items; +3.3V will be used in the netlist",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR064 Pin 1 [Power input, Line]",
+                            "pos": {
+                                "x": 77.0,
+                                "y": 47.0
+                            },
+                            "uuid": "e1392ca5-873f-46e8-9f8e-fbba0c63585d"
+                        },
+                        {
+                            "description": "Label 'VBAT_LDO_STATUS'",
+                            "pos": {
+                                "x": 87.5,
+                                "y": 56.0
+                            },
+                            "uuid": "91307658-40d3-4b1f-8f29-49d14b3324bb"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "multiple_net_names"
+                }
+            ]
+        },
+        {
+            "path": "/Peripherals/",
+            "uuid_path": "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/e7df30d3-5847-4b99-8916-a8021a668802",
+            "violations": [
+                {
+                    "description": "Input Power pin not driven by any Output Power pins",
+                    "items": [
+                        {
+                            "description": "Symbol J2 Pin 6 [VSS, Power input, Line]",
+                            "pos": {
+                                "x": 34.5,
+                                "y": 19.0
+                            },
+                            "uuid": "b521478a-00e4-48fa-86a7-aefa7d79b260"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "power_pin_not_driven"
+                },
+                {
+                    "description": "Pins of type Output and Output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol U2 Pin 6 [SDO, Output, Line]",
+                            "pos": {
+                                "x": 75.5,
+                                "y": 42.0
+                            },
+                            "uuid": "d71a2195-fb1d-496c-89a1-0e33703144ac"
+                        },
+                        {
+                            "description": "Symbol U3 Pin 6 [SDO, Output, Line]",
+                            "pos": {
+                                "x": 90.0,
+                                "y": 42.0
+                            },
+                            "uuid": "7be0a6f7-25b5-412e-95df-8b38f5d504aa"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Output and Output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol U4 Pin 7 [SDO, Output, Line]",
+                            "pos": {
+                                "x": 89.0,
+                                "y": 27.5
+                            },
+                            "uuid": "d3f682d5-dffd-4edb-8105-2f82f33ac35e"
+                        },
+                        {
+                            "description": "Symbol U5 Pin 7 [SDO, Output, Line]",
+                            "pos": {
+                                "x": 76.5,
+                                "y": 27.5
+                            },
+                            "uuid": "ff4cc01d-3ff2-40ff-8790-0066eba22452"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Output and Output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol U3 Pin 6 [SDO, Output, Line]",
+                            "pos": {
+                                "x": 90.0,
+                                "y": 42.0
+                            },
+                            "uuid": "7be0a6f7-25b5-412e-95df-8b38f5d504aa"
+                        },
+                        {
+                            "description": "Symbol U4 Pin 7 [SDO, Output, Line]",
+                            "pos": {
+                                "x": 89.0,
+                                "y": 27.5
+                            },
+                            "uuid": "d3f682d5-dffd-4edb-8105-2f82f33ac35e"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Both +3.3V and VDD are attached to the same items; +3.3V will be used in the netlist",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR024 Pin 1 [Power input, Line]",
+                            "pos": {
+                                "x": 43.5,
+                                "y": 22.0
+                            },
+                            "uuid": "5e1e196f-f8e3-47b7-8362-d9e86147ef08"
+                        },
+                        {
+                            "description": "Symbol U5 Hidden pin 15 [VDD, Power input, Line]",
+                            "pos": {
+                                "x": 70.5,
+                                "y": 22.5
+                            },
+                            "uuid": "41d02cd4-93c8-4356-b158-6a4652d14a0e"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "multiple_net_names"
+                }
+            ]
+        },
+        {
+            "path": "/Comms/",
+            "uuid_path": "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/4243282c-f3ca-4105-833d-42ac8b978054",
+            "violations": []
+        },
+        {
+            "path": "/Pyros/",
+            "uuid_path": "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/810ac388-79e0-4279-a05f-a2a0b85dc963",
+            "violations": [
+                {
+                    "description": "Input Power pin not driven by any Output Power pins",
+                    "items": [
+                        {
+                            "description": "Symbol #PWR021 Pin 1 [Power input, Line]",
+                            "pos": {
+                                "x": 16.5,
+                                "y": 47.0
+                            },
+                            "uuid": "63b0700d-089a-460a-83c5-c0338db530b7"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "power_pin_not_driven"
+                }
+            ]
+        },
+        {
+            "path": "/Indication/",
+            "uuid_path": "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/57914cc3-efa9-43f1-a4d3-11a42d51adab",
+            "violations": []
+        }
+    ],
+    "source": "UNSW_Rocketry_Senior_Flight_Computer.kicad_sch"
+}
