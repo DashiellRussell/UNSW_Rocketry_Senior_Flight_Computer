@@ -4307,6 +4307,16 @@
 	)
 	(wire
 		(pts
+			(xy 146.05 66.04) (xy 146.05 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "df1c1b43-fa2c-49a3-a7dd-96ada8ddc06f")
+	)
+	(wire
+		(pts
 			(xy 184.15 93.98) (xy 191.77 93.98)
 		)
 		(stroke
@@ -4552,6 +4562,30 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+			)
+		)
+	)
+	(global_label "VBAT_SENSE"
+		(shape input)
+		(at 146.05 66.04 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "285c6550-b8f4-4a26-b482-f5ba121fc3e4")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 146.05 51.6249 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
 		)
 	)

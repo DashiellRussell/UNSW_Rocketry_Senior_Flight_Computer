@@ -3820,6 +3820,18 @@
 		(uuid "0a5a74a2-e185-48bb-a252-c87dd395a8e1")
 	)
 	(junction
+		(at 201.93 39.37)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "108157ff-1bc2-470c-b463-6a4e9af1bb69")
+	)
+	(junction
+		(at 242.57 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "108a769b-ab45-4f59-98fa-33ed6ba5aa6e")
+	)
+	(junction
 		(at 104.14 119.38)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3898,16 +3910,16 @@
 		(uuid "aa22abf9-eec7-42b9-bba0-808f28cd25db")
 	)
 	(junction
+		(at 201.93 52.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "aa58fc6d-d0aa-4d03-bfd2-f60929d18490")
+	)
+	(junction
 		(at 72.39 54.61)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ab626d3a-9a47-436e-8714-7b9b92ad9dd9")
-	)
-	(junction
-		(at 238.76 52.07)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ae929599-bc06-43db-ae25-573382f09fd1")
 	)
 	(junction
 		(at 167.64 119.38)
@@ -3971,6 +3983,16 @@
 	)
 	(wire
 		(pts
+			(xy 201.93 48.26) (xy 201.93 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "00cd6360-44c7-44bd-8c6c-df4a27b7912e")
+	)
+	(wire
+		(pts
 			(xy 134.62 63.5) (xy 132.08 63.5)
 		)
 		(stroke
@@ -4008,6 +4030,16 @@
 			(type default)
 		)
 		(uuid "0a1d9bcf-9a10-4439-aa43-783d821f3ddf")
+	)
+	(wire
+		(pts
+			(xy 198.12 39.37) (xy 201.93 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0bcfaec3-7b19-4aeb-8857-dd03a0a2849c")
 	)
 	(wire
 		(pts
@@ -4098,16 +4130,6 @@
 			(type default)
 		)
 		(uuid "1f773c60-d4ee-423c-b8f6-13f4cbf772b6")
-	)
-	(wire
-		(pts
-			(xy 222.25 52.07) (xy 238.76 52.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "202fc772-0ec6-4bf4-b385-029a1e93e1fd")
 	)
 	(wire
 		(pts
@@ -4281,7 +4303,7 @@
 	)
 	(wire
 		(pts
-			(xy 241.3 57.15) (xy 238.76 57.15)
+			(xy 246.38 57.15) (xy 242.57 57.15)
 		)
 		(stroke
 			(width 0)
@@ -4391,6 +4413,16 @@
 	)
 	(wire
 		(pts
+			(xy 242.57 52.07) (xy 246.38 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5a0e93be-f340-4ae6-ae1d-73b203f4ab69")
+	)
+	(wire
+		(pts
 			(xy 100.33 137.16) (xy 99.06 137.16)
 		)
 		(stroke
@@ -4401,7 +4433,7 @@
 	)
 	(wire
 		(pts
-			(xy 198.12 52.07) (xy 203.2 52.07)
+			(xy 198.12 52.07) (xy 201.93 52.07)
 		)
 		(stroke
 			(width 0)
@@ -4451,6 +4483,16 @@
 	)
 	(wire
 		(pts
+			(xy 242.57 52.07) (xy 242.57 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "62051268-9ea4-4219-9c5a-84147167a59c")
+	)
+	(wire
+		(pts
 			(xy 132.08 63.5) (xy 132.08 52.07)
 		)
 		(stroke
@@ -4471,16 +4513,6 @@
 	)
 	(wire
 		(pts
-			(xy 238.76 52.07) (xy 241.3 52.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "64b946e2-104b-4d25-8a58-0b9f978681e5")
-	)
-	(wire
-		(pts
 			(xy 170.18 119.38) (xy 172.72 119.38)
 		)
 		(stroke
@@ -4498,6 +4530,16 @@
 			(type default)
 		)
 		(uuid "6dc8b0b3-15b3-483d-8f94-45f672164a32")
+	)
+	(wire
+		(pts
+			(xy 201.93 39.37) (xy 201.93 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6e8a890f-b141-45cc-9687-35d0af6de323")
 	)
 	(wire
 		(pts
@@ -4631,6 +4673,16 @@
 	)
 	(wire
 		(pts
+			(xy 201.93 36.83) (xy 201.93 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e2cb492-54dc-4b91-b00f-c208c3efbd05")
+	)
+	(wire
+		(pts
 			(xy 194.31 123.19) (xy 194.31 119.38)
 		)
 		(stroke
@@ -4638,6 +4690,16 @@
 			(type default)
 		)
 		(uuid "8fcdd8a9-d593-46ed-8b6c-6da4390164d2")
+	)
+	(wire
+		(pts
+			(xy 201.93 27.94) (xy 201.93 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8ffa1317-ffad-4f15-a761-0ce6d5fe57bb")
 	)
 	(wire
 		(pts
@@ -4731,16 +4793,6 @@
 	)
 	(wire
 		(pts
-			(xy 238.76 57.15) (xy 238.76 52.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a60760e0-e3bb-4ca6-84f4-56338d980fa9")
-	)
-	(wire
-		(pts
 			(xy 120.65 127) (xy 121.92 127)
 		)
 		(stroke
@@ -4821,16 +4873,6 @@
 	)
 	(wire
 		(pts
-			(xy 238.76 48.26) (xy 238.76 52.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b3ee78d4-2c6c-476a-8dc6-ee4f23ad4279")
-	)
-	(wire
-		(pts
 			(xy 99.06 127) (xy 100.33 127)
 		)
 		(stroke
@@ -4898,6 +4940,16 @@
 			(type default)
 		)
 		(uuid "bdd6158f-2797-4547-ba6e-254a5ffe1a0e")
+	)
+	(wire
+		(pts
+			(xy 201.93 52.07) (xy 203.2 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "beeb7ec0-14ab-444b-b8b6-48e678c57800")
 	)
 	(wire
 		(pts
@@ -5021,7 +5073,7 @@
 	)
 	(wire
 		(pts
-			(xy 241.3 48.26) (xy 238.76 48.26)
+			(xy 246.38 48.26) (xy 242.57 48.26)
 		)
 		(stroke
 			(width 0)
@@ -5161,6 +5213,16 @@
 	)
 	(wire
 		(pts
+			(xy 242.57 48.26) (xy 242.57 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ee7c42c6-6575-4d63-b71c-0c05dfc325d9")
+	)
+	(wire
+		(pts
 			(xy 194.31 116.84) (xy 194.31 119.38)
 		)
 		(stroke
@@ -5168,6 +5230,16 @@
 			(type default)
 		)
 		(uuid "f0c3aad9-b6ff-4545-ae8d-2a6799921d83")
+	)
+	(wire
+		(pts
+			(xy 222.25 52.07) (xy 242.57 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f64bf639-8ac7-4d0e-882d-2b688c3082fc")
 	)
 	(wire
 		(pts
@@ -5280,7 +5352,7 @@
 		(uuid "6ae0a17e-d3f4-4cee-a860-0279f194b750")
 	)
 	(label "VBAT_FUSED_STATUS"
-		(at 241.3 57.15 0)
+		(at 246.38 57.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5328,6 +5400,30 @@
 			(justify left bottom)
 		)
 		(uuid "f996b4f7-0ccc-4ffd-b827-cb0dd9f6e005")
+	)
+	(global_label "VBAT_SENSE"
+		(shape input)
+		(at 198.12 39.37 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "56478bbc-ece2-43bf-bf5d-4afe90684757")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 183.7049 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
 	)
 	(global_label "VBAT_RAW"
 		(shape input)
@@ -5379,7 +5475,7 @@
 	)
 	(global_label "VBAT_FUSED"
 		(shape input)
-		(at 241.3 52.07 0)
+		(at 246.38 52.07 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5389,7 +5485,7 @@
 		)
 		(uuid "c77a4f98-141b-449a-818d-345eb681d026")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 255.7152 52.07 0)
+			(at 260.7952 52.07 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8294,6 +8390,96 @@
 		)
 	)
 	(symbol
+		(lib_id "PCM_SparkFun-Resistor:4.7k_0603")
+		(at 201.93 34.29 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "63517162-0127-4a28-96da-ef29e32d9658")
+		(property "Reference" "R32"
+			(at 197.358 34.29 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 199.39 34.29 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "PCM_SparkFun-Resistor:R_0603_1608Metric"
+			(at 206.248 34.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
+			(at 210.82 34.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 213.36 34.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PROD_ID" "RES-07857"
+			(at 208.534 34.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0eee078f-1d35-4c16-9b32-d9390770ff76")
+		)
+		(pin "2"
+			(uuid "056baf08-ca40-409c-8733-1cf4b5917ee7")
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/32dc7f8f-d1cd-4967-8830-7944681bf161"
+					(reference "R32")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at 255.27 119.38 180)
 		(unit 1)
@@ -9257,7 +9443,7 @@
 	)
 	(symbol
 		(lib_id "PCM_SparkFun-Connector:TestPoint_1.0mm")
-		(at 241.3 48.26 270)
+		(at 246.38 48.26 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9268,7 +9454,7 @@
 		(fields_autoplaced yes)
 		(uuid "9abf140f-4c01-4d71-a97d-44045d819549")
 		(property "Reference" "TP3"
-			(at 246.38 48.26 0)
+			(at 251.46 48.26 0)
 			(show_name no)
 			(do_not_autoplace yes)
 			(effects
@@ -9278,7 +9464,7 @@
 			)
 		)
 		(property "Value" "1.0mm"
-			(at 237.49 48.26 0)
+			(at 242.57 48.26 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9289,7 +9475,7 @@
 			)
 		)
 		(property "Footprint" "PCM_SparkFun-Connector:TestPoint-1.0mm"
-			(at 234.95 48.26 0)
+			(at 240.03 48.26 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9300,7 +9486,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 233.68 48.26 0)
+			(at 238.76 48.26 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9311,7 +9497,7 @@
 			)
 		)
 		(property "Description" "Test Point"
-			(at 231.14 48.26 0)
+			(at 236.22 48.26 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9328,6 +9514,83 @@
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/32dc7f8f-d1cd-4967-8830-7944681bf161"
 					(reference "TP3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 201.93 27.94 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "9b4a3b8a-e036-453b-9005-f5e38d097d21")
+		(property "Reference" "#PWR086"
+			(at 201.93 21.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 201.93 22.86 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 201.93 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 201.93 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 201.93 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7f831afe-bf02-4013-b143-bfc7ff6d61f4")
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/32dc7f8f-d1cd-4967-8830-7944681bf161"
+					(reference "#PWR086")
 					(unit 1)
 				)
 			)
@@ -9664,6 +9927,96 @@
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/32dc7f8f-d1cd-4967-8830-7944681bf161"
 					(reference "R16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "PCM_SparkFun-Resistor:4.7k_0603")
+		(at 201.93 45.72 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b508bfa8-f3a9-41c4-bdbc-95d3f6a76ec6")
+		(property "Reference" "R31"
+			(at 197.358 45.72 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "33k"
+			(at 199.39 45.72 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "PCM_SparkFun-Resistor:R_0603_1608Metric"
+			(at 206.248 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
+			(at 210.82 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 213.36 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PROD_ID" "RES-07857"
+			(at 208.534 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "024d419d-2bbe-4d71-8a58-b68b0d94bff3")
+		)
+		(pin "2"
+			(uuid "273b9a6c-09cc-46c5-9a73-3587d99fe7b7")
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/32dc7f8f-d1cd-4967-8830-7944681bf161"
+					(reference "R31")
 					(unit 1)
 				)
 			)
