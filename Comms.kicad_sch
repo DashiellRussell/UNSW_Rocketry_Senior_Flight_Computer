@@ -3194,6 +3194,26 @@
 		)
 		(uuid "fb53fe90-6f1e-480e-88e7-0e2e322e96a8")
 	)
+	(label "USB_RAW_N"
+		(at 68.58 71.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1080da0e-52ae-4182-964a-8ff59fc18f6e")
+	)
+	(label "USB_RAW_P"
+		(at 68.58 73.66 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cd71fa53-0517-493e-9366-057f6c9c751b")
+	)
 	(global_label "VBAT_FUSED"
 		(shape input)
 		(at 71.12 33.02 90)

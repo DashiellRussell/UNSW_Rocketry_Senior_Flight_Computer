@@ -2602,12 +2602,6 @@
 		(uuid "a5dbd7ff-4e17-4197-9cec-e377c57da369")
 	)
 	(junction
-		(at 243.84 78.74)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b82cb718-60fb-4691-96bb-689535d5a8d7")
-	)
-	(junction
 		(at 134.62 44.45)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2642,12 +2636,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e9b175d2-ac54-4d42-8947-64144b536635")
-	)
-	(junction
-		(at 146.05 76.2)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ee4d85d3-2f87-47aa-88b8-ef52375d1425")
 	)
 	(junction
 		(at 138.43 63.5)
@@ -2860,16 +2848,6 @@
 			(type default)
 		)
 		(uuid "337d45ae-1375-4648-96ad-87b78ecd053b")
-	)
-	(wire
-		(pts
-			(xy 146.05 76.2) (xy 146.05 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "34e2d59d-583f-43f0-9244-e6b8e2d273a9")
 	)
 	(wire
 		(pts
@@ -3153,16 +3131,6 @@
 	)
 	(wire
 		(pts
-			(xy 243.84 78.74) (xy 243.84 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "78aa0749-1f12-451c-91be-a18581076e60")
-	)
-	(wire
-		(pts
 			(xy 151.13 102.87) (xy 153.67 102.87)
 		)
 		(stroke
@@ -3333,16 +3301,6 @@
 	)
 	(wire
 		(pts
-			(xy 243.84 78.74) (xy 246.38 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9e7ef720-db42-4708-b6d7-9890b1afebc4")
-	)
-	(wire
-		(pts
 			(xy 135.89 63.5) (xy 138.43 63.5)
 		)
 		(stroke
@@ -3463,7 +3421,7 @@
 	)
 	(wire
 		(pts
-			(xy 146.05 71.12) (xy 146.05 76.2)
+			(xy 146.05 71.12) (xy 146.05 82.55)
 		)
 		(stroke
 			(width 0)
@@ -3473,7 +3431,7 @@
 	)
 	(wire
 		(pts
-			(xy 243.84 71.12) (xy 243.84 78.74)
+			(xy 243.84 71.12) (xy 243.84 82.55)
 		)
 		(stroke
 			(width 0)
@@ -3660,16 +3618,6 @@
 			(type default)
 		)
 		(uuid "ee34899f-5a63-490b-829c-3a893f29bf87")
-	)
-	(wire
-		(pts
-			(xy 146.05 76.2) (xy 148.59 76.2)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f4b1a33d-5809-47c1-918d-157f360ed11b")
 	)
 	(wire
 		(pts
@@ -5544,84 +5492,6 @@
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/810ac388-79e0-4279-a05f-a2a0b85dc963"
 					(reference "U9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "PCM_SparkFun-Connector:TestPoint_1.0mm")
-		(at 148.59 76.2 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "461603a6-b93f-4936-a1a5-ec33182546e2")
-		(property "Reference" "TP11"
-			(at 153.67 76.2 0)
-			(show_name no)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1.0mm"
-			(at 144.78 76.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "PCM_SparkFun-Connector:TestPoint-1.0mm"
-			(at 142.24 76.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 140.97 76.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Test Point"
-			(at 138.43 76.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "e90a17bf-12ca-4db4-a839-70ed2ce42205")
-		)
-		(instances
-			(project "UNSW_Rocketry_Senior_Flight_Computer"
-				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/810ac388-79e0-4279-a05f-a2a0b85dc963"
-					(reference "TP11")
 					(unit 1)
 				)
 			)
@@ -8473,84 +8343,6 @@
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/810ac388-79e0-4279-a05f-a2a0b85dc963"
 					(reference "R17")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "PCM_SparkFun-Connector:TestPoint_1.0mm")
-		(at 246.38 78.74 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d2e76287-22e9-4395-b317-24a5843e06f9")
-		(property "Reference" "TP13"
-			(at 251.46 78.74 0)
-			(show_name no)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1.0mm"
-			(at 242.57 78.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "PCM_SparkFun-Connector:TestPoint-1.0mm"
-			(at 240.03 78.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 238.76 78.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Test Point"
-			(at 236.22 78.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "e64facbc-bbd1-48b9-9aa6-bb1782999c27")
-		)
-		(instances
-			(project "UNSW_Rocketry_Senior_Flight_Computer"
-				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/810ac388-79e0-4279-a05f-a2a0b85dc963"
-					(reference "TP13")
 					(unit 1)
 				)
 			)
