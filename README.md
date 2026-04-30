@@ -2,11 +2,12 @@
 
 KiCad project for the senior flight computer used by UNSW Rocketry.
 
-## Schematic
+## Documents
 
-A rendered PDF of the full schematic is committed at the repo root for easy viewing on GitHub:
+Reference docs live in [`docs/`](docs/) and render inline on GitHub:
 
-[UNSW_Rocketry_Senior_Flight_Computer.pdf](UNSW_Rocketry_Senior_Flight_Computer.pdf)
+- [Schematic (PDF)](docs/UNSW_Rocketry_Senior_Flight_Computer.pdf) — exported full schematic
+- [Project OZONE](docs/Project%20OZONE.pdf)
 
 ## Project layout
 
@@ -22,6 +23,7 @@ A rendered PDF of the full schematic is committed at the repo root for easy view
 | `Indication.kicad_sch` | Status / indication sheet |
 | `UNSW_ROCKETRY_LIBRARY.pretty/` | Project-specific footprint library |
 | `UNSW_Rocketry_Senior_Flight_Computer.csv` | BOM export |
+| `docs/` | Reference PDFs (schematic export, project documents) |
 
 ## Opening the project
 
