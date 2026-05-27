@@ -6265,7 +6265,8 @@
 	)
 	(symbol
 		(lib_id "PCM_SparkFun-Capacitor:0.1uF_0603_25V_20%")
-		(at 182.88 142.24 270)
+		(at 182.88 142.24 90)
+		(mirror x)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6275,7 +6276,7 @@
 		(dnp no)
 		(uuid "3869a27e-66a7-4883-a6f3-769e0f561923")
 		(property "Reference" "C5"
-			(at 185.42 136.906 90)
+			(at 180.34 136.906 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6285,7 +6286,7 @@
 			)
 		)
 		(property "Value" "0.1uF"
-			(at 185.42 139.446 90)
+			(at 180.34 139.446 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6295,7 +6296,7 @@
 			)
 		)
 		(property "Footprint" "PCM_SparkFun-Capacitor:C_0603_1608Metric"
-			(at 171.45 142.24 0)
+			(at 194.31 142.24 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6306,7 +6307,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn.sparkfun.com/assets/8/a/4/a/5/Kemet_Capacitor_Datasheet.pdf"
-			(at 168.91 142.24 0)
+			(at 196.85 142.24 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6317,7 +6318,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 163.83 142.24 0)
+			(at 201.93 142.24 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6328,7 +6329,7 @@
 			)
 		)
 		(property "PROD_ID" "CAP-00810"
-			(at 166.37 142.24 0)
+			(at 199.39 142.24 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6339,7 +6340,7 @@
 			)
 		)
 		(property "Voltage" "25V"
-			(at 180.3336 136.906 90)
+			(at 185.4264 136.906 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6349,7 +6350,7 @@
 			)
 		)
 		(property "Tolerance" "20%"
-			(at 180.3336 139.446 90)
+			(at 185.4264 139.446 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
