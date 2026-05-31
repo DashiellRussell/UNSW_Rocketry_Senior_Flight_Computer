@@ -5,310 +5,6 @@
 	(uuid "3a93ba59-ef8f-4238-85fc-d4c6e632973a")
 	(paper "A4")
 	(lib_symbols
-		(symbol "Connector:Conn_01x05_Pin"
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "J"
-				(at 0 7.62 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Conn_01x05_Pin"
-				(at 0 -7.62 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Generic connector, single row, 01x05, script generated"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_locked" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "connector"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "Connector*:*_1x??_*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "Conn_01x05_Pin_1_1"
-				(rectangle
-					(start 0.8636 5.207)
-					(end 0 4.953)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 -4.953)
-					(end 0 -5.207)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 5.08) (xy 0.8636 5.08)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 2.54) (xy 0.8636 2.54)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 0) (xy 0.8636 0)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 -2.54) (xy 0.8636 -2.54)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 -5.08) (xy 0.8636 -5.08)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at 5.08 5.08 180)
-					(length 3.81)
-					(name "Pin_1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 2.54 180)
-					(length 3.81)
-					(name "Pin_2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 0 180)
-					(length 3.81)
-					(name "Pin_3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 -2.54 180)
-					(length 3.81)
-					(name "Pin_4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 -5.08 180)
-					(length 3.81)
-					(name "Pin_5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Connector:USB_C_Receptacle_USB2.0_16P"
 			(pin_names
 				(offset 1.016)
@@ -2405,6 +2101,302 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "UNSW_ROCKETRY_LIBRARY:FTSH-105-01-X-DV-K-X"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at -7.62 8.89 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left bottom)
+				)
+			)
+			(property "Value" "FTSH-105-01-L-DV-K"
+				(at -7.62 -8.89 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+				)
+			)
+			(property "Footprint" "UNSW_ROCKETRY_LIBRARY:SAMTEC_FTSH-105-01-X-DV-K-X"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "PARTREV" "H"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "STANDARD" "Manufacturer Recommendations"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "MANUFACTURER" "Samtec"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(symbol "FTSH-105-01-X-DV-K-X_0_0"
+				(rectangle
+					(start -7.62 -7.62)
+					(end 7.62 7.62)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin passive line
+					(at -12.7 5.08 0)
+					(length 5.08)
+					(name "01"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "01"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 5.08 180)
+					(length 5.08)
+					(name "02"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "02"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -12.7 2.54 0)
+					(length 5.08)
+					(name "03"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "03"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 2.54 180)
+					(length 5.08)
+					(name "04"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "04"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -12.7 0 0)
+					(length 5.08)
+					(name "05"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "05"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 0 180)
+					(length 5.08)
+					(name "06"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "06"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -12.7 -2.54 0)
+					(length 5.08)
+					(name "07"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "07"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 -2.54 180)
+					(length 5.08)
+					(name "08"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "08"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -12.7 -5.08 0)
+					(length 5.08)
+					(name "09"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "09"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 -5.08 180)
+					(length 5.08)
+					(name "10"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "power:+3.3V"
 			(power global)
 			(pin_numbers
@@ -2697,12 +2689,20 @@
 		(uuid "dd2b1164-9d30-4b2c-896c-1699c954a660")
 	)
 	(no_connect
+		(at 93.308 125.4946)
+		(uuid "47ceaa4a-22c4-4548-80e2-5a4afda761dc")
+	)
+	(no_connect
 		(at 62.23 86.36)
 		(uuid "8fb9320f-c8f1-4848-a4e8-da2079df5ab9")
 	)
 	(no_connect
 		(at 62.23 83.82)
 		(uuid "a9aa24be-7dfb-4551-9061-6742f9b9d153")
+	)
+	(no_connect
+		(at 118.708 125.4946)
+		(uuid "d572139f-a5c8-4b65-b1ca-8a8d87eb3fde")
 	)
 	(wire
 		(pts
@@ -2723,16 +2723,6 @@
 			(type default)
 		)
 		(uuid "09da87d4-a6af-4bd1-987b-bf903eb59e06")
-	)
-	(wire
-		(pts
-			(xy 142.24 137.16) (xy 142.24 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0a940523-d0d3-4b0d-aac9-5fe913d7c756")
 	)
 	(wire
 		(pts
@@ -2846,13 +2836,23 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 147.32) (xy 146.05 147.32)
+			(xy 90.768 122.9546) (xy 93.308 122.9546)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "4e4afe57-2194-4d08-9906-75e3d3435626")
+		(uuid "4acb0cdd-4e05-4ed4-bb82-3a31b90c9941")
+	)
+	(wire
+		(pts
+			(xy 118.708 120.4146) (xy 121.248 120.4146)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4dd661b3-a681-45ea-9b19-3066b54a0aa6")
 	)
 	(wire
 		(pts
@@ -2896,16 +2896,6 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 142.24) (xy 134.62 142.24)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6301017a-92fe-4819-bc90-20c545c9d88b")
-	)
-	(wire
-		(pts
 			(xy 39.37 93.98) (xy 39.37 97.79)
 		)
 		(stroke
@@ -2926,6 +2916,16 @@
 	)
 	(wire
 		(pts
+			(xy 118.708 128.0346) (xy 121.248 128.0346)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7a5b6295-b02b-4622-b74c-084d5427c376")
+	)
+	(wire
+		(pts
 			(xy 71.12 40.64) (xy 71.12 46.99)
 		)
 		(stroke
@@ -2943,6 +2943,16 @@
 			(type default)
 		)
 		(uuid "80b978a5-b249-4e5b-a270-0df8504a1d6d")
+	)
+	(wire
+		(pts
+			(xy 118.708 117.8746) (xy 121.248 117.8746)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "85649eab-ee91-4527-aa38-019ee66f5f9f")
 	)
 	(wire
 		(pts
@@ -2986,6 +2996,16 @@
 	)
 	(wire
 		(pts
+			(xy 90.768 128.0346) (xy 93.308 128.0346)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8fa12e10-c08c-4aae-9e11-a08bd5a1ec11")
+	)
+	(wire
+		(pts
 			(xy 66.04 76.2) (xy 62.23 76.2)
 		)
 		(stroke
@@ -3026,23 +3046,23 @@
 	)
 	(wire
 		(pts
-			(xy 134.62 146.05) (xy 137.16 146.05)
+			(xy 118.708 122.9546) (xy 121.248 122.9546)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b118c218-445a-4391-b30e-5ca1ccbf9d0e")
+		(uuid "b11d9e7d-acba-4c21-8a45-f2fe88451e6d")
 	)
 	(wire
 		(pts
-			(xy 137.16 146.05) (xy 137.16 137.16)
+			(xy 90.768 120.4146) (xy 93.308 120.4146)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b514a3d5-f982-48f9-9d2c-4460c86e1e5c")
+		(uuid "b4eb1c71-23e0-46ec-bf2a-577b553928c5")
 	)
 	(wire
 		(pts
@@ -3063,16 +3083,6 @@
 			(type default)
 		)
 		(uuid "bc01b954-a228-408c-9144-f5e0c7aa3f29")
-	)
-	(wire
-		(pts
-			(xy 144.78 142.24) (xy 147.32 142.24)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bfb5d7ce-8bab-4d14-b612-c73229926698")
 	)
 	(wire
 		(pts
@@ -3106,13 +3116,13 @@
 	)
 	(wire
 		(pts
-			(xy 139.7 137.16) (xy 139.7 147.32)
+			(xy 90.768 117.8746) (xy 93.308 117.8746)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "cbe60b9a-9c4b-449a-97ad-630026296c4f")
+		(uuid "ca6540e1-00b7-4f68-98a7-ff463b46d9cc")
 	)
 	(wire
 		(pts
@@ -3146,16 +3156,6 @@
 	)
 	(wire
 		(pts
-			(xy 134.62 142.24) (xy 134.62 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e3d8247a-239e-448c-b10f-761161fe54ec")
-	)
-	(wire
-		(pts
 			(xy 175.26 62.23) (xy 175.26 64.77)
 		)
 		(stroke
@@ -3184,16 +3184,6 @@
 		)
 		(uuid "ec82cc6f-8467-4259-9ece-7e88d2bdfc31")
 	)
-	(wire
-		(pts
-			(xy 144.78 137.16) (xy 144.78 142.24)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fb53fe90-6f1e-480e-88e7-0e2e322e96a8")
-	)
 	(label "USB_RAW_N"
 		(at 68.58 71.12 0)
 		(effects
@@ -3213,6 +3203,78 @@
 			(justify left bottom)
 		)
 		(uuid "cd71fa53-0517-493e-9366-057f6c9c751b")
+	)
+	(global_label "SWCLK"
+		(shape input)
+		(at 121.248 120.4146 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "202708c0-546d-483a-8fc7-cad3a0ca887d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 130.4622 120.4146 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "SWO"
+		(shape input)
+		(at 121.248 122.9546 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "43cd193c-e297-49fa-b47a-30f3b60b350e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 128.2246 122.9546 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "NRST"
+		(shape input)
+		(at 121.248 128.0346 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "49d26eae-dca2-41d7-8f21-c4e55dc18ac5")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 129.0108 128.0346 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
 	)
 	(global_label "VBAT_FUSED"
 		(shape input)
@@ -3238,19 +3300,19 @@
 			)
 		)
 	)
-	(global_label "NRST"
+	(global_label "SWDIO"
 		(shape input)
-		(at 128.27 142.24 180)
+		(at 121.248 117.8746 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
-		(uuid "877ed6ac-44f5-4115-8ae0-da4487b6a463")
+		(uuid "6fa93b76-af0d-4009-890a-bb5cf5b04f22")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 120.5072 142.24 0)
+			(at 130.0994 117.8746 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3258,7 +3320,7 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 	)
@@ -3334,30 +3396,6 @@
 			)
 		)
 	)
-	(global_label "SWDIO"
-		(shape input)
-		(at 146.05 147.32 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "ead58b6a-c7dd-4d13-b4d9-d6946679e399")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 154.9014 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
 	(global_label "USB_P"
 		(shape input)
 		(at 92.71 73.66 0)
@@ -3379,30 +3417,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-			)
-		)
-	)
-	(global_label "SWCLK"
-		(shape input)
-		(at 139.7 147.32 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "f7487aa2-6f08-4d38-be1d-b7276bfcc4fa")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 139.7 156.5342 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 			)
 		)
 	)
@@ -3479,6 +3493,84 @@
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/4243282c-f3ca-4105-833d-42ac8b978054"
 					(reference "#PWR060")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 90.768 128.0346 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "12f80689-d9d7-4089-9c35-239ac9684c48")
+		(property "Reference" "#PWR097"
+			(at 84.418 128.0346 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 86.958 128.0346 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 90.768 128.0346 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 90.768 128.0346 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 90.768 128.0346 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d35db2ec-1d02-425d-af9a-ff41ef226756")
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/4243282c-f3ca-4105-833d-42ac8b978054"
+					(reference "#PWR097")
 					(unit 1)
 				)
 			)
@@ -4119,8 +4211,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x05_Pin")
-		(at 139.7 132.08 270)
+		(lib_id "UNSW_ROCKETRY_LIBRARY:FTSH-105-01-X-DV-K-X")
+		(at 106.008 122.9546 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4129,9 +4221,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "8d1d00e6-2b96-47c1-9721-6f03a0732940")
-		(property "Reference" "J4"
-			(at 139.7 127 90)
+		(uuid "85341974-948b-4b37-a2ea-10a63c446281")
+		(property "Reference" "J1"
+			(at 106.008 110.2546 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4141,7 +4233,7 @@
 			)
 		)
 		(property "Value" "SWD"
-			(at 139.7 129.54 90)
+			(at 106.008 112.7946 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4150,8 +4242,152 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical"
-			(at 139.7 132.08 0)
+		(property "Footprint" "UNSW_ROCKETRY_LIBRARY:SAMTEC_FTSH-105-01-X-DV-K-X"
+			(at 106.008 122.9546 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Datasheet" ""
+			(at 106.008 122.9546 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 106.008 122.9546 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PARTREV" "H"
+			(at 106.008 122.9546 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "STANDARD" "Manufacturer Recommendations"
+			(at 106.008 122.9546 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "MANUFACTURER" "Samtec"
+			(at 106.008 122.9546 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(pin "09"
+			(uuid "4a53d5e8-31dc-4726-8d8c-4518c605cc98")
+		)
+		(pin "10"
+			(uuid "65ac5b6c-f8da-44dd-abf4-cb0c70ea8617")
+		)
+		(pin "07"
+			(uuid "4b69a692-1ba4-4094-a2fa-39bfabf2e625")
+		)
+		(pin "08"
+			(uuid "f5005913-9f80-4b9f-a5af-4159563fa7be")
+		)
+		(pin "01"
+			(uuid "2bd8ea59-e658-4e42-aa9b-ed196de2b42e")
+		)
+		(pin "02"
+			(uuid "6c09be3b-0454-4e43-b7bb-cd79fb798365")
+		)
+		(pin "03"
+			(uuid "ed1e8d61-4581-49f1-a695-2d9e6c73b465")
+		)
+		(pin "04"
+			(uuid "eba3fda0-05b6-46ed-b300-0b89e08c080b")
+		)
+		(pin "05"
+			(uuid "33b619c3-92af-4c55-978a-abaa8865f176")
+		)
+		(pin "06"
+			(uuid "506484e5-5958-47a0-a7f3-90dc7a598c78")
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/4243282c-f3ca-4105-833d-42ac8b978054"
+					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 90.768 117.8746 90)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "959183e2-0a4c-42a9-8258-b8c19013cfe9")
+		(property "Reference" "#PWR095"
+			(at 94.578 117.8746 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 86.958 117.8745 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 90.768 117.8746 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4162,7 +4398,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 139.7 132.08 0)
+			(at 90.768 117.8746 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4172,8 +4408,8 @@
 				)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x05, script generated"
-			(at 139.7 132.08 0)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 90.768 117.8746 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4182,26 +4418,14 @@
 					(size 1.27 1.27)
 				)
 			)
-		)
-		(pin "2"
-			(uuid "42e6dc03-c6e7-418f-8907-625c88d3daa4")
 		)
 		(pin "1"
-			(uuid "0a9f40be-d4e4-47f4-81a5-efd540fffccf")
-		)
-		(pin "3"
-			(uuid "65a35b28-b58b-4193-8b63-2f95a4bf7058")
-		)
-		(pin "4"
-			(uuid "4391300b-5cb7-46f6-a933-992f70162777")
-		)
-		(pin "5"
-			(uuid "31025acb-2f58-465c-bb23-a13480aaaaa8")
+			(uuid "4986c1e7-969e-48e5-8a71-b80afde61229")
 		)
 		(instances
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/4243282c-f3ca-4105-833d-42ac8b978054"
-					(reference "J4")
+					(reference "#PWR095")
 					(unit 1)
 				)
 			)
@@ -4331,7 +4555,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
+		(property "Footprint" "Connector_Molex:Molex_PicoBlade_53047-0410_1x04_P1.25mm_Vertical"
 			(at 184.15 67.31 0)
 			(hide yes)
 			(show_name no)
@@ -4543,6 +4767,84 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 90.768 120.4146 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "d29761d3-cbfa-4089-b895-85461fa10922")
+		(property "Reference" "#PWR094"
+			(at 84.418 120.4146 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 86.958 120.4146 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 90.768 120.4146 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 90.768 120.4146 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 90.768 120.4146 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0f7c688c-5846-4e3c-a772-482b33608896")
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/4243282c-f3ca-4105-833d-42ac8b978054"
+					(reference "#PWR094")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "PCM_SparkFun-Resistor:5.1k_0603")
 		(at 68.58 63.5 0)
 		(unit 1)
@@ -4627,84 +4929,6 @@
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/4243282c-f3ca-4105-833d-42ac8b978054"
 					(reference "R14")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 134.62 146.05 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "d9aa0c95-6278-4b75-b0fa-cb0250388d1c")
-		(property "Reference" "#PWR066"
-			(at 128.27 146.05 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 130.81 146.05 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 134.62 146.05 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 134.62 146.05 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 134.62 146.05 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "904c7fce-2efc-4fcc-bccc-3a98fc5edf89")
-		)
-		(instances
-			(project "UNSW_Rocketry_Senior_Flight_Computer"
-				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/4243282c-f3ca-4105-833d-42ac8b978054"
-					(reference "#PWR066")
 					(unit 1)
 				)
 			)
@@ -4836,86 +5060,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3.3V")
-		(at 147.32 142.24 270)
-		(mirror x)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "dc08f89d-3dc6-44b6-8e17-1bc26c18229c")
-		(property "Reference" "#PWR067"
-			(at 143.51 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 151.13 142.2399 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 147.32 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 147.32 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 147.32 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "8be1c7a4-14f8-4193-9ada-2d737e04db14")
-		)
-		(instances
-			(project "UNSW_Rocketry_Senior_Flight_Computer"
-				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/4243282c-f3ca-4105-833d-42ac8b978054"
-					(reference "#PWR067")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 85.09 50.8 90)
 		(unit 1)
@@ -4989,6 +5133,84 @@
 			(project "UNSW_Rocketry_Senior_Flight_Computer"
 				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/4243282c-f3ca-4105-833d-42ac8b978054"
 					(reference "#PWR064")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 90.768 122.9546 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "e4de810f-d0a1-4edc-910b-4a44821cc091")
+		(property "Reference" "#PWR096"
+			(at 84.418 122.9546 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 86.958 122.9546 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 90.768 122.9546 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 90.768 122.9546 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 90.768 122.9546 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6c0dfadb-76cc-4b25-a6bd-bf73caa69dc2")
+		)
+		(instances
+			(project "UNSW_Rocketry_Senior_Flight_Computer"
+				(path "/9e0253f5-fba5-4205-8256-7fc47a91dd1e/4243282c-f3ca-4105-833d-42ac8b978054"
+					(reference "#PWR096")
 					(unit 1)
 				)
 			)
