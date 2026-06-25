@@ -1,0 +1,9 @@
+# STM32CubeIDE build output
+Debug/
+Release/
+*.launch
+.settings/
+# Other toolchain folders CubeMX may emit (we use STM32CubeIDE)
+EWARM/
+MDK-ARM/
+# keep .ioc, Core/, Drivers/, app/, USB_DEVICE/, FATFS/

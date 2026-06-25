@@ -1,0 +1,14 @@
+{
+  "name": "ozone-fw-tools",
+  "private": true,
+  "description": "Ground tooling for the Project OZONE flight computer (pnpm task runner over the Python TUI)",
+  "scripts": {
+    "setup": "pip3 install -r tools/requirements.txt",
+    "console": "python3 tools/ozone_console.py",
+    "preflight": "python3 tools/ozone_console.py --mode preflight",
+    "monitor": "python3 tools/ozone_console.py --mode monitor",
+    "postflight": "python3 tools/ozone_console.py --mode postflight",
+    "terminal": "python3 tools/ozone_console.py --mode raw",
+    "ports": "python3 tools/ozone_console.py --list"
+  }
+}
