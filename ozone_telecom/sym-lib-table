@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "OZONE_RADIO")(type "KiCad")(uri "${KIPRJMOD}/libs/OZONE_RADIO.kicad_sym")(options "")(descr "OZONE radio expansion board — curated standard ICs (ESP32-S3, MAX-M10S, TPS63060, etc.)"))
+  (lib (name "UNSW_ROCKETRY_LIBRARY")(type "KiCad")(uri "${KIPRJMOD}/../v1.0/UNSW_ROCKETRY_LIBRARY.kicad_sym")(options "")(descr "Shared UNSW Rocketry library — E22-900M22S, logos, connectors"))
+)
