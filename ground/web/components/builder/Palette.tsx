@@ -28,7 +28,7 @@ export function Palette({ presentKinds }: { presentKinds: Set<BlockKind> }) {
                 e.dataTransfer.setData(DND_MIME, JSON.stringify({ source: "palette", kind: def.kind }));
                 e.dataTransfer.effectAllowed = "copy";
               }}
-              className={`pill flex flex-col gap-0.5 px-3 py-2 text-left transition ${
+              className={`pill !rounded-[5px] flex flex-col gap-0.5 px-3 py-2 text-left transition ${
                 already ? "cursor-not-allowed opacity-40" : "cursor-grab hover:!text-cyan active:cursor-grabbing"
               }`}
             >

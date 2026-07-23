@@ -17,6 +17,31 @@ import { CanvasEditor } from "@/components/builder/CanvasEditor";
 import { PreviewPane } from "@/components/builder/PreviewPane";
 import { OutputPanel } from "@/components/builder/OutputPanel";
 
+/**
+ * Section divider between the builder's major zones (canvas -> live preview
+ * -> generated code) — an uppercase tracking-widest label + a hairline rule
+ * spanning the rest of the row, same "small dot + label-caps" mission-
+ * control language used elsewhere (BoardHeader, the /protocol hero). Makes
+ * the hand-off from "you're editing" to "this is what a board would show"
+ * to "this is the code to paste" read as three distinct zones, not one
+ * continuous scroll.
+ */
+function SectionDivider({ label, accent = "cyan" }: { label: string; accent?: "cyan" | "amber" }) {
+  return (
+    <div className="mb-2.5 mt-8 flex items-center gap-3 first:mt-0">
+      <span
+        className="h-1.5 w-1.5 shrink-0 rounded-full"
+        style={{
+          background: accent === "amber" ? "var(--color-amber)" : "var(--color-cyan)",
+          boxShadow: `0 0 6px ${accent === "amber" ? "var(--color-amber)" : "var(--color-cyan)"}`,
+        }}
+      />
+      <span className="label-caps shrink-0 text-[11px] font-semibold tracking-[0.18em] text-ink-dim">{label}</span>
+      <span className="h-px flex-1 bg-hairline-bright" />
+    </div>
+  );
+}
+
 function loadInitial(): BuilderBlock[] {
   if (typeof window === "undefined") return defaultBlocks();
   try {
@@ -77,13 +102,11 @@ export default function BuilderPage() {
         <CanvasEditor blocks={blocks} setBlocks={setBlocks} />
       </div>
 
-      <div className="mt-2.5">
-        <PreviewPane descriptor={descriptor} />
-      </div>
+      <SectionDivider label="Live preview" accent="cyan" />
+      <PreviewPane descriptor={descriptor} />
 
-      <div className="mt-2.5">
-        <OutputPanel descriptor={descriptor} onImport={(imported) => setBlocks(() => imported)} />
-      </div>
+      <SectionDivider label="FCD1 output" accent="amber" />
+      <OutputPanel descriptor={descriptor} onImport={(imported) => setBlocks(() => imported)} />
     </main>
   );
 }

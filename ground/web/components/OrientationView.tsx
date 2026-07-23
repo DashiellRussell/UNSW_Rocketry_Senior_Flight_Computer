@@ -72,7 +72,11 @@ export function OrientationView({
     ctx.clearRect(0, 0, w, h);
     const cx = w / 2;
     const cy = h / 2 + 4 * dpr;
-    const scale = Math.min(w, h) * 0.42;
+    // Kept comfortably inside the canvas: the broadside camera reveals the
+    // board's long axis (and the Y/Z triad legs) at close to full-length
+    // reach on screen, larger than the old near-top-down view's footprint —
+    // scaled down accordingly so nothing clips at the panel's edges.
+    const scale = Math.min(w, h) * 0.32;
 
     const inkFaint = "rgba(134,140,149,0.5)";
     const inkDim = "rgba(228,231,235,0.75)";
@@ -90,7 +94,7 @@ export function OrientationView({
     for (const ax of axes) {
       const isFlightAxis = ax.letter === flightAxisLetter;
       const color = isFlightAxis ? accentHex : inkFaint;
-      const [ex, ey] = project([ax.v[0] * 0.95, ax.v[1] * 0.95, ax.v[2] * 0.95], scale, cx, cy);
+      const [ex, ey] = project([ax.v[0] * 0.78, ax.v[1] * 0.78, ax.v[2] * 0.78], scale, cx, cy);
       ctx.strokeStyle = color;
       ctx.lineWidth = (isFlightAxis ? 1.6 : 1) * dpr;
       ctx.beginPath();

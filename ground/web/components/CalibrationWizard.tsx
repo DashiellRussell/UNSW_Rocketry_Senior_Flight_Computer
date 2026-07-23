@@ -252,8 +252,12 @@ export function CalibrationWizard({
                     {copied ? "Copied!" : "Copy snippet"}
                   </button>
                 </div>
-                <pre className="frost overflow-x-auto p-2.5 text-[11px] leading-relaxed text-ink">
-                  <code className="font-mono">{snippet}</code>
+                {/* Fixed-height, scroll-contained — a tall/wide imu snippet must
+                    never expand the modal (or shove the OrientationView/
+                    dashboard around behind it). Scrolls both axes inside its
+                    own box instead of stretching. */}
+                <pre className="frost max-h-[200px] overflow-auto p-2.5 text-[11px] leading-relaxed text-ink">
+                  <code className="block w-max whitespace-pre font-mono">{snippet}</code>
                 </pre>
 
                 <div className="mt-3 flex justify-end gap-2">

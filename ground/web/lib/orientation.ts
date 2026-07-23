@@ -17,13 +17,15 @@
  * normal. The model's neutral/rest pose is always "flat, face up" — i.e.
  * its own +Z is the rotation reference — so a board lying flat and level
  * renders upright/level, and any real tilt visibly rotates it away from
- * that rest pose. (Previously the rotation reference was read from the
- * descriptor's `up` field, which defaulted to "+z" too, but the camera's
- * fixed pitch/yaw made even the untilted case render like a tilted diamond
- * — fixed below by using a much shallower, near-top-down camera suited to a
- * flat object instead of a standing rocket.) `up` is now purely an
- * informational label (which axis is the flight/thrust axis to highlight),
- * decoupled from the rotation math.
+ * that rest pose. `up` is purely an informational label (which axis is the
+ * flight/thrust axis to highlight in the triad), decoupled from the
+ * rotation math.
+ *
+ * CAMERA: a fixed "hero shot" basis (right/up/view unit vectors, built from
+ * cross products below) rather than a naive pitch-then-yaw Euler chain —
+ * broadside to the board's LONG face (view direction ≈ the short axis, X),
+ * from slightly above, pitched gently down, with a small azimuth off pure-
+ * broadside for a bit of 3D parallax. See CAM_PITCH_DEG/CAM_YAW_DEG.
  */
 import type { ImuSpec } from "./types";
 
@@ -119,25 +121,53 @@ export function orientModel(points: Vec3[], accelBoardFrame: Vec3): Vec3[] {
 }
 
 /**
- * Fixed camera. Chosen SHALLOW (near top-down) rather than the oblique
- * side-on angle a standing rocket would want — this is a flat board now, so
- * a mostly-overhead view is what makes "flat & level" actually look flat and
- * level instead of a tilted diamond, while still giving enough depth to see
- * genuine tilts rotate it out of that resting look.
+ * Fixed "hero shot" camera — NOT top-down. Broadside to the board's LONG
+ * face: the view/depth axis points roughly along the board's SHORT axis
+ * (X), so the long axis (Y) reads across the screen horizontally, from
+ * slightly above (a shallow ~18° downward pitch) rather than dead-level, so
+ * the top face reveals itself a little instead of seeing pure edge-on. A
+ * small azimuth (yaw) off pure-broadside adds a bit of 3D parallax so the
+ * board doesn't read as a flat 2D silhouette.
+ *
+ * Built from an explicit camera basis (view/right/up unit vectors via cross
+ * products) rather than a naive Euler pitch-then-yaw chain, so the mapping
+ * from "which world axis reads where on screen" is exact and easy to
+ * reason about: screen-x = dot(p, RIGHT) [~ +Y, the long axis], screen-y =
+ * dot(p, UP) [~ mostly +Z (thickness/normal), with a bit of +X (width)
+ * mixed in by the downward pitch — that's what reveals the top face].
+ *
+ * At rest (board flat & level -> orientModel applies no rotation, see
+ * above), this still renders the board as a wide, thin, LEVEL horizontal
+ * bar — "flat" reads as flat/level in this view exactly as it did in the
+ * previous near-top-down camera; only the vantage point changed, not the
+ * rest-pose behaviour. Any real tilt of the board rotates the model (via
+ * orientModel) before it ever reaches this fixed camera, so tilts visibly
+ * rotate it away from that level bar.
  */
+const CAM_PITCH_DEG = 18; // downward tilt — "slightly above, pointing gently down"
+const CAM_YAW_DEG = 14; // small azimuth off pure-broadside, for 3D parallax only
+
+const CAM_PITCH = (CAM_PITCH_DEG * Math.PI) / 180;
+const CAM_YAW = (CAM_YAW_DEG * Math.PI) / 180;
+
+// View direction: mostly +X (looking broadside along the short axis),
+// nudged in azimuth by CAM_YAW, tilted down by CAM_PITCH.
+const CAM_VIEW: Vec3 = normalize([
+  Math.cos(CAM_PITCH) * Math.cos(CAM_YAW),
+  Math.cos(CAM_PITCH) * Math.sin(CAM_YAW),
+  -Math.sin(CAM_PITCH),
+]);
+const WORLD_UP_REF: Vec3 = [0, 0, 1];
+// screen-horizontal ~ +Y (board length); screen-vertical ~ +Z (thickness/
+// normal) with a bit of +X (width) mixed in — see doc comment above.
+const CAM_RIGHT: Vec3 = normalize(cross(WORLD_UP_REF, CAM_VIEW));
+const CAM_UP: Vec3 = normalize(cross(CAM_VIEW, CAM_RIGHT));
+
 export function project(p: Vec3, scale: number, cx: number, cy: number): [number, number, number] {
-  const camPitch = (-62 * Math.PI) / 180;
-  const camYaw = (16 * Math.PI) / 180;
-  let [x, y, z] = p;
-  const y1 = y * Math.cos(camPitch) - z * Math.sin(camPitch);
-  const z1 = y * Math.sin(camPitch) + z * Math.cos(camPitch);
-  y = y1;
-  z = z1;
-  const x2 = x * Math.cos(camYaw) + z * Math.sin(camYaw);
-  const z2 = -x * Math.sin(camYaw) + z * Math.cos(camYaw);
-  x = x2;
-  z = z2;
-  return [cx + x * scale, cy - y * scale, z];
+  const sx = dot(p, CAM_RIGHT);
+  const sy = dot(p, CAM_UP);
+  const depth = dot(p, CAM_VIEW);
+  return [cx + sx * scale, cy - sy * scale, depth];
 }
 
 /**

@@ -170,11 +170,14 @@ export function PyroPanel({ profile, lastTlm, api }: { profile: Profile; lastTlm
           channels still shows all 6 slots (4 greyed placeholders) so the
           panel reads as a dense, purpose-built instrument rather than two
           cards floating in a lot of empty space. If caps.pyro were 6, every
-          slot is a live channel. */}
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-        {Array.from({ length: 6 }, (_, i) => i + 1).map((ch) =>
-          ch > channels ? (
-            <PyroChannelPlaceholder key={ch} ch={ch} />
+          slot is a live channel. One row of 6 real squares (aspect-square) —
+          on narrow viewports the row scrolls horizontally rather than
+          wrapping or squishing the squares out of shape. */}
+      <div className="-mx-0.5 overflow-x-auto px-0.5 pb-1">
+        <div className="grid min-w-[560px] grid-cols-6 gap-2">
+          {Array.from({ length: 6 }, (_, i) => i + 1).map((ch) =>
+            ch > channels ? (
+              <PyroChannelPlaceholder key={ch} ch={ch} />
           ) : (
             <PyroChannelCard
               key={ch}
@@ -224,8 +227,9 @@ export function PyroPanel({ profile, lastTlm, api }: { profile: Profile; lastTlm
                 toast.show(reply);
               }}
             />
-          )
-        )}
+            )
+          )}
+        </div>
       </div>
 
       {confirm && (
@@ -251,7 +255,7 @@ export function PyroPanel({ profile, lastTlm, api }: { profile: Profile; lastTlm
  *  leave the grid looking sparse/unbalanced). */
 function PyroChannelPlaceholder({ ch }: { ch: number }) {
   return (
-    <div className="frost flex flex-col items-center justify-center gap-1 p-4 opacity-40">
+    <div className="frost aspect-square flex flex-col items-center justify-center gap-1 p-3 opacity-40">
       <span className="font-display text-[12px] tracking-wide text-ink-faint">CH {ch}</span>
       <span className="label-caps text-[9px] text-ink-faint">not present</span>
       <span className="mt-1 text-[16px] text-ink-faint">—</span>
@@ -290,7 +294,7 @@ function PyroChannelCard({
   useNow(1000, !!primeToken);
 
   return (
-    <div className="frost flex flex-col gap-3 p-4">
+    <div className="frost aspect-square flex flex-col gap-2 overflow-y-auto p-2.5">
       <div className="flex items-center justify-between">
         <span className="font-display text-[12px] tracking-wide text-ink">CH {ch}</span>
         <span
