@@ -24,7 +24,8 @@ static size_t   s_line_len = 0;
  * is idle. Fixes (a) the aliasing bug where CDC_Transmit_FS held a caller's
  * transient stack buffer (corrupted in-flight TLM) and (b) the drop-on-busy
  * that made periodic telemetry unreliable. */
-#define TX_RING_SZ  2048u
+#define TX_RING_SZ  8192u   /* must comfortably hold the ~1.6 KB whoami descriptor
+                             * PLUS buffered TLM/LOG/banner without truncating it */
 static volatile uint8_t  s_tx[TX_RING_SZ];
 static volatile uint16_t s_tx_head = 0;
 static volatile uint16_t s_tx_tail = 0;
