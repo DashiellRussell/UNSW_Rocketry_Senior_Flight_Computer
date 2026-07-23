@@ -1,0 +1,409 @@
+@import "tailwindcss";
+
+@theme {
+  /* Type: a neutral technical grotesk (labels/UI) + a mono for ALL data —
+     numbers, telemetry, log, params. No decorative/display face. */
+  --font-display: var(--font-plex-sans), "IBM Plex Sans", ui-sans-serif, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* Near-monochrome graphite-on-near-black. Color is reserved for MEANING
+     (status + the one functional accent) — never decoration. */
+  --color-bg: #060708;
+  --color-bg-raised: #0a0b0d;
+  --color-bg-panel: #0e0f12;
+  --color-bg-inset: #050506;
+  --color-hairline: #202329;
+  --color-hairline-bright: #2e323a;
+
+  --color-ink: #e4e7eb;
+  --color-ink-dim: #868c95;
+  --color-ink-faint: #4d525a;
+
+  /* One functional accent (cyan), disciplined/desaturated rather than neon. */
+  --color-cyan: #35bede;
+  --color-cyan-dim: #1a5c6e;
+  --color-amber: #d99a3f;
+  --color-amber-dim: #6e5324;
+  --color-green: #3fbd84;
+  --color-red: #e6404c;
+  --color-red-dim: #6e1f26;
+
+  --shadow-panel: inset 0 1px 0 rgba(255, 255, 255, 0.02), 0 2px 10px rgba(0, 0, 0, 0.4);
+  --shadow-soft: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Generic aliases onto the --color-* tokens above — consumed by the hand-
+     written .glass/.frost/.pill/.danger-box rules below, not by Tailwind's
+     utility generator. */
+  --background: var(--color-bg);
+  --panel: var(--color-bg-panel);
+  --panel-edge: var(--color-hairline-bright);
+  --foreground: var(--color-ink);
+  --muted: var(--color-ink-dim);
+  --accent: var(--color-cyan);
+  --warn: var(--color-amber);
+  --danger: var(--color-red);
+  --ok: var(--color-green);
+
+  /* Dialed WAY back from a "frosted glass" look toward crisp, engineered
+     instrument bezels: a hairline edge and a bare hint of blur, not a soft
+     translucent card. */
+  --glass-blur: 5px;
+  --glass-saturate: 1.05;
+  --radius-lg: 10px;
+  --radius-md: 8px;
+  --radius-sm: 6px;
+  --radius-pill: 9999px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-size: 13px;
+}
+
+/* Ambient background: the drifting-blob canvas (<Backdrop/>, very low alpha
+   — see components/Backdrop.tsx) plus a faint static engineering grid on
+   top of it. Both sit behind everything (negative z-index) so panels read
+   as instruments sitting on a quiet, barely-there backdrop, not a light show. */
+.grid-veil {
+  position: fixed;
+  inset: 0;
+  z-index: -9;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 20%, black 40%, transparent 90%);
+}
+
+.noise-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.02;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: rgba(53, 190, 222, 0.28);
+  color: #fff;
+}
+
+/* Scrollbars: thin, dark, technical */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-hairline-bright) transparent;
+}
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--color-hairline-bright);
+  border-radius: 3px;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+}
+.pulse {
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
+
+@keyframes armed-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(230, 64, 76, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(230, 64, 76, 0);
+  }
+}
+.armed-glow {
+  animation: armed-glow 1.3s ease-out infinite;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise-in {
+  animation: rise-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes sweep-in {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+.sweep-in {
+  animation: sweep-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+.toast-in {
+  animation: toast-in 0.2s ease-out both;
+}
+
+/* ── Panel chrome: crisp instrument bezels, not soft glass cards ───────────
+   .glass / .surface: the OUTER panel treatment — a near-opaque graphite
+   fill, a hairline edge, and a bare hint of backdrop-blur (just enough that
+   the drifting backdrop still reads through faintly). Radius/padding are
+   left to each component's own Tailwind classes.
+   .glass-header: same idea, darker still, for the sticky top bar.
+   .frost: for anything NESTED inside a .glass/.surface panel — translucency
+   only, no backdrop-filter of its own (nested backdrop-filter silently
+   no-ops inside an already-filtered ancestor).
+   .pill: compact toggles + nav chips. */
+.glass,
+.surface {
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--panel) 94%, transparent) 0%,
+    color-mix(in srgb, var(--panel) 88%, transparent) 100%
+  );
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--panel-edge);
+  box-shadow: var(--shadow-panel);
+}
+
+.glass-header {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--background) 96%, transparent) 0%,
+    color-mix(in srgb, var(--background) 90%, transparent) 100%
+  );
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border-bottom: 1px solid var(--panel-edge);
+}
+
+.frost {
+  background: color-mix(in srgb, var(--foreground) 3%, transparent);
+  border: 1px solid var(--panel-edge);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--foreground) 4%, transparent);
+}
+
+.pill {
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--panel-edge);
+  color: var(--muted);
+  transition:
+    color 0.15s,
+    border-color 0.15s,
+    background 0.15s;
+}
+.pill:hover {
+  color: var(--foreground);
+  border-color: var(--muted);
+}
+
+/* Back-compat aliases so nothing that still references the old mission-
+   control panel classes silently loses its chrome. */
+.mc-panel {
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--panel) 94%, transparent) 0%,
+    color-mix(in srgb, var(--panel) 88%, transparent) 100%
+  );
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--panel-edge);
+  box-shadow: var(--shadow-panel);
+}
+.mc-inset {
+  background: color-mix(in srgb, var(--foreground) 3%, transparent);
+  border: 1px solid var(--panel-edge);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--foreground) 4%, transparent);
+}
+
+/* ── Hazard / warning boxes ─────────────────────────────────────────────────
+   .danger-box: critical — ARMED, FIRE, faults, NO-GO, board disconnected.
+   Dark-on-black, red hairline, bold uppercase, optional hazard stripe.
+   .warn-box: non-critical warnings (amber). */
+.danger-box {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--danger) 12%, black), color-mix(in srgb, var(--danger) 5%, black));
+  border: 1px solid color-mix(in srgb, var(--danger) 55%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--danger) 20%, transparent),
+    0 0 0 1px rgba(0, 0, 0, 0.4);
+  color: color-mix(in srgb, var(--danger) 88%, white);
+}
+.warn-box {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--warn) 10%, black), color-mix(in srgb, var(--warn) 4%, black));
+  border: 1px solid color-mix(in srgb, var(--warn) 50%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--warn) 16%, transparent);
+  color: color-mix(in srgb, var(--warn) 88%, white);
+}
+.hazard-stripes {
+  background-image: repeating-linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--danger) 22%, transparent) 0px,
+    color-mix(in srgb, var(--danger) 22%, transparent) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
+
+/* ── Hazard FRAME (stripes as a translucent border ring, not a fill) ───────
+   Three-layer construction — see components/HazardFrame.tsx for the React
+   wrapper: a solid 1.5px amber-or-red OUTLINE on the outer element; that
+   same element's background is the diagonal caution stripe pattern at ~45%
+   alpha (the fully-transparent gaps between stripes let the dark panel/
+   backdrop behind the frame show through, so it reads as a soft tint, not a
+   solid fill), with just enough padding to read as a frame; an INNER
+   element with a normal solid/glass panel fill sits on top, covering the
+   middle so the stripes only show around the edge. `--hazard-color` /
+   `--hazard-border` are the one-line swap between variants — red stays
+   reserved for the most-critical states (ARMED / board-disconnected /
+   NO-GO, via .hazard-stripes above, kept exactly as-is); amber is this
+   frame's default, used for the pyro-panel caution boundary. Static —
+   nothing here animates, so there's nothing to gate on
+   prefers-reduced-motion. */
+.hazard-frame {
+  /* Semi-transparent stripe on a fully transparent gap — the dark panel/
+     backdrop behind the frame shows through both, so the stripe reads as a
+     soft tint rather than a solid fill. A solid 1.5px outer border in the
+     same hue anchors the frame, so the layering is: solid amber outline ->
+     translucent striped ring -> solid inner content. */
+  --hazard-color: color-mix(in srgb, var(--warn) 45%, transparent);
+  --hazard-border: var(--warn);
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--hazard-color) 0px,
+    var(--hazard-color) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  border: 1.5px solid var(--hazard-border);
+  padding: 10px;
+  border-radius: var(--radius-lg);
+}
+.hazard-frame-slim {
+  padding: 5px;
+  border-radius: var(--radius-md);
+}
+.hazard-frame-amber {
+  --hazard-color: color-mix(in srgb, var(--warn) 45%, transparent);
+  --hazard-border: var(--warn);
+}
+.hazard-frame-red {
+  --hazard-color: color-mix(in srgb, var(--danger) 45%, transparent);
+  --hazard-border: var(--danger);
+}
+.hazard-frame-inner {
+  background: var(--panel);
+  border-radius: calc(var(--radius-lg) - 4px);
+  height: 100%;
+}
+.hazard-frame-slim > .hazard-frame-inner {
+  border-radius: calc(var(--radius-md) - 3px);
+}
+
+/* ── Physical / tactile controls ────────────────────────────────────────────
+   Raised, bevelled, engineered control surfaces — a crisp top highlight and
+   a real press-down collapse on :active, not a soft skeuomorphic toy. Used
+   for ARM / FIRE / flight-mode and any other hardware-grade control. */
+.btn-physical {
+  position: relative;
+  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, var(--foreground) 16%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 10%, transparent),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.35),
+    0 2px 0 rgba(0, 0, 0, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.35);
+  transform: translateY(0);
+  transition:
+    transform 0.08s ease-out,
+    box-shadow 0.08s ease-out,
+    background 0.15s;
+}
+.btn-physical:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.5),
+    0 0 0 rgba(0, 0, 0, 0.5);
+}
+.btn-physical:disabled {
+  filter: grayscale(0.4);
+}
+.btn-physical-danger {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--danger) 38%, #1a0407) 0%, color-mix(in srgb, var(--danger) 20%, #1a0407) 100%);
+  border-color: color-mix(in srgb, var(--danger) 60%, transparent);
+  color: #fff2f2;
+}
+.btn-physical-danger:hover:not(:disabled) {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--danger) 48%, #1a0407) 0%, color-mix(in srgb, var(--danger) 26%, #1a0407) 100%);
+}
+.btn-physical-accent {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 34%, #04141a) 0%, color-mix(in srgb, var(--accent) 16%, #04141a) 100%);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  color: #eafcff;
+}
+.btn-physical-accent:hover:not(:disabled) {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 44%, #04141a) 0%, color-mix(in srgb, var(--accent) 22%, #04141a) 100%);
+}
+
+.label-caps {
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}

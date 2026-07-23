@@ -1,0 +1,28 @@
+{
+  "name": "ozone-ground-station",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Web ground station for the OZONE (fcd/1) flight computer family",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "16.2.11",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-markdown": "10.1.0",
+    "remark-gfm": "4.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "22.10.2",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@types/w3c-web-serial": "1.0.8",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3"
+  }
+}
