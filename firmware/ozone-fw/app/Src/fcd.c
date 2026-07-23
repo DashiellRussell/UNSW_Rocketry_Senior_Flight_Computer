@@ -29,7 +29,8 @@ static const char *DESC =
   * accel keys, so the ground station can render a 3D orientation view. Right-
   * handed axes; "up" = axis reading +1g when the rocket stands nose-up on the
   * pad. CONFIRM up/sign against the physical LIS3DH mounting on this board. */
- "\"imu\":{\"accel\":[\"lo_gx\",\"lo_gy\",\"lo_gz\"],\"up\":\"+z\",\"units\":\"g\",\"g_rest\":1.0},"
+ "\"imu\":{\"accel\":[\"lo_gx\",\"lo_gy\",\"lo_gz\"],\"map\":[\"+x\",\"-y\",\"+z\"],"
+ "\"up\":\"+y\",\"units\":\"g\",\"g_rest\":1.0},"
  "\"tlm\":[\"t_ms\",\"state\",\"agl_m\",\"alt_m\",\"vel_ms\",\"pressure_pa\",\"temp_c\","
  "\"hi_g\",\"lo_g\",\"lo_gx\",\"lo_gy\",\"lo_gz\",\"vbat\",\"pyro_v\",\"armed\",\"cont1\",\"cont2\","
  "\"pg\",\"baro_ok\",\"accel_ok\",\"sd_ok\"],"
