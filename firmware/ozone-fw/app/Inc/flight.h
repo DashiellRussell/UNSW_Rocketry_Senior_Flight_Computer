@@ -30,18 +30,34 @@ typedef enum {
     DEPLOY_MAIN,        /* fire PYRO_CH2 */
 } deploy_cmd_t;
 
+/* Rolling-average window for the noise-robust apogee detector (samples). At the
+ * 20 Hz flight rate this is a ~0.5 s smoothing window. */
+#define FLIGHT_ALT_AVG_N 10
+
 typedef struct {
     flight_state_t state;
     uint32_t       launch_ms;          /* tick at launch detect */
     uint32_t       state_entry_ms;
-    float          max_alt_agl;        /* running apogee tracker */
+    float          max_alt_agl;        /* running apogee tracker (raw) */
     float          last_alt_agl;
     uint32_t       last_alt_ms;
-    float          vel_mps;            /* filtered vertical velocity */
+    float          vel_mps;            /* filtered vertical velocity (telemetry) */
     uint32_t       launch_hold_ms;     /* high-g persistence timer */
     uint32_t       land_hold_ms;       /* landing persistence timer */
     bool           drogue_fired;
     bool           main_fired;
+
+    /* Rolling-average apogee detector: a moving average of altitude, its running
+     * peak, and a sustained-descent debounce. Apogee = the SMOOTHED altitude has
+     * dropped below its peak by a margin for N consecutive samples -> a real
+     * descent, immune to the noisy single-sample velocity derivative. */
+    float          alt_hist[FLIGHT_ALT_AVG_N];
+    uint8_t        alt_hist_i;
+    uint8_t        alt_hist_n;
+    float          alt_smooth;         /* current moving-average altitude */
+    float          peak_smooth_agl;    /* running peak of the smoothed altitude */
+    uint16_t       descent_count;      /* consecutive samples below peak-margin */
+    float          tt_apogee_s;        /* estimated time-to-apogee (coast, s) */
 } flight_ctx_t;
 
 void flight_init(flight_ctx_t *f);

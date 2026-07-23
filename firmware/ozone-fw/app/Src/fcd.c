@@ -34,7 +34,7 @@ static const char *DESC =
  "\"up\":\"+y\",\"units\":\"g\",\"g_rest\":1.0},"
  "\"tlm\":[\"t_ms\",\"state\",\"agl_m\",\"alt_m\",\"vel_ms\",\"pressure_pa\",\"temp_c\","
  "\"hi_g\",\"lo_g\",\"lo_gx\",\"lo_gy\",\"lo_gz\",\"vbat\",\"pyro_v\",\"armed\",\"cont1\",\"cont2\","
- "\"pg\",\"baro_ok\",\"accel_ok\",\"sd_ok\"],"
+ "\"pg\",\"baro_ok\",\"accel_ok\",\"sd_ok\",\"ttapo_s\"],"
  "\"states\":[\"IDLE\",\"ARMED\",\"BOOST\",\"COAST\",\"DROGUE\",\"MAIN\",\"LANDED\",\"FAULT\"],"
  "\"events\":[\"ARMED\",\"DISARMED\",\"LAUNCH\",\"BURNOUT\",\"APOGEE\",\"DEPLOY\",\"PYRO\",\"MAIN\",\"LANDED\",\"FAULT\"],"
  "\"params\":[{\"id\":\"fire_mode\",\"label\":\"Pyro fire mode\",\"type\":\"enum\","
@@ -243,14 +243,14 @@ static void emit_tlm(void)
         "TLM t_ms=%lu state=%s agl_m=%.1f alt_m=%.1f vel_ms=%.1f pressure_pa=%.0f "
         "temp_c=%.1f hi_g=%.2f lo_g=%.2f lo_gx=%.3f lo_gy=%.3f lo_gz=%.3f "
         "vbat=%.2f pyro_v=%.2f armed=%d cont1=%d cont2=%d "
-        "pg=%d baro_ok=%d accel_ok=%d sd_ok=%d",
+        "pg=%d baro_ok=%d accel_ok=%d sd_ok=%d ttapo_s=%.1f",
         (unsigned long)s->timestamp_ms, flight_state_name(f->state),
         s->altitude_agl_m, s->altitude_m, f->vel_mps, s->pressure_pa, s->temperature_c,
         s->hi_g_mag, s->lo_g_mag, s->lo_g_x, s->lo_g_y, s->lo_g_z,
         C->read_vbat ? C->read_vbat() : -1.0f, C->read_pyro_vbat ? C->read_pyro_vbat() : -1.0f,
         pyro_is_armed() ? 1 : 0, c1 ? 1 : 0, c2 ? 1 : 0,
         (C->power_good && C->power_good()) ? 1 : 0, s->baro_valid ? 1 : 0,
-        s->accel_valid ? 1 : 0, (C->sd_ok && C->sd_ok()) ? 1 : 0);
+        s->accel_valid ? 1 : 0, (C->sd_ok && C->sd_ok()) ? 1 : 0, f->tt_apogee_s);
     /* rolling deploy tokens (HOT mode) so the ground can bind a one-key fire */
     if (d1 && n > 0 && n < (int)sizeof b - 24) n += snprintf(b + n, sizeof b - n, " dtok1=%04lX", (unsigned long)d1);
     if (d2 && n > 0 && n < (int)sizeof b - 24) n += snprintf(b + n, sizeof b - n, " dtok2=%04lX", (unsigned long)d2);

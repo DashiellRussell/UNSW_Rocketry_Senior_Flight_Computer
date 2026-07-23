@@ -48,10 +48,14 @@
 #define OZONE_LAUNCH_HOLD_MS        100                /* must persist   */
 
 /* Apogee voting / deployment safety (doc section 7.5, 15.4).          */
-#define OZONE_APOGEE_BARO_DV        (-0.5f)            /* m/s, vel crosses neg */
+#define OZONE_APOGEE_BARO_DV        (-0.5f)            /* m/s, vel crosses neg (legacy) */
 #define OZONE_APOGEE_TIMER_MS       30000              /* timer backup voter   */
 #define OZONE_ALT_LOCKOUT_M         200.0f             /* no fire below this AGL*/
-#define OZONE_VEL_LOCKOUT_MS        3.0f               /* min descent m/s      */
+#define OZONE_VEL_LOCKOUT_MS        3.0f               /* min descent m/s (legacy) */
+/* Rolling-average apogee detector (primary, noise-robust): apogee = smoothed
+ * altitude fell OZONE_APOGEE_DROP_M below its peak for DEBOUNCE_N samples. */
+#define OZONE_APOGEE_DROP_M         10.0f              /* CALIBRATE: peak drop margin */
+#define OZONE_APOGEE_DEBOUNCE_N     5                  /* sustained descent samples   */
 
 /* Main chute deploy altitude AGL (doc: typ. 500-1000 ft -> ~150-300 m). */
 #define OZONE_MAIN_DEPLOY_AGL_M     300.0f
