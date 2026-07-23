@@ -11,6 +11,7 @@ import { GENERIC_PROFILE, normaliseProfile, type Profile, type CheckStatus, type
 import { SerialTransport, WebSocketTransport, type Transport } from "@/lib/transports";
 import { SimTransport } from "@/lib/sim";
 import { GraphBus } from "@/lib/bus";
+import { BANNER_EVENTS } from "@/lib/events";
 
 export type TransportKind = "serial" | "ws" | "sim";
 
@@ -26,6 +27,25 @@ export interface LogLine {
   level: fcd.LogLevel;
   msg: string;
   t: string;
+}
+
+/** A structured `EVT <name> k=v ...` flight-milestone line — distinct from
+ *  free-text LogLine. `t` is the wall-clock-since-connect fallback (same
+ *  convention as LogLine); prefer kv.t_ms (the board's own mission clock)
+ *  for display where present — see lib/events.ts#eventMissionClock. */
+export interface FlightEvent {
+  id: number;
+  name: string;
+  kv: Record<string, string>;
+  t: string;
+}
+
+/** Transient "big moment" banner state — one at a time; a new bannerable
+ *  event replaces whatever's showing rather than queuing. */
+export interface EventBannerState {
+  id: number;
+  name: string;
+  kv: Record<string, string>;
 }
 
 export interface CheckState {
@@ -54,6 +74,8 @@ export interface PyroChannelState {
 }
 
 const LOG_MAX = 400;
+const EVENT_MAX = 300;
+const BANNER_MS = 4200;
 
 function fmtT(t0: number) {
   return (performance.now() / 1000 - t0).toFixed(1) + "s";
@@ -82,6 +104,10 @@ export function useFcdConnection() {
   const [rails, setRails] = useState<Record<string, RailState>>({});
   const [logLines, setLogLines] = useState<LogLine[]>([]);
   const [logCounts, setLogCounts] = useState({ err: 0, warn: 0 });
+  const [events, setEvents] = useState<FlightEvent[]>([]);
+  const [eventBanner, setEventBanner] = useState<EventBannerState | null>(null);
+  const eventIdRef = useRef(0);
+  const bannerTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [lastTlm, setLastTlm] = useState<TlmFrame>({});
   const [flightState, setFlightState] = useState("—");
   // Set when a REAL board link drops unexpectedly (device unplugged, USB
@@ -217,12 +243,43 @@ export function useFcdConnection() {
     setRails({});
   }, []);
 
+  // ── structured flight-milestone events (EVT, distinct from LOG) ─────────
+  const onEvent = useCallback((name: string, kv: Record<string, string>) => {
+    const t = fmtT(t0Ref.current);
+    eventIdRef.current += 1;
+    const entry: FlightEvent = { id: eventIdRef.current, name, kv, t };
+    setEvents((prev) => {
+      const next = [...prev, entry];
+      return next.length > EVENT_MAX ? next.slice(next.length - EVENT_MAX) : next;
+    });
+    if (BANNER_EVENTS.has(name)) {
+      if (bannerTimerRef.current) clearTimeout(bannerTimerRef.current);
+      setEventBanner({ id: entry.id, name, kv });
+      bannerTimerRef.current = setTimeout(() => setEventBanner(null), BANNER_MS);
+    }
+  }, []);
+
+  useEffect(
+    () => () => {
+      if (bannerTimerRef.current) clearTimeout(bannerTimerRef.current);
+    },
+    []
+  );
+
   const onLine = useCallback(
     (line: string) => {
       if (!line) return;
       if (line.startsWith("FCD1 ")) {
         const d = fcd.parseDescriptor(line);
         if (d) buildFromDescriptor(d, false);
+        return;
+      }
+      // Spontaneous, board-initiated — never resolves a pending do/set reply
+      // (unlike LOG lines below, which is pre-existing/deliberate: an EVT
+      // arriving between a command and its ACK must not eat that reply).
+      const evt = fcd.parseEvent(line);
+      if (evt) {
+        onEvent(evt.name, evt.kv);
         return;
       }
       const logEv = fcd.parseLog(line);
@@ -248,7 +305,7 @@ export function useFcdConnection() {
       }
       resolvePending(line);
     },
-    [buildFromDescriptor, onTelemetry, resolvePending]
+    [buildFromDescriptor, onEvent, onTelemetry, resolvePending]
   );
 
   const onClose = useCallback((reason: string) => {
@@ -326,6 +383,9 @@ export function useFcdConnection() {
       t0Ref.current = performance.now() / 1000;
       setLogLines([]);
       setLogCounts({ err: 0, warn: 0 });
+      setEvents([]);
+      setEventBanner(null);
+      if (bannerTimerRef.current) clearTimeout(bannerTimerRef.current);
       await handshake(transport);
       setConnected(true);
     },
@@ -530,6 +590,8 @@ export function useFcdConnection() {
     rails,
     logLines,
     logCounts,
+    events,
+    eventBanner,
     lastTlm,
     flightState,
     graphBus,

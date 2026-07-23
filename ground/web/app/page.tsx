@@ -22,6 +22,8 @@ export default function Home() {
       rails={fcd.rails}
       logLines={fcd.logLines}
       logCounts={fcd.logCounts}
+      events={fcd.events}
+      eventBanner={fcd.eventBanner}
       lastTlm={fcd.lastTlm}
       graphBus={fcd.graphBus}
       invoke={fcd.invoke}

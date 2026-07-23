@@ -15,6 +15,7 @@ const FCD_RE = /FCD1\s+(\{.*\})\s*$/;
 const KV_RE = /(\w+)=(\S+)/g;
 const LOG_RE = /^\s*LOG\s+(ERR|WARN|INFO|DEBUG|E|W|I|D)\s+(.*)$/i;
 const LVL_MAP: Record<string, string> = { E: "ERR", W: "WARN", I: "INFO", D: "DEBUG" };
+const EVT_RE = /^\s*EVT\s+(\S+)\s*(.*)$/;
 
 export type LogLevel = "ERR" | "WARN" | "INFO" | "DEBUG";
 
@@ -63,6 +64,30 @@ export function parseLog(line: string): LogEvent | null {
   if (!m) return null;
   const lvl = m[1].toUpperCase();
   return { level: (LVL_MAP[lvl] || lvl) as LogLevel, msg: m[2].trim() };
+}
+
+export interface EventLine {
+  name: string;
+  kv: Record<string, string>;
+}
+
+/**
+ * Parse a structured flight-milestone line: `EVT <NAME> [k=v ...]` — e.g.
+ * `EVT APOGEE t_ms=18800 agl=920.4 vel=-1.2 max_agl=921.0`. Distinct from
+ * free-text `LOG` lines; see docs/fcd-protocol.md and the descriptor's
+ * `events[]` vocab (lib/types.ts#EventSpec). `kv` values are kept as raw
+ * strings (not coerced to number/bool like TLM) since events are read for
+ * display, not computed on — callers Number()/parse whatever fields they need.
+ */
+export function parseEvent(line: string): EventLine | null {
+  const m = EVT_RE.exec(line);
+  if (!m) return null;
+  const name = m[1].toUpperCase();
+  const kv: Record<string, string> = {};
+  let match: RegExpExecArray | null;
+  const re = /(\w+)=(\S+)/g;
+  while ((match = re.exec(m[2])) !== null) kv[match[1]] = match[2];
+  return { name, kv };
 }
 
 export interface ParamReply {

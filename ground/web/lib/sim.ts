@@ -48,6 +48,22 @@ const SIM_FCD: Descriptor = {
     "cont1", "cont2", "dtok1", "dtok2", "pg", "baro_ok", "accel_ok", "sd_ok",
   ],
   states: ["PAD", "BOOST", "COAST", "APOGEE", "DESCENT", "LANDED"],
+  // Vocab for the structured EVT flight-milestone stream (distinct from LOG
+  // — see docs/fcd-protocol.md and lib/events.ts). Labels/classes here just
+  // confirm the descriptor-driven path works; they match the built-in
+  // defaults exactly, so omitting `events[]` entirely would look identical.
+  events: [
+    { name: "ARMED", class: "amber" },
+    { name: "DISARMED", class: "info" },
+    { name: "LAUNCH", class: "accent" },
+    { name: "BURNOUT", class: "accent" },
+    { name: "APOGEE", class: "highlight" },
+    { name: "DEPLOY", class: "amber" },
+    { name: "PYRO", class: "amber" },
+    { name: "MAIN", class: "amber" },
+    { name: "LANDED", class: "ok" },
+    { name: "FAULT", class: "danger" },
+  ],
   // `map` identity by default — a real board needs the Calibrate wizard
   // (components/CalibrationWizard.tsx) to solve its actual axis wiring.
   imu: { accel: ["lo_gx", "lo_gy", "lo_gz"], map: ["+x", "+y", "+z"], up: "+y", units: "g", g_rest: 1.0 },
@@ -157,6 +173,9 @@ export class SimTransport implements Transport {
   private launchAt = 4.0;
   private flightT0 = 0;
   private lastState = "";
+  private maxAgl = 0;
+  private drogueDeployed = false;
+  private mainDeployed = false;
   private model = new FlightModel({});
   private armed = false;
   private vbat = 7.82;
@@ -217,16 +236,44 @@ export class SimTransport implements Transport {
       vel = m.vel;
       state = m.state;
       gz = m.gz;
+      this.maxAgl = Math.max(this.maxAgl, alt);
+      const tMs = Math.round(t * 1000);
       if (state !== this.lastState) {
         this.lastState = state;
         const evs: Record<string, string> = {
           BOOST: "liftoff confirmed — boosting",
           COAST: "motor burnout — coasting",
           APOGEE: `apogee detected (${alt.toFixed(0)} m)`,
-          DESCENT: "drogue/main deploy sequence",
+          DESCENT: "drogue deploy sequence",
           LANDED: "landed — recovery beacon ON",
         };
         if (evs[state]) this.emit(`LOG INFO ${evs[state]}`);
+        // Structured EVT milestones (distinct from the LOG line above) —
+        // see docs/fcd-protocol.md / lib/events.ts. Scripted to the flight
+        // arc regardless of the operator's actual arm/fire_mode state, same
+        // as the LOG lines above — this is a demo narrative, not a real
+        // pyro firing (the PyroPanel's own arm/fire controls are unaffected).
+        if (state === "BOOST") {
+          this.emit(`EVT LAUNCH t_ms=${tMs} agl=${alt.toFixed(1)} vel=${vel.toFixed(1)} max_agl=${this.maxAgl.toFixed(1)}`);
+        } else if (state === "COAST") {
+          this.emit(`EVT BURNOUT t_ms=${tMs} agl=${alt.toFixed(1)} vel=${vel.toFixed(1)}`);
+        } else if (state === "APOGEE") {
+          this.emit(`EVT APOGEE t_ms=${tMs} agl=${alt.toFixed(1)} vel=${vel.toFixed(1)} max_agl=${this.maxAgl.toFixed(1)}`);
+        } else if (state === "DESCENT" && !this.drogueDeployed) {
+          this.drogueDeployed = true;
+          this.emit(`EVT DEPLOY ch=1 t_ms=${tMs} agl=${alt.toFixed(1)}`);
+          this.emit(`EVT PYRO ch=1 t_ms=${tMs} result=fired cont_cleared=1`);
+        } else if (state === "LANDED") {
+          this.emit(`EVT LANDED t_ms=${tMs} agl=0.0 vel=${vel.toFixed(1)} max_agl=${this.maxAgl.toFixed(1)}`);
+        }
+      }
+      // MAIN deploy isn't a discrete flight-model STATE (it happens partway
+      // through DESCENT once altitude crosses the main_alt_m param) — a
+      // one-shot altitude-threshold check instead of a state transition.
+      if (state === "DESCENT" && !this.mainDeployed && alt <= Number(this.params.main_alt_m || 150)) {
+        this.mainDeployed = true;
+        this.emit(`EVT MAIN ch=2 t_ms=${tMs} agl=${alt.toFixed(1)}`);
+        this.emit(`EVT PYRO ch=2 t_ms=${tMs} result=fired cont_cleared=1`);
       }
     }
     // Orientation model (SIM only): a gentle, continuously-animating tilt so
@@ -383,11 +430,13 @@ export class SimTransport implements Transport {
       case "arm":
         this.armed = true;
         this.emit(`LOG WARN pyros ARMED`);
+        this.emit(`EVT ARMED`);
         this.emit(`ACK arm armed`);
         return;
       case "disarm":
         this.armed = false;
         this.resetTrigger();
+        this.emit(`EVT DISARMED`);
         this.emit(`ACK disarm safe`);
         return;
       case "safe":

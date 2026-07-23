@@ -1,11 +1,13 @@
 import type { Profile } from "@/lib/types";
-import type { CheckState, LogLine, RailState } from "@/hooks/useFcdConnection";
+import type { CheckState, EventBannerState, FlightEvent, LogLine, RailState } from "@/hooks/useFcdConnection";
 import type { GraphBus } from "@/lib/bus";
 import { BoardHeader } from "./BoardHeader";
 import { ChecksPanel } from "./ChecksPanel";
 import { RailsPanel } from "./RailsPanel";
 import { GraphsPanel } from "./GraphsPanel";
 import { LogPanel } from "./LogPanel";
+import { EventsPanel } from "./EventsPanel";
+import { EventBanner } from "./EventBanner";
 import { ParamsPanel } from "./ParamsPanel";
 import { ActionsPanel } from "./ActionsPanel";
 import { PyroPanel } from "./PyroPanel";
@@ -22,6 +24,8 @@ export function Dashboard({
   rails,
   logLines,
   logCounts,
+  events,
+  eventBanner,
   lastTlm,
   graphBus,
   invoke,
@@ -35,6 +39,8 @@ export function Dashboard({
   rails: Record<string, RailState>;
   logLines: LogLine[];
   logCounts: { err: number; warn: number };
+  events: FlightEvent[];
+  eventBanner: EventBannerState | null;
   lastTlm: TlmFrame;
   graphBus: GraphBus;
   invoke: (id: string, args?: Record<string, unknown>) => Promise<string>;
@@ -53,6 +59,8 @@ export function Dashboard({
         </div>
       )}
 
+      <EventBanner banner={eventBanner} profile={profile} />
+
       <BoardHeader profile={profile} flightState={flightState} fellBack={fellBack} />
 
       <div className={`grid grid-cols-1 gap-2.5 ${profile.imu ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
@@ -63,9 +71,10 @@ export function Dashboard({
         )}
       </div>
 
-      <div className="mt-2.5 grid grid-cols-1 gap-2.5 xl:grid-cols-[1.4fr_1fr]">
+      <div className="mt-2.5 grid grid-cols-1 gap-2.5 xl:grid-cols-[1.1fr_0.9fr_0.9fr]">
         <GraphsPanel graphs={profile.graphs} accent={accent} bus={graphBus} />
         <LogPanel lines={logLines} counts={logCounts} />
+        <EventsPanel events={events} profile={profile} />
       </div>
 
       {profile.hasPyro && (

@@ -195,6 +195,29 @@ body {
   animation: toast-in 0.2s ease-out both;
 }
 
+/* Mission-control "big moment" banner (EventBanner.tsx) — appear, hold,
+   fade, once. Duration MUST match BANNER_MS in hooks/useFcdConnection.ts
+   (4200ms) so the fade completes right as React unmounts it, instead of
+   being cut off mid-animation. */
+@keyframes event-banner-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  8%,
+  88% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+.event-banner-anim {
+  animation: event-banner-fade 4.2s ease-in-out both;
+}
+
 /* ── Panel chrome: crisp instrument bezels, not soft glass cards ───────────
    .glass / .surface: the OUTER panel treatment — a near-opaque graphite
    fill, a hairline edge, and a bare hint of backdrop-blur (just enough that

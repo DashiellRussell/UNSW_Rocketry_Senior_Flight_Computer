@@ -93,6 +93,24 @@ export interface ActionSpec {
   args?: ActionArgSpec[];
 }
 
+/**
+ * Vocabulary entry for a structured flight-milestone event (`EVT <name>
+ * k=v ...` on the wire — see lib/fcd.ts#parseEvent — distinct from free-text
+ * `LOG` lines). Purely descriptive: labels/colours the FLIGHT EVENTS feed
+ * and mission-control banner (components/EventsPanel.tsx, EventBanner.tsx).
+ * A board doesn't have to declare every name it emits — unknown names fall
+ * back to sane defaults (see lib/events.ts#DEFAULT_EVENT_CLASS) so nothing
+ * breaks if the vocab and the firmware's actual EVT names drift apart.
+ */
+export interface EventSpec {
+  /** Wire name, e.g. "LAUNCH", "APOGEE", "PYRO". */
+  name: string;
+  /** Display label; defaults to `name` if omitted. */
+  label?: string;
+  /** Visual category — see lib/events.ts#EventClass for the exact palette. */
+  class?: "accent" | "highlight" | "amber" | "danger" | "ok" | "info";
+}
+
 export interface Caps {
   pyro?: number;
   arm?: boolean;
@@ -118,6 +136,7 @@ export interface Descriptor {
   actions?: ActionSpec[];
   caps?: Caps;
   imu?: ImuSpec | null;
+  events?: EventSpec[];
 }
 
 /** Descriptor after normalisation: every array is guaranteed present. */
@@ -137,6 +156,7 @@ export interface Profile {
   caps: Caps;
   hasPyro: boolean;
   imu: ImuSpec | null;
+  events: EventSpec[];
 }
 
 export type TlmValue = number | string | boolean;
@@ -164,6 +184,7 @@ export const GENERIC_PROFILE: Profile = {
   caps: {},
   hasPyro: false,
   imu: null,
+  events: [],
 };
 
 export function normaliseProfile(raw: Descriptor): Profile {
@@ -185,5 +206,6 @@ export function normaliseProfile(raw: Descriptor): Profile {
     caps,
     hasPyro: Number(caps.pyro || 0) > 0,
     imu: p.imu || null,
+    events: p.events || [],
   };
 }

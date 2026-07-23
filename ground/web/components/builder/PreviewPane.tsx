@@ -36,6 +36,8 @@ export function PreviewPane({ descriptor }: { descriptor: Descriptor }) {
             rails={rails}
             logLines={logLines}
             logCounts={logCounts}
+            events={[]}
+            eventBanner={null}
             lastTlm={lastTlm}
             graphBus={graphBus}
             invoke={invoke}
