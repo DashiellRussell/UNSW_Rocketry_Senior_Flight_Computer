@@ -47,6 +47,8 @@ bool logging_card_present(void)
     return HAL_GPIO_ReadPin(SD_CD_GPIO_Port, SD_CD_Pin) == GPIO_PIN_RESET;
 }
 
+bool logging_active(void) { return s_open; }
+
 log_status_t logging_init(void)
 {
     /* Don't trust card-detect (PC3) - just try to mount. f_mount with the

@@ -39,4 +39,7 @@ void logging_close(void);
 
 bool logging_card_present(void);
 
+/* True once a log file is open (i.e. the card mounted and logging is live). */
+bool logging_active(void);
+
 #endif /* LOGGING_H */

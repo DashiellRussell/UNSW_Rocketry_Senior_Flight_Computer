@@ -51,6 +51,13 @@ static void app_identify(void)
         HAL_Delay(100);
     }
 }
+
+/* Subsystem health for the FCD telemetry (drives the ground-station checks). */
+static bool app_power_good(void)
+{
+    return HAL_GPIO_ReadPin(OZ_PG_BUCK_PORT, OZ_PG_BUCK_PIN) == GPIO_PIN_SET;
+}
+static bool app_sd_ok(void) { return logging_active(); }
 static bool app_fire(pyro_channel_t ch)   /* immediate fire after trigger auth */
 {
     logging_event(HAL_GetTick(), ch == PYRO_CH1 ? "FIRE_DROGUE" : "FIRE_MAIN");
@@ -139,6 +146,8 @@ void ozone_app_init(void)
         .log_start      = app_log_start,
         .log_stop       = app_log_stop,
         .identify       = app_identify,
+        .power_good     = app_power_good,
+        .sd_ok          = app_sd_ok,
     };
     fcd_init(&fctx);
 }
