@@ -274,6 +274,8 @@ void fcd_task(uint32_t now_ms)
         s_last_tlm = now_ms;
         emit_tlm();
     }
+
+    usb_cli_pump();   /* keep the USB TX ring draining (TLM/LOG/replies) */
 }
 
 void fcd_handle_line(const char *line, void (*reply)(const char *))

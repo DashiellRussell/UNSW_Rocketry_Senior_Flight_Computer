@@ -33,7 +33,10 @@ bool usb_connected(void);
  * reading (bounded ~10 ms retry), so it never stalls the super-loop. */
 int usb_printf(const char *fmt, ...);
 
-/* Raw write (same non-blocking semantics). */
+/* Raw write (non-blocking: copies into the TX ring, never blocks/drops-on-busy). */
 void usb_write(const char *s);
+
+/* Drain the TX ring to the CDC endpoint when free. Call every super-loop. */
+void usb_cli_pump(void);
 
 #endif /* USB_CLI_H */
