@@ -4,6 +4,9 @@
  * Job: be a dumb, fast, concurrent pipe between the STM32 flight computer's
  * FCD/1 text link (UART) and three independent radio links (WiFi/WebSocket,
  * BLE/NUS, LoRa/E22), plus inject the local GNSS fix as extra TLM fields.
+ * Every line received from the FC is also mirrored to this board's own
+ * microSD (sd_log.cpp) as a second, independent flight record, backing up
+ * the FC's own OZONE*.CSV SD log in case that card is ever lost or damaged.
  *
  * SAFETY CONTRACT (read docs/telecom-command-protocol.md and
  * firmware/ozone-fw/app/Inc/pyro_trigger.h before touching this file):
@@ -31,6 +34,7 @@
 #include "ble_nus.h"
 #include "lora_link.h"
 #include "gnss_link.h"
+#include "sd_log.h"
 
 namespace {
 
@@ -55,9 +59,26 @@ void onLineFromWs(const String &line)   { fc_link_send_line(line); }
 void onLineFromBle(const String &line)  { fc_link_send_line(line); }
 void onLineFromLora(const String &line) { fc_link_send_line(line); }
 
-// --- Callback: a line arrived from the FC -> fan out to all three downlinks
+// --- Callback: a line arrived from the FC -> fan out + SD backup ----------
+// Every line the FC sends (TLM/EVT/LOG/PARAM/ACK/FCD1) goes to the three
+// radio downlinks *and* to the telecom board's own microSD (sd_log.cpp) as
+// an independent backup copy of the flight — mirroring the FC's own SD log.
+// sd_log_line() is a fast RAM-buffer append (or true no-op with no card
+// present); it never blocks, so it can't become the slowest link in this
+// fan-out and can't stall the radio relay.
 void onLineFromFc(const String &line) {
     fanOutToAllLinks(line);
+    sd_log_line(line.c_str());
+
+    // Flight events (LAUNCH/APOGEE/DEPLOY/PYRO/LANDED — see
+    // firmware/tools/gcs/PROTOCOL.md) are rare and safety-relevant: force
+    // them to the card immediately instead of waiting for the next timed
+    // flush, so a power loss right after e.g. LANDED doesn't cost this
+    // backup its most important line. Cheap to do — EVT lines are
+    // infrequent by nature.
+    if (line.startsWith("EVT ")) {
+        sd_log_flush();
+    }
 }
 
 } // namespace
@@ -79,6 +100,14 @@ void setup() {
         // the bench. LoRa failures are logged, not fatal.
     }
 
+    if (!sd_log_init()) {
+        Serial.println("SD backup log NOT active (no/bad card on J8) — "
+                        "relay unaffected, this is a best-effort backup only");
+        // Same "log it, don't halt" treatment as LoRa above: the SD backup
+        // is a nice-to-have second copy of the flight, never a dependency
+        // of the actual comms-relay job this hub exists to do.
+    }
+
     Serial.println("OZONE TELECOM hub up.");
 }
 
@@ -93,6 +122,9 @@ void loop() {
     lora_poll(onLineFromLora);
 
     // 3) local GNSS fix -> extra TLM line, fanned out same as FC telemetry.
+    //    (Not written to the SD backup — that file is meant to be a mirror
+    //    of the FC's own record, and the GNSS fix is hub-local data the FC
+    //    never saw; keep the backup an honest copy of the FCD stream only.)
     gnss_poll();
     uint32_t now = millis();
     if (now - last_gnss_emit_ms >= GNSS_EMIT_PERIOD_MS) {
@@ -102,4 +134,8 @@ void loop() {
         }
         last_gnss_emit_ms = now;
     }
+
+    // 4) SD backup: flush the RAM-buffered FC lines to the microSD on a
+    //    timer (sd_log.cpp) — never blocks the relay above.
+    sd_log_poll();
 }

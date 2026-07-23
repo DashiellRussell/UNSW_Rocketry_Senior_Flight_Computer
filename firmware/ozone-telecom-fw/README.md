@@ -7,16 +7,19 @@ companion to UNSW Rocketry's OZONE senior flight computer (STM32L452).
 
 The STM32 flight computer speaks a plain-text protocol (`fcd/1`, see
 `firmware/tools/gcs/PROTOCOL.md`) over a UART: `whoami` -> `FCD1 {json}`,
-`TLM key=value ...`, `LOG <level> <msg>`, `get`/`set`/`do ...`. This hub's
+`TLM key=value ...`, `EVT <name> ...` (flight milestones — LAUNCH, APOGEE,
+DEPLOY, PYRO, LANDED), `LOG <level> <msg>`, `get`/`set`/`do ...`. This hub's
 entire job is to **relay that stream, unmodified, to/from three independent
-radio links at once**, and add the local GPS fix as extra telemetry:
+radio links at once**, add the local GPS fix as extra telemetry, and mirror
+every FC line to its own microSD as an independent flight-record backup:
 
 ```
                  ┌───────────────────────────────────────────┐
                  │            ESP32-S3-MINI-1U hub            │
 STM32 FC  ──UART──▶ fc_link  ──┬─▶ ws_link   (WiFi WebSocket) │
 (FCD/1)   ◀──UART──            ├─▶ ble_nus   (BLE NUS)        │
-                 │             └─▶ lora_link (E22/SX1262 SPI) │
+                 │             ├─▶ lora_link (E22/SX1262 SPI) │
+                 │             └─▶ sd_log    (microSD backup) │
                  │                                            │
                  │  gnss_link (MAX-M10S UART, RX only) ───────┼─▶ extra TLM
                  └───────────────────────────────────────────┘
@@ -41,6 +44,7 @@ kind of hub-side logic that turns a safe two-board design into an unsafe one.
 | BLE | Nordic UART Service (NUS) — any generic BLE-UART phone app | `h2zero/NimBLE-Arduino` |
 | LoRa | E22-900M22S (SX1262) transceiver, 915 MHz AU915 | `jgromes/RadioLib` |
 | GNSS | u-blox MAX-M10S, NMEA, receive-only | `mikalhart/TinyGPSPlus` |
+| SD backup | microSD (J8), independent flight-record mirror, SPI | `SD` (bundled with arduino-esp32) |
 
 **WiFi + BLE coexistence:** the ESP32-S3 has one 2.4 GHz radio shared
 (time-sliced) between WiFi and BLE. At this hub's actual data rates — short
@@ -94,7 +98,7 @@ could not be resolved this way and is marked **CONFIRM** — see below.
 | VBAT_SENSE (ADC) | IO15 | CONFIRMED | unused by this firmware; hub power monitoring, add if wanted |
 | FC_3V3_SENSE (ADC) | IO14 | CONFIRMED | ditto |
 | CAN RX/TX (SN65HVD230, bonus) | IO21 / IO26 | CONFIRMED | not used by this firmware |
-| microSD MISO/MOSI/SCK/CS (bonus) | IO35 / IO34 / IO36 / IO33 | CONFIRMED | not used by this firmware |
+| microSD SCK/MISO/MOSI/CS (J8, flight backup) | IO36 / IO35 / IO34 / IO33 | CONFIRMED | used by `sd_log.cpp` — independent FCD backup, own SPI bus (`FSPI`) separate from the E22's `HSPI` |
 | **FC UART TX** | **IO17 (placeholder)** | **CONFIRM — SEE BELOW** | |
 | **FC UART RX** | **IO18 (placeholder)** | **CONFIRM — SEE BELOW** | |
 
@@ -126,6 +130,56 @@ derived from, and which should be ground truth) instead has GNSS PPS on
 carrying the (unused-by-this-firmware) microSD MISO line. That routing doc
 may simply predate the final schematic revision — flagging so Dash can
 reconcile the two rather than silently trusting one.
+
+## SD backup logging (independent flight-record mirror)
+
+The telecom board carries its **own** microSD (J8, Molex 47219-2001, SPI
+mode — `Connector:Micro_SD_Card` in `ozone_telecom/peripherals.kicad_sch`),
+separate from the flight computer's SD card that logs `OZONE000.CSV` etc.
+(`firmware/ozone-fw/app/Src/logging.c`). `src/sd_log.{h,cpp}` mirrors every
+line this hub receives from the FC over UART — `TLM`, `EVT`, `LOG`,
+`PARAM`, `ACK`, `FCD1` — onto that second card, so if the FC's own card is
+ever lost, damaged, or unreadable after recovery, there is still a complete,
+independently-wired, independently-powered copy of the flight.
+
+**Pins** (`config.h`, CONFIRMED against the schematic — see the pin-map
+table above):
+
+| Signal | ESP32-S3 GPIO |
+|---|---|
+| SD_SCK  | IO36 |
+| SD_MISO | IO35 |
+| SD_MOSI | IO34 |
+| SD_CS   | IO33 |
+
+No card-detect line is routed to the ESP for J8 — `sd_log_init()` treats a
+failed `SD.begin()` as "no card" and just disables the backup for that
+boot, the same way the FC's own `logging.c` had to stop trusting its
+unreliable PC3 card-detect switch and started using the mount attempt
+itself as the presence test.
+
+**File naming:** `TCM000.LOG` .. `TCM999.LOG`, one new file per power-up —
+deliberately mirrors the FC's `OZONE000.CSV` .. `OZONE999.CSV` scheme so the
+two cards' files are recognisable as siblings of the same flight. Each line
+is written as `[<hub millis()>] <verbatim FCD line>`.
+
+**Non-blocking design:** `sd_log_line()` (called once per FC line, right
+alongside the WiFi/BLE/LoRa fan-out in `main.cpp`) only appends to a small
+RAM buffer — it never touches the SPI bus and is a true no-op if no card is
+mounted, so it can never be the thing that stalls the radio relay. The
+buffer is flushed to the card in one write+fsync every
+`SD_LOG_FLUSH_PERIOD_MS` (500 ms) or sooner if it nearly fills, via
+`sd_log_poll()` in the main loop — and immediately after any `EVT` line
+(LAUNCH/APOGEE/DEPLOY/PYRO/LANDED), via an explicit `sd_log_flush()` call,
+so the rare, safety-relevant lines aren't left sitting in RAM. The SD card
+uses its own dedicated SPI bus (`FSPI`) so it can never contend with or
+block the E22 LoRa radio's separate `HSPI` bus.
+
+**This is a best-effort backup, not a required subsystem** — a missing,
+full, or dead SD card on the telecom board must never affect the WiFi/BLE/
+LoRa relay. If `sd_log_init()` fails at boot, or a write fails mid-flight,
+the module disables itself for the rest of that boot and logs a warning to
+the USB debug console; everything else keeps running exactly as before.
 
 ## Build & flash
 
@@ -181,5 +235,12 @@ the same FCD lines the WiFi/BLE clients get, one LoRa packet per line.
 - VBAT_SENSE / FC_3V3_SENSE ADC pins are wired and documented but not read by
   this firmware yet (not in the task's required scope — the FC already
   reports its own `vbat` in its `TLM` line).
-- Buttons/servo/CAN/microSD pins are all wired on the board but intentionally
+- Buttons/servo/CAN pins are all wired on the board but intentionally
   untouched by this firmware — out of scope for the comms-hub relay job.
+  (microSD is now used — see "SD backup logging" above.)
+- SD backup logging has not been bench-tested on real hardware (board isn't
+  fabbed yet) — the SPI pin assignment is CONFIRMED against the schematic
+  using the same coordinate-matching method as every other net on this
+  board, but first bring-up should still sanity-check the FSPI bus
+  (SCK/MISO/MOSI/CS on IO36/35/34/33) with a real card before trusting it
+  in flight.

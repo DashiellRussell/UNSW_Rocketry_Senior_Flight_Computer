@@ -124,14 +124,48 @@
 #define PIN_BTN3           10   // CONFIRMED: BTN3 -> ESP IO10
 #define PIN_VBAT_SENSE     15   // CONFIRMED: VBAT_SENSE (ADC) -> ESP IO15
 #define PIN_FC_3V3_SENSE   14   // CONFIRMED: FC_3V3_SENSE (ADC) -> ESP IO14
-// CAN (SN65HVD230 bonus connector) and microSD are wired but not used by this
-// firmware; documented for completeness only.
+// CAN (SN65HVD230 bonus connector) is wired but not used by this firmware;
+// documented for completeness only.
 #define PIN_CAN_RX         21
 #define PIN_CAN_TX         26
+
+// ============================================================================
+// microSD (J8, Molex 47219-2001, SPI-mode "Connector:Micro_SD_Card" symbol —
+// ozone_telecom/peripherals.kicad_sch) — used by sd_log.cpp as an independent
+// FCD-stream backup, mirroring the FC's own OZONE*.CSV SD log.
+// CONFIRMED by the same net-label/symbol-pin-offset coordinate match used
+// for every other net in this file: SD_SCK/MISO/MOSI/CS land cleanly on
+// IO36/IO35/IO34/IO33 (a tight, unambiguous group, same derivation that
+// nailed CAN_RX/CAN_TX right next to them). No separate card-detect line is
+// routed to the ESP (the Micro_SD_Card symbol's CD pin isn't wired out on
+// this sheet) — sd_log.cpp treats "mount failed" as the presence test
+// instead, same approach the FC's own logging.c takes for its unreliable
+// PC3 card-detect switch.
+// ============================================================================
 #define PIN_SD_MISO        35
 #define PIN_SD_MOSI        34
 #define PIN_SD_SCK         36
 #define PIN_SD_CS          33
+#define SD_SPI_HOST        FSPI   // dedicated SPI bus, independent of the E22
+                                   // LoRa radio's HSPI bus (lora_link.cpp) —
+                                   // a slow/blocking SD write can never stall
+                                   // or contend with the radio SPI traffic.
+#define SD_SPI_FREQ_HZ     20000000UL // 20 MHz — comfortable default for
+                                   // most microSD cards over short traces;
+                                   // drop it if bring-up shows glitches.
+
+// Backup log file naming, mirroring the FC's OZONE000.CSV .. OZONE999.CSV
+// scheme (firmware/ozone-fw/app/Inc/ozone_config.h) so the two cards' files
+// are recognisable as siblings of the same flight.
+#define SD_LOG_FILENAME_FMT   "/TCM%03u.LOG"
+#define SD_LOG_MAX_INDEX      1000
+
+// RAM staging buffer for sd_log.cpp: lines accumulate here and are flushed
+// to the card in one write() every SD_LOG_FLUSH_PERIOD_MS (or sooner if the
+// buffer fills), so the (blocking) SPI flush happens a couple of times a
+// second instead of once per FC line.
+#define SD_LOG_BUF_CAP           2048
+#define SD_LOG_FLUSH_PERIOD_MS   500
 
 // ============================================================================
 // Networking service ports / names.
