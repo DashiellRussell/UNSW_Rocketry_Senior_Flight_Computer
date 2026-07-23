@@ -36,7 +36,9 @@ static const char *DESC =
  "{\"id\":\"tlm_hz\",\"label\":\"Telemetry rate\",\"type\":\"int\",\"value\":5,\"min\":1,"
  "\"max\":50,\"unit\":\"Hz\"}],"
  "\"actions\":[{\"id\":\"arm\",\"label\":\"Arm\",\"confirm\":\"ARM\"},"
- "{\"id\":\"disarm\",\"label\":\"Disarm\"},{\"id\":\"preflight\",\"label\":\"Preflight checks\"},"
+ "{\"id\":\"disarm\",\"label\":\"Disarm\"},"
+ "{\"id\":\"identify\",\"label\":\"Identify (blink+beep)\"},"
+ "{\"id\":\"preflight\",\"label\":\"Preflight checks\"},"
  "{\"id\":\"log_start\",\"label\":\"Start SD log\"},{\"id\":\"log_stop\",\"label\":\"Stop SD log\"},"
  "{\"id\":\"zero_baro\",\"label\":\"Zero baro\"},"
  "{\"id\":\"flight_mode\",\"label\":\"Enter flight mode (set pyro key)\",\"confirm\":\"FLIGHT\","
@@ -127,6 +129,8 @@ static void do_action(char *id, const char *args, void (*wr)(const char *))
     else if (!strcmp(id, "safe"))      { pyro_trigger_safe(); wr("ACK safe\r\n"); }
     else if (!strcmp(id, "zero_baro")) { if (C->zero_ground) C->zero_ground();
                                          wr("ACK zero_baro\r\n"); }
+    else if (!strcmp(id, "identify"))  { if (C->identify) C->identify();
+                                         wr("ACK identify\r\n"); }
     else if (!strcmp(id, "log_start")) { if (C->log_start) C->log_start(); wr("ACK log_start\r\n"); }
     else if (!strcmp(id, "log_stop"))  { if (C->log_stop) C->log_stop();  wr("ACK log_stop\r\n"); }
     else if (!strcmp(id, "preflight")) { run_preflight(wr); }

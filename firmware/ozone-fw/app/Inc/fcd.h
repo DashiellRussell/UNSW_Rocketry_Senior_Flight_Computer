@@ -37,6 +37,7 @@ typedef struct {
     bool  (*fire)(pyro_channel_t ch);   /* immediate fire AFTER auth passes    */
     void  (*log_start)(void);
     void  (*log_stop)(void);
+    void  (*identify)(void);            /* blink LED + chirp to locate the board */
 } fcd_ctx_t;
 
 void fcd_init(const fcd_ctx_t *ctx);

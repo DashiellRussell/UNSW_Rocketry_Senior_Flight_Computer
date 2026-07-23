@@ -37,6 +37,20 @@ static void app_zero_ground(void) { sensors_zero_ground(&g_sensors, &g_sample); 
 /* FCD telecom hooks. */
 static void app_log_start(void)   { logging_init(); }
 static void app_log_stop(void)    { logging_close(); }
+
+/* Physical "identify / locate": cyan flash + chirp x3 so the operator can tell
+ * which board this ground-station link is talking to. Brief blocking ground op. */
+static void app_identify(void)
+{
+    for (int i = 0; i < 3; i++) {
+        indication_solid(0, 1000, 1000);            /* cyan */
+        buzzer_tone(OZONE_BUZZER_RESONANCE_HZ);
+        HAL_Delay(120);
+        indication_solid(0, 0, 0);
+        buzzer_off();
+        HAL_Delay(100);
+    }
+}
 static bool app_fire(pyro_channel_t ch)   /* immediate fire after trigger auth */
 {
     logging_event(HAL_GetTick(), ch == PYRO_CH1 ? "FIRE_DROGUE" : "FIRE_MAIN");
@@ -124,6 +138,7 @@ void ozone_app_init(void)
         .fire           = app_fire,
         .log_start      = app_log_start,
         .log_stop       = app_log_stop,
+        .identify       = app_identify,
     };
     fcd_init(&fctx);
 }
