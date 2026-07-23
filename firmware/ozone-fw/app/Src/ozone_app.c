@@ -82,6 +82,7 @@ void ozone_app_init(void)
         indication_boot_fault(fault);
         indication_set(IND_FAULT);
     } else {
+        indication_error(false);   /* clear any stale error latch on a clean boot */
         indication_boot_ok();
         indication_set(IND_IDLE);
     }

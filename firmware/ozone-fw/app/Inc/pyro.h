@@ -27,8 +27,12 @@ bool pyro_is_armed(void);
  * logic here - the state machine enforces lockouts before calling this. */
 bool pyro_fire(pyro_channel_t ch);
 
-/* Continuity present on a channel (e-match connected). */
+/* Continuity present on a channel (e-match/short bridges the live pyro rail). */
 bool pyro_continuity(pyro_channel_t ch);
+
+/* Raw sensed divider-node voltage in millivolts (diagnostic: ~PYRO_BATT when
+ * bridged and the rail is energised, ~0 when open or the rail is de-energised). */
+uint16_t pyro_cont_node_mv(pyro_channel_t ch);
 
 /* Drive the per-channel yellow continuity LED. */
 void pyro_set_cont_led(pyro_channel_t ch, bool on);

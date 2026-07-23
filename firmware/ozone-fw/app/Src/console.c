@@ -207,6 +207,9 @@ static void run_preflight(void)
     if (fails)      pf_red();
     else if (warns) pf_amber();
     else            pf_green();
+    /* Track the error LED to the latest preflight verdict (clears a stale latch
+     * from a boot-time transient once the operator confirms all checks pass). */
+    indication_error(fails > 0);
     if (fails)      P(" RESULT: FAIL  (%d error(s), %d warning(s)) - DO NOT FLY\r\n", fails, warns);
     else if (warns) P(" RESULT: PASS WITH WARNINGS (%d)\r\n", warns);
     else            P(" RESULT: ALL CHECKS PASSED\r\n");
@@ -306,10 +309,13 @@ static void test_pyro(void)
 {
     P("Pyro continuity / arm status:\r\n");
     P("  armed     : %s\r\n", yesno(pyro_is_armed()));
-    P("  ch1 cont  : %s\r\n", yesno(pyro_continuity(PYRO_CH1)));
-    P("  ch2 cont  : %s\r\n", yesno(pyro_continuity(PYRO_CH2)));
+    P("  ch1 cont  : %s  (node %u mV)\r\n",
+      yesno(pyro_continuity(PYRO_CH1)), pyro_cont_node_mv(PYRO_CH1));
+    P("  ch2 cont  : %s  (node %u mV)\r\n",
+      yesno(pyro_continuity(PYRO_CH2)), pyro_cont_node_mv(PYRO_CH2));
     P("  pyro vbat : %.2f V\r\n", s_ctx.read_pyro_vbat());
-    P("  (continuity is digital go/no-go on this board - see ERRATA)\r\n");
+    P("  (continuity = analog divider on PA0/PA1, read via ADC - ERR-007;\r\n"
+      "   node ~ PYRO_BATT when bridged AND the rail is energised/armed)\r\n");
 }
 
 static void test_power(void)

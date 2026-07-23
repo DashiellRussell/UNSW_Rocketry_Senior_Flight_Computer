@@ -8,10 +8,24 @@
 #define OZONE_CONFIG_H
 
 /* ------------------------------------------------------------------ */
+/* Buzzer (Same Sky/CUI CPT-9019S-SMT-TR PIEZO transducer, externally driven) */
+/* ------------------------------------------------------------------ */
+/* Datasheet: rated freq 4000 Hz, SPL 65 dB @10cm @3Vp-p, ~12 nF capacitance,
+ * absolute max 25 Vp-p (lots of drive headroom). Being PIEZO it's a capacitor,
+ * not a coil - it needs a DISCHARGE RESISTOR across it (~1k) or it can't swing
+ * and is very quiet (see ERR-006). The broadband response peaks above 4 kHz,
+ * so use the buzzer-test sweep (3-6 kHz) to find the loudest point for THIS
+ * unit and set it here. Driver already outputs a 50%% square wave. */
+#define OZONE_BUZZER_RESONANCE_HZ   4000u   /* TUNE: loudest freq from sweep */
+
+/* ------------------------------------------------------------------ */
 /* Power / battery sensing                                            */
 /* ------------------------------------------------------------------ */
 /* VBAT_SENSE divider (schematic Power sheet: R6=100k top, R7=33k bottom). */
-#define OZONE_VBAT_DIV_RATIO        (133.0f / 33.0f)   /* CALIBRATE against DMM */
+/* Single-point cal 2026-06-26: nominal 133/33 read 5.38 V where the DMM said
+ * 5.99 V (resistor tolerance + VREF error), so trim by 5.99/5.38. Re-check at a
+ * second voltage; if the error isn't a constant ratio it's an offset not gain. */
+#define OZONE_VBAT_DIV_RATIO        (133.0f / 33.0f * (5.99f / 5.38f))
 /* PYRO_BATT_SENSE divider (Pyro sheet: R15=10k top, R16=3.3k bottom).      */
 #define OZONE_PYRO_DIV_RATIO        (13.3f / 3.3f)     /* CALIBRATE against DMM */
 #define OZONE_ADC_VREF              (3.30f)
@@ -52,7 +66,11 @@
 
 /* Continuity: PC6/PC7 are GPIO (not ADC on L452). HIGH at the divider */
 /* node = e-match present. Active level set here in case of inversion.  */
-#define OZONE_CONT_PRESENT_LEVEL    GPIO_PIN_SET
+/* ERR-007: continuity is an ANALOG divider (R25/R26 = 10k/3.3k, same ratio as
+ * OZONE_PYRO_DIV_RATIO) read via the ADC, NOT a digital pin. "Present" = the
+ * sensed node voltage exceeds this threshold (node ~ PYRO_BATT when an e-match
+ * bridges the live pyro rail; ~0 V when open). CALIBRATE against your pack. */
+#define OZONE_CONT_THRESH_V         (1.0f)   /* volts at the divider node */
 
 /* ------------------------------------------------------------------ */
 /* Logging                                                           */
