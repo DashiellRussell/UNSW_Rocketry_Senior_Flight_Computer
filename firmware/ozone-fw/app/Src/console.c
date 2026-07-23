@@ -103,6 +103,24 @@ static void status_line(void)
 }
 
 /* ── preflight ───────────────────────────────────────────────── */
+/* LED colours used while paced-scanning each preflight step. */
+static void pf_blue(void)  { indication_solid(0, 0, 1000); }   /* reading...  */
+static void pf_green(void) { indication_solid(0, 1000, 0); }   /* OK          */
+static void pf_red(void)   { indication_solid(1000, 0, 0); }   /* FAIL        */
+static void pf_amber(void) { indication_solid(1000, 350, 0); } /* WARN        */
+static void pf_cyan(void)  { indication_solid(0, 1000, 1000); }/* INFO        */
+
+/* Begin a step: announce it, turn the LED blue, and pause so it reads as
+ * "taking a measurement" rather than instant. */
+static void pf_scan(const char *what)
+{
+    P("   ... reading %s\r\n", what);
+    pf_blue();
+    HAL_Delay(650);
+}
+/* Hold the result colour briefly so it's visible before the next step. */
+static void pf_hold(void (*colour)(void)) { colour(); HAL_Delay(350); }
+
 static void run_preflight(void)
 {
     int fails = 0, warns = 0;
@@ -110,30 +128,46 @@ static void run_preflight(void)
     P(" PREFLIGHT CHECKS\r\n");
     P(LINE);
 
+    /* RGB lamp test - confirm each channel lights the right colour. The label
+     * printed here should match the colour you actually see on the LED. */
+    P("[LAMP] RGB check - watch the LED: RED, then BLUE, then GREEN (1s each)\r\n");
+    indication_solid(1000, 0, 0); P("       -> RED\r\n");   HAL_Delay(1000);
+    indication_solid(0, 0, 1000); P("       -> BLUE\r\n");  HAL_Delay(1000);
+    indication_solid(0, 1000, 0); P("       -> GREEN\r\n"); HAL_Delay(1000);
+    indication_solid(0, 0, 0);    HAL_Delay(300);
+    P(LINE);
+
     /* 1. Power */
+    pf_scan("power rail (LED: blue)");
     float vbat = s_ctx.read_vbat();
     float pyro_v = s_ctx.read_pyro_vbat();
     bool pg = (HAL_GPIO_ReadPin(OZ_PG_BUCK_PORT, OZ_PG_BUCK_PIN) == GPIO_PIN_SET);
-    if (!pg) { P("[FAIL] [1/5] Power     - buck-boost PG low (out of reg)\r\n"); fails++; }
+    if (!pg) { P("[FAIL] [1/5] Power     - buck-boost PG low (out of reg)\r\n");
+               fails++; pf_hold(pf_red); }
     else if (vbat > 0 && vbat < OZONE_VBAT_LOW_1S)
-        { P("[WARN] [1/5] Power     - vbat low %.2fV\r\n", vbat); warns++; }
-    else  P("[ OK ] [1/5] Power     - vbat %.2fV  PG ok\r\n", vbat);
+        { P("[WARN] [1/5] Power     - vbat low %.2fV\r\n", vbat);
+          warns++; pf_hold(pf_amber); }
+    else { P("[ OK ] [1/5] Power     - vbat %.2fV  PG ok\r\n", vbat);
+           pf_hold(pf_green); }
 
     /* 2. Barometers */
+    pf_scan("barometers (LED: blue)");
     refresh_baro(8);
     bool b1 = s_ctx.sensors->baro1.healthy, b2 = s_ctx.sensors->baro2.healthy;
     if (!b1 || !b2) { P("[%s] [2/5] Baro      - baro1=%s baro2=%s\r\n",
                         (!b1 && !b2) ? "FAIL" : "WARN", yesno(b1), yesno(b2));
-                      (!b1 && !b2) ? fails++ : warns++; }
-    else P("[ OK ] [2/5] Baro      - both ok, %.0f Pa, %.1f C, alt %.1f m\r\n",
+                      if (!b1 && !b2) { fails++; pf_hold(pf_red); }
+                      else            { warns++; pf_hold(pf_amber); } }
+    else { P("[ OK ] [2/5] Baro      - both ok, %.0f Pa, %.1f C, alt %.1f m\r\n",
            s_ctx.sample->pressure_pa, s_ctx.sample->temperature_c,
-           s_ctx.sample->altitude_m);
+           s_ctx.sample->altitude_m); pf_hold(pf_green); }
 
     /* 3. Accelerometers */
+    pf_scan("accelerometers (LED: blue)");
     uint8_t hw_hi = h3lis_whoami(), hw_lo = lis3dh_whoami();
     bool a_ok = (hw_hi == H3LIS_WHOAMI) && (hw_lo == LIS3DH_WHOAMI);
     if (!a_ok) { P("[FAIL] [3/5] Accel     - h3lis=0x%02X(exp32) lis3dh=0x%02X(exp33)\r\n",
-                   hw_hi, hw_lo); fails++; }
+                   hw_hi, hw_lo); fails++; pf_hold(pf_red); }
     else {
         h3lis_read(&s_ctx.sensors->hi_g); lis3dh_read(&s_ctx.sensors->lo_g);
         P("[ OK ] [3/5] Accel     - hi-g %.2fg  lo-g %.2fg (rest ~1g)\r\n",
@@ -143,24 +177,35 @@ static void run_preflight(void)
           sqrtf(s_ctx.sensors->lo_g.g_x*s_ctx.sensors->lo_g.g_x +
                 s_ctx.sensors->lo_g.g_y*s_ctx.sensors->lo_g.g_y +
                 s_ctx.sensors->lo_g.g_z*s_ctx.sensors->lo_g.g_z));
+        pf_hold(pf_green);
     }
 
-    /* 4. SD card */
-    if (!logging_card_present()) { P("[FAIL] [4/5] SD card   - no card detected\r\n"); fails++; }
-    else {
+    /* 4. SD card - test by actually reading the filesystem, not the PC3 pin */
+    pf_scan("SD card (LED: blue)");
+    {
         FATFS *fs; DWORD fre;
         if (f_getfree(SDPath, &fre, &fs) == FR_OK) {
             uint32_t free_mb = (uint32_t)(((uint64_t)fre * fs->csize) / 2048u);
-            P("[ OK ] [4/5] SD card   - present, %lu MB free\r\n", (unsigned long)free_mb);
-        } else { P("[WARN] [4/5] SD card   - present but not mounted\r\n"); warns++; }
+            P("[ OK ] [4/5] SD card   - mounted, %lu MB free\r\n", (unsigned long)free_mb);
+            pf_hold(pf_green);
+        } else {
+            P("[FAIL] [4/5] SD card   - not mounted (absent/unreadable; "
+              "re-seat + power-cycle)\r\n"); fails++; pf_hold(pf_red);
+        }
     }
 
     /* 5. Pyro */
+    pf_scan("pyro continuity (LED: blue)");
     bool c1 = pyro_continuity(PYRO_CH1), c2 = pyro_continuity(PYRO_CH2);
     P("[%s] [5/5] Pyro      - armed=%s cont ch1=%s ch2=%s pyro_v=%.2fV\r\n",
       "INFO", yesno(pyro_is_armed()), yesno(c1), yesno(c2), pyro_v);
+    pf_hold(pf_cyan);
 
     P(LINE);
+    /* Settle the LED to the overall verdict colour. */
+    if (fails)      pf_red();
+    else if (warns) pf_amber();
+    else            pf_green();
     if (fails)      P(" RESULT: FAIL  (%d error(s), %d warning(s)) - DO NOT FLY\r\n", fails, warns);
     else if (warns) P(" RESULT: PASS WITH WARNINGS (%d)\r\n", warns);
     else            P(" RESULT: ALL CHECKS PASSED\r\n");
@@ -201,17 +246,58 @@ static void test_accel(void)
     }
 }
 
+static const char *fr_name(FRESULT fr)
+{
+    switch (fr) {
+        case FR_OK:               return "OK";
+        case FR_DISK_ERR:         return "DISK_ERR (data-phase R/W fail -> data lines/pull-ups/signal)";
+        case FR_INT_ERR:          return "INT_ERR";
+        case FR_NOT_READY:        return "NOT_READY (card init/CMD0-ACMD41 fail -> CMD/CLK/power/seating)";
+        case FR_NO_FILE:          return "NO_FILE";
+        case FR_NO_PATH:          return "NO_PATH";
+        case FR_INVALID_NAME:     return "INVALID_NAME";
+        case FR_DENIED:           return "DENIED";
+        case FR_EXIST:            return "EXIST";
+        case FR_INVALID_OBJECT:   return "INVALID_OBJECT";
+        case FR_WRITE_PROTECTED:  return "WRITE_PROTECTED";
+        case FR_INVALID_DRIVE:    return "INVALID_DRIVE";
+        case FR_NOT_ENABLED:      return "NOT_ENABLED (no work area)";
+        case FR_NO_FILESYSTEM:    return "NO_FILESYSTEM (card read OK but no valid FAT -> BPB read garbled or wrong fmt)";
+        case FR_MKFS_ABORTED:     return "MKFS_ABORTED";
+        case FR_TIMEOUT:          return "TIMEOUT";
+        case FR_LOCKED:           return "LOCKED";
+        case FR_NOT_ENOUGH_CORE:  return "NOT_ENOUGH_CORE";
+        case FR_TOO_MANY_OPEN_FILES: return "TOO_MANY_OPEN_FILES";
+        default:                  return "?";
+    }
+}
+
 static void test_sd(void)
 {
-    if (!logging_card_present()) { P("[FAIL] no card detected (PC3)\r\n"); return; }
+    extern SD_HandleTypeDef hsd1;   /* defined in main.c */
+
+    P("PC3 card-detect reads: %s (advisory only)\r\n",
+      logging_card_present() ? "inserted" : "not inserted");
+
+    /* Diagnostic: force a fresh mount and report the EXACT failure point so we
+     * can tell a card-init failure (CMD/CLK/power/seating) from a data-line
+     * failure (missing SDMMC pull-ups, ERR-004) from a format problem. */
+    f_mount(0, SDPath, 0);                        /* drop any stale volume */
+    FRESULT fr = f_mount(&SDFatFS, SDPath, 1);    /* opt 1 = mount now, touches card */
+    P("f_mount -> %d  %s\r\n", (int)fr, fr_name(fr));
+    P("HAL_SD: State=0x%02lX  ErrorCode=0x%08lX  CardType=%lu  CardVer=%lu  BlkNbr=%lu\r\n",
+      (unsigned long)hsd1.State, (unsigned long)hsd1.ErrorCode,
+      (unsigned long)hsd1.SdCard.CardType, (unsigned long)hsd1.SdCard.CardVersion,
+      (unsigned long)hsd1.SdCard.BlockNbr);
+
     FATFS *fs; DWORD fre;
-    if (f_getfree(SDPath, &fre, &fs) == FR_OK) {
+    if (fr == FR_OK && f_getfree(SDPath, &fre, &fs) == FR_OK) {
         uint32_t total_mb = (uint32_t)(((uint64_t)(fs->n_fatent - 2) * fs->csize) / 2048u);
         uint32_t free_mb  = (uint32_t)(((uint64_t)fre * fs->csize) / 2048u);
-        P("[ OK ] card present - %lu MB free of %lu MB\r\n",
+        P("[ OK ] card mounted - %lu MB free of %lu MB\r\n",
           (unsigned long)free_mb, (unsigned long)total_mb);
     } else {
-        P("[WARN] card present but f_getfree failed (not mounted?)\r\n");
+        P("[FAIL] card not mounted (absent/unreadable - re-seat + power-cycle)\r\n");
     }
 }
 
@@ -247,12 +333,43 @@ static void test_leds(void)
 
 static void test_buzzer(void)
 {
-    P("Buzzer: 3 beeps...\r\n");
-    for (int i = 0; i < 3; i++) {
-        buzzer_tone(4000); HAL_Delay(150);
-        buzzer_off();      HAL_Delay(150);
+    /* Diagnostic: we don't yet know if the fitted buzzer is ACTIVE (built-in
+     * oscillator - wants steady DC) or PASSIVE (wants an AC tone). Drive both
+     * ways and tell me which one you actually hear.
+     * Test A = steady DC on PB9 (active buzzer should sound a fixed pitch).
+     * Test B = swept square-wave tones via TIM6 (passive buzzer should sing). */
+    P("Buzzer diagnostic - listen and note which makes sound:\r\n");
+
+    P("  A) steady DC on (active buzzer test) - 800 ms ...\r\n");
+    buzzer_off();   /* make sure TIM6 isn't toggling the pin */
+    HAL_GPIO_WritePin(OZ_BUZZER_PORT, OZ_BUZZER_PIN, GPIO_PIN_SET);
+    HAL_Delay(800);
+    HAL_GPIO_WritePin(OZ_BUZZER_PORT, OZ_BUZZER_PIN, GPIO_PIN_RESET);
+    HAL_Delay(400);
+
+    P("  B) LOUDEST-FREQ FINDER 1.0->6.0 kHz - note which step is LOUDEST,\r\n");
+    P("     then set OZONE_BUZZER_RESONANCE_HZ to that value. (No discharge R on\r\n");
+    P("     this board (ERR-006), so the real loudest may not be the 4kHz rated):\r\n");
+    for (uint32_t f = 1000; f <= 6000; f += 250) {
+        P("       %lu Hz%s\r\n", (unsigned long)f,
+          (f == OZONE_BUZZER_RESONANCE_HZ) ? "  <- current setting" : "");
+        buzzer_tone(f); HAL_Delay(450); buzzer_off(); HAL_Delay(150);
     }
-    P("[ OK ] buzzer done\r\n");
+
+    /* Test C bypasses TIM6 entirely - a blocking, hand-timed ~4 kHz square wave
+     * straight on the GPIO. This is the decisive isolator:
+     *   C sounds but B doesn't -> TIM6 ISR isn't firing (firmware/NVIC issue)
+     *   neither A/B/C sounds    -> hardware (Q5/BZ1 solder joint, wrong rail)
+     *   it works                -> we're done. */
+    P("  C) bit-bang ~4 kHz directly on PB9, no TIM6 - 700 ms ...\r\n");
+    buzzer_off();
+    for (uint32_t i = 0; i < 2800; i++) {                 /* ~2800 half-cycles */
+        HAL_GPIO_TogglePin(OZ_BUZZER_PORT, OZ_BUZZER_PIN);
+        for (volatile uint32_t d = 0; d < 1400; d++) { __NOP(); }  /* ~125 us */
+    }
+    HAL_GPIO_WritePin(OZ_BUZZER_PORT, OZ_BUZZER_PIN, GPIO_PIN_RESET);
+
+    P("[ OK ] buzzer diagnostic done - reply which made sound: A, B, C, or none\r\n");
 }
 
 static void do_ground_test(int ch)

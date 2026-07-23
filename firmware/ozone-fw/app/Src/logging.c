@@ -2,8 +2,25 @@
 #include "ozone_hal.h"
 #include "ozone_config.h"
 #include "fatfs.h"          /* CubeMX FATFS: SDFatFS, SDPath, retSD */
+#include "bsp_driver_sd.h"  /* BSP_SD_IsDetected / SD_PRESENT */
 #include <stdio.h>
 #include <string.h>
+
+/*
+ * ERR-004 FIX (2026-07-23): the PC3 card-detect switch is unreliable on rev 1.0
+ * and reads "not inserted" even with a good card seated. The CubeMX BSP gates
+ * card init on it - BSP_SD_Init() bails with MSD_ERROR_SD_NOT_PRESENT *before*
+ * ever calling HAL_SD_Init() when BSP_SD_IsDetected() != SD_PRESENT. Since
+ * HAL_SD_Init is reached ONLY through that path (MX_SDMMC1_SD_Init does not call
+ * it), a false "not present" blocks mounting a perfectly good card (symptom:
+ * f_mount -> FR_DISK_ERR, hsd1.State=RESET, CardType=0). BSP_SD_IsDetected() is
+ * __weak, so override it to always report present and let the real SD init/mount
+ * be the actual presence test. Regen-safe: lives in the app module.
+ */
+uint8_t BSP_SD_IsDetected(void)
+{
+    return SD_PRESENT;
+}
 
 /*
  * UPGRADE PATH (doc 15.7): replace the f_write-per-row scheme below with a
@@ -23,15 +40,19 @@ static const char *CSV_HEADER =
 
 bool logging_card_present(void)
 {
-    /* SD_CD (PC3) active-low: low = card inserted. */
+    /* SD_CD (PC3) reads the socket's card-detect switch. Polarity/wiring is
+     * socket-specific and proved unreliable on rev 1.0, so this is advisory
+     * only - logging_init() no longer gates on it; it tries the mount instead.
+     * Kept active-low (low = inserted) for the console's informational display. */
     return HAL_GPIO_ReadPin(SD_CD_GPIO_Port, SD_CD_Pin) == GPIO_PIN_RESET;
 }
 
 log_status_t logging_init(void)
 {
-    if (!logging_card_present()) return LOG_NO_CARD;
-
-    if (f_mount(&SDFatFS, SDPath, 1) != FR_OK) return LOG_MOUNT_FAIL;
+    /* Don't trust card-detect (PC3) - just try to mount. f_mount with the
+     * "mount immediately" flag actually touches the card, so a real absent /
+     * unreadable card returns an error here. */
+    if (f_mount(&SDFatFS, SDPath, 1) != FR_OK) return LOG_NO_CARD;
 
     /* Find a free filename OZONE000.CSV .. OZONE999.CSV. */
     char name[16];
