@@ -1,6 +1,7 @@
 #include "fcd.h"
 #include "pyro_trigger.h"
 #include "link_uart.h"
+#include "usb_cli.h"              /* also stream FCD over USB CDC (Web Serial) */
 #include "ozone_config.h"
 #include "main.h"                 /* HAL_GetTick */
 #include <string.h>
@@ -242,6 +243,7 @@ static void emit_tlm(void)
     if (d2 && n > 0 && n < (int)sizeof b - 24) n += snprintf(b + n, sizeof b - n, " dtok2=%04lX", (unsigned long)d2);
     if (n > 0 && n < (int)sizeof b - 3) { b[n++] = '\r'; b[n++] = '\n'; b[n] = '\0'; }
     link_uart_write(b);
+    if (usb_connected()) usb_write(b);   /* also to the USB-C console / Web Serial */
 }
 
 /* ── public API ────────────────────────────────────────────────────────────── */
@@ -279,5 +281,8 @@ void fcd_handle_line(const char *line, void (*reply)(const char *))
 
 void fcd_log(char level, const char *msg)
 {
-    link_uart_printf("LOG %c %s\r\n", level, msg);
+    char b[112];
+    snprintf(b, sizeof b, "LOG %c %s\r\n", level, msg);
+    link_uart_write(b);
+    if (usb_connected()) usb_write(b);   /* also to the USB-C console / Web Serial */
 }
