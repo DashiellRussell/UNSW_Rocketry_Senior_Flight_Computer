@@ -17,9 +17,18 @@ static const char *DESC =
  "\"rails\":[{\"id\":\"vbat\",\"label\":\"Main batt\",\"min\":6.4,\"max\":8.4,\"nom\":7.4},"
  "{\"id\":\"pyro_v\",\"label\":\"Pyro batt\",\"min\":6.0,\"max\":8.4,\"nom\":7.4}],"
  "\"graphs\":[{\"id\":\"agl_m\",\"label\":\"Altitude AGL\",\"unit\":\"m\"},"
- "{\"id\":\"vel_ms\",\"label\":\"Vertical vel\",\"unit\":\"m/s\"}],"
+ "{\"id\":\"vel_ms\",\"label\":\"Vertical vel\",\"unit\":\"m/s\"},"
+ "{\"id\":\"lo_g\",\"label\":\"Accel (low-g)\",\"unit\":\"g\"},"
+ "{\"id\":\"hi_g\",\"label\":\"Accel (high-g)\",\"unit\":\"g\"},"
+ "{\"id\":\"pressure_pa\",\"label\":\"Pressure\",\"unit\":\"Pa\"},"
+ "{\"id\":\"temp_c\",\"label\":\"Temperature\",\"unit\":\"C\"}],"
+ /* IMU orientation: which board axis is skyward at rest + the per-axis low-g
+  * accel keys, so the ground station can render a 3D orientation view. Right-
+  * handed axes; "up" = axis reading +1g when the rocket stands nose-up on the
+  * pad. CONFIRM up/sign against the physical LIS3DH mounting on this board. */
+ "\"imu\":{\"accel\":[\"lo_gx\",\"lo_gy\",\"lo_gz\"],\"up\":\"+z\",\"units\":\"g\",\"g_rest\":1.0},"
  "\"tlm\":[\"t_ms\",\"state\",\"agl_m\",\"alt_m\",\"vel_ms\",\"pressure_pa\",\"temp_c\","
- "\"hi_g\",\"lo_g\",\"vbat\",\"pyro_v\",\"armed\",\"cont1\",\"cont2\"],"
+ "\"hi_g\",\"lo_g\",\"lo_gx\",\"lo_gy\",\"lo_gz\",\"vbat\",\"pyro_v\",\"armed\",\"cont1\",\"cont2\"],"
  "\"states\":[\"IDLE\",\"ARMED\",\"BOOST\",\"COAST\",\"DROGUE\",\"MAIN\",\"LANDED\",\"FAULT\"],"
  "\"params\":[{\"id\":\"fire_mode\",\"label\":\"Pyro fire mode\",\"type\":\"enum\","
  "\"value\":\"session\",\"values\":[\"safe\",\"session\",\"hot\",\"direct\"]},"
@@ -218,13 +227,14 @@ static void emit_tlm(void)
     bool c1 = pyro_continuity(PYRO_CH1), c2 = pyro_continuity(PYRO_CH2);
     uint32_t d1 = pyro_trigger_live_token(PYRO_CH1), d2 = pyro_trigger_live_token(PYRO_CH2);
 
-    char b[224];
+    char b[288];
     int n = snprintf(b, sizeof b,
         "TLM t_ms=%lu state=%s agl_m=%.1f alt_m=%.1f vel_ms=%.1f pressure_pa=%.0f "
-        "temp_c=%.1f hi_g=%.2f lo_g=%.2f vbat=%.2f pyro_v=%.2f armed=%d cont1=%d cont2=%d",
+        "temp_c=%.1f hi_g=%.2f lo_g=%.2f lo_gx=%.3f lo_gy=%.3f lo_gz=%.3f "
+        "vbat=%.2f pyro_v=%.2f armed=%d cont1=%d cont2=%d",
         (unsigned long)s->timestamp_ms, flight_state_name(f->state),
         s->altitude_agl_m, s->altitude_m, f->vel_mps, s->pressure_pa, s->temperature_c,
-        s->hi_g_mag, s->lo_g_mag,
+        s->hi_g_mag, s->lo_g_mag, s->lo_g_x, s->lo_g_y, s->lo_g_z,
         C->read_vbat ? C->read_vbat() : -1.0f, C->read_pyro_vbat ? C->read_pyro_vbat() : -1.0f,
         pyro_is_armed() ? 1 : 0, c1 ? 1 : 0, c2 ? 1 : 0);
     /* rolling deploy tokens (HOT mode) so the ground can bind a one-key fire */

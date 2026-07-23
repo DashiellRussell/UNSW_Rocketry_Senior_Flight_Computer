@@ -116,6 +116,7 @@ forward-compatible (see [§9](#9-versioning--forward-compatibility)).
 | `states` | array of strings | no | The flight-state vocabulary (e.g. `["PAD","BOOST","COAST","APOGEE","DESCENT","LANDED"]`), used for labelling/colouring the `state` telemetry value. |
 | `params` | array of param objects | no | Tunable settings the console can read (`get`) and write (`set <id> <val>`). See shape below. |
 | `actions` | array of action objects | no | Commands the console can invoke via `do <id> [k=v]`. The console auto-renders one button per action. See shape below. |
+| `imu` | object `{accel:[x,y,z], up, units, g_rest}` | no | Inertial orientation (see below). `accel` = the three TLM keys carrying the accelerometer axis components; `up` = the board axis reading +1 g at rest; lets a ground station render a 3D orientation view. |
 | `caps` | object | no | Capability flags — see below. |
 
 **`params[]` object shape:**
@@ -148,6 +149,30 @@ forward-compatible (see [§9](#9-versioning--forward-compatibility)).
 | `arm` | bool | Whether arming is supported at all. |
 | `logs` | bool | Whether the board logs to SD (and those logs are downloadable). |
 | `telemetry` | bool | Whether the board has a live in-flight downlink. If `false`, the console shows a "logging, disconnect & fly" view instead of live graphs, since there's nothing to stream in flight. **Defaults to `true` if omitted.** |
+
+### Orientation (`imu`)
+
+If the board has an accelerometer, it can declare an `imu` block so the ground
+station can draw a live 3D orientation view instead of just a number:
+
+```jsonc
+"imu": {
+  "accel": ["lo_gx", "lo_gy", "lo_gz"], // the 3 TLM keys for the axis components
+  "up":    "+z",                        // board axis pointing skyward at rest (nose-up)
+  "units": "g",                         // component units
+  "g_rest": 1.0                         // |accel| magnitude at rest
+}
+```
+
+- Axes are **right-handed**; `up` is the axis that reads `+g_rest` when the
+  vehicle stands nose-up on the pad. It **must** match the physical sensor
+  mounting (sign included, e.g. `-y`).
+- The station derives **tilt** from the gravity vector at rest. This is
+  accel-only: there is **no yaw**, and during powered/coast flight the measured
+  vector is thrust/drag, not gravity — so label the view "orientation
+  (accel-derived)" and treat it as attitude-at-rest, not a full IMU.
+- Prefer the **low-g** accelerometer's axes for `accel` (clean 1 g at rest); the
+  high-g sensor saturates the resting reading.
 
 ### Full annotated example
 
