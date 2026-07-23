@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OZONE Ground Station</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header id="connectBar" class="connect-bar">
+  <div class="brand">
+    <span class="brand-mark">FCD/1</span>
+    <span class="brand-name">Ground Station</span>
+  </div>
+
+  <div class="connect-controls">
+    <label class="field">
+      <span>Link</span>
+      <select id="transportKind">
+        <option value="serial">Web Serial (USB / UART)</option>
+        <option value="ws">WebSocket (ESP32 telecom hub)</option>
+        <option value="sim">Built-in simulator (no hardware)</option>
+      </select>
+    </label>
+    <label class="field" id="wsUrlRow" style="display:none">
+      <span>URL</span>
+      <input id="wsUrlInput" type="text" placeholder="ws://192.168.4.1:81" />
+    </label>
+    <label class="field" id="baudRow">
+      <span>Baud</span>
+      <input id="baudInput" type="number" value="115200" step="1" />
+    </label>
+    <button id="connectBtn" class="btn btn-primary">Connect</button>
+    <button id="disconnectBtn" class="btn" style="display:none">Disconnect</button>
+    <span id="statusPill" class="status-pill">not connected</span>
+  </div>
+</header>
+
+<main id="waitingScreen" class="waiting-screen">
+  <div class="waiting-card">
+    <div class="pulse-dot"></div>
+    <h1>Waiting for handshake…</h1>
+    <p>Pick a transport above and hit <b>Connect</b>. The console sends <code>whoami</code> and
+       builds the whole UI from the board's <code>FCD1</code> descriptor — no board-specific code
+       here. No hardware handy? Choose <b>Built-in simulator</b> for a full demo flight.</p>
+  </div>
+</main>
+
+<div id="dashboard" style="display:none">
+  <div id="fallbackNote" class="fallback-note" style="display:none">
+    No <code>FCD1</code> descriptor arrived within 1.5&nbsp;s — showing a generic empty profile.
+    The board still gets plain <code>TLM</code>/<code>LOG</code> parsing; declare <code>checks</code>/
+    <code>rails</code>/<code>graphs</code>/<code>params</code>/<code>actions</code> in firmware to
+    populate the rest.
+  </div>
+
+  <div class="board-header">
+    <div class="board-title">
+      <h1 id="boardName">FLIGHT COMPUTER</h1>
+      <p id="boardSub" class="board-sub"></p>
+    </div>
+    <div class="board-meta">
+      <span id="boardFw" class="fw-tag"></span>
+      <span id="flightState" class="state-tag">—</span>
+      <span id="capsLine" class="caps-line"></span>
+    </div>
+  </div>
+
+  <section class="panel-row">
+    <div class="panel" id="checksPanelCard">
+      <h2>Preflight checks</h2>
+      <div id="checksPanel" class="checks-list"></div>
+    </div>
+    <div class="panel" id="railsPanelCard">
+      <h2>Power rails</h2>
+      <div id="railsPanel" class="rails-list"></div>
+    </div>
+  </section>
+
+  <section class="panel-row">
+    <div class="panel panel-graphs">
+      <h2>Live telemetry</h2>
+      <div id="graphsPanel" class="graphs-grid"></div>
+    </div>
+    <div class="panel panel-log">
+      <h2>Event log
+        <span class="log-counters">
+          <span class="count-badge count-err"><span id="logErrCount">0</span> err</span>
+          <span class="count-badge count-warn"><span id="logWarnCount">0</span> warn</span>
+        </span>
+      </h2>
+      <div id="logPanel" class="log-list"></div>
+    </div>
+  </section>
+
+  <section id="pyroSection" class="panel-row" style="display:none">
+    <div class="panel panel-pyro">
+      <h2>Pyro control</h2>
+      <div id="pyroPanel"></div>
+    </div>
+  </section>
+
+  <section class="panel-row">
+    <div class="panel">
+      <h2>Parameters</h2>
+      <div id="paramsPanel" class="params-list"></div>
+    </div>
+    <div class="panel">
+      <h2>Actions</h2>
+      <div id="actionsPanel" class="actions-list"></div>
+    </div>
+  </section>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
