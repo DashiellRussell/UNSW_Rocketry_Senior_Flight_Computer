@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdarg.h>
 
 /* ── the self-describing descriptor (one line; see docs/fcd-protocol.md) ───── */
 static const char *DESC =
@@ -35,6 +36,7 @@ static const char *DESC =
  "\"hi_g\",\"lo_g\",\"lo_gx\",\"lo_gy\",\"lo_gz\",\"vbat\",\"pyro_v\",\"armed\",\"cont1\",\"cont2\","
  "\"pg\",\"baro_ok\",\"accel_ok\",\"sd_ok\"],"
  "\"states\":[\"IDLE\",\"ARMED\",\"BOOST\",\"COAST\",\"DROGUE\",\"MAIN\",\"LANDED\",\"FAULT\"],"
+ "\"events\":[\"ARMED\",\"DISARMED\",\"LAUNCH\",\"BURNOUT\",\"APOGEE\",\"DEPLOY\",\"PYRO\",\"MAIN\",\"LANDED\",\"FAULT\"],"
  "\"params\":[{\"id\":\"fire_mode\",\"label\":\"Pyro fire mode\",\"type\":\"enum\","
  "\"value\":\"session\",\"values\":[\"safe\",\"session\",\"hot\",\"direct\"]},"
  "{\"id\":\"tlm_hz\",\"label\":\"Telemetry rate\",\"type\":\"int\",\"value\":5,\"min\":1,"
@@ -298,4 +300,16 @@ void fcd_log(char level, const char *msg)
     snprintf(b, sizeof b, "LOG %c %s\r\n", level, msg);
     link_uart_write(b);
     if (usb_connected()) usb_write(b);   /* also to the USB-C console / Web Serial */
+}
+
+void fcd_event(const char *name, const char *fmt, ...)
+{
+    char kv[128];
+    va_list ap; va_start(ap, fmt);
+    vsnprintf(kv, sizeof kv, fmt, ap);
+    va_end(ap);
+    char b[176];
+    snprintf(b, sizeof b, "EVT %s %s\r\n", name, kv);
+    link_uart_write(b);
+    if (usb_connected()) usb_write(b);
 }

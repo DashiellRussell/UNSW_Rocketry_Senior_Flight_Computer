@@ -55,4 +55,9 @@ void fcd_handle_line(const char *line, void (*reply)(const char *));
 /* Emit a LOG line on the UART link (faults/events surfaced to the ground). */
 void fcd_log(char level, const char *msg);   /* level: 'E' 'W' 'I' 'D' */
 
+/* Emit a structured board->ground flight EVENT: `EVT <name> <k=v ...>`.
+ * Machine-readable milestones the ESP/ground react to (LAUNCH, APOGEE, DEPLOY,
+ * PYRO, LANDED, ...). Streamed over both USART2 and USB CDC. */
+void fcd_event(const char *name, const char *fmt, ...);
+
 #endif /* FCD_H */

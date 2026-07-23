@@ -60,9 +60,17 @@ static bool app_power_good(void)
 static bool app_sd_ok(void) { return logging_active(); }
 static bool app_fire(pyro_channel_t ch)   /* immediate fire after trigger auth */
 {
+    bool cont_before = pyro_continuity(ch);
+    fcd_event("DEPLOY", "ch=%d", (int)ch + 1);
     logging_event(HAL_GetTick(), ch == PYRO_CH1 ? "FIRE_DROGUE" : "FIRE_MAIN");
     indication_set(IND_PYRO_FIRED);
-    return pyro_fire(ch);
+    bool ok = pyro_fire(ch);
+    bool cont_after = pyro_continuity(ch);
+    /* cont_cleared: had continuity, now open -> e-match consumed = fired for real */
+    fcd_event("PYRO", "ch=%d result=%s cont_cleared=%d",
+              (int)ch + 1, ok ? "fired" : "nofire",
+              (cont_before && !cont_after) ? 1 : 0);
+    return ok;
 }
 
 /* ---- init --------------------------------------------------------- */
@@ -169,17 +177,24 @@ static void map_indication(flight_state_t st, float vbat)
     }
 }
 
-static void do_deploy(deploy_cmd_t cmd)
+/* Map a flight-state transition to a board->ground EVENT name (NULL = none). */
+static const char *state_event(flight_state_t st)
 {
-    if (cmd == DEPLOY_DROGUE) {
-        logging_event(HAL_GetTick(), "FIRE_DROGUE");
-        indication_set(IND_PYRO_FIRED);
-        pyro_fire(PYRO_CH1);
-    } else if (cmd == DEPLOY_MAIN) {
-        logging_event(HAL_GetTick(), "FIRE_MAIN");
-        indication_set(IND_PYRO_FIRED);
-        pyro_fire(PYRO_CH2);
+    switch (st) {
+        case FS_BOOST:        return "LAUNCH";
+        case FS_COAST:        return "BURNOUT";
+        case FS_DROGUE:       return "APOGEE";
+        case FS_MAIN_DESCENT: return "MAIN";
+        case FS_LANDED:       return "LANDED";
+        case FS_FAULT:        return "FAULT";
+        default:              return NULL;    /* IDLE/ARMED -> arm/disarm events */
     }
+}
+
+static void do_deploy(deploy_cmd_t cmd)     /* auto-deploy routes through app_fire */
+{
+    if      (cmd == DEPLOY_DROGUE) app_fire(PYRO_CH1);
+    else if (cmd == DEPLOY_MAIN)   app_fire(PYRO_CH2);
 }
 
 /* ---- super-loop iteration ----------------------------------------- */
@@ -196,19 +211,26 @@ void ozone_app_run(void)
         pyro_arm();
         flight_arm(&g_flight);
         logging_event(now, "ARMED");
+        fcd_event("ARMED", "t_ms=%lu", (unsigned long)now);
     }
     if (g_disarm_request) {
         g_disarm_request = false;
         pyro_disarm();
         if (g_flight.state == FS_ARMED) g_flight.state = FS_IDLE;
         logging_event(now, "DISARMED");
+        fcd_event("DISARMED", "t_ms=%lu", (unsigned long)now);
     }
 
     /* 3. Flight state machine -> deployment. */
     flight_state_t prev = g_flight.state;
     deploy_cmd_t cmd = flight_update(&g_flight, &g_sample, now);
-    if (g_flight.state != prev)
+    if (g_flight.state != prev) {
         logging_event(now, flight_state_name(g_flight.state));
+        const char *ev = state_event(g_flight.state);
+        if (ev) fcd_event(ev, "t_ms=%lu agl=%.1f vel=%.1f max_agl=%.1f",
+                          (unsigned long)now, g_sample.altitude_agl_m,
+                          g_flight.vel_mps, g_flight.max_alt_agl);
+    }
     if (cmd != DEPLOY_NONE)
         do_deploy(cmd);
 
