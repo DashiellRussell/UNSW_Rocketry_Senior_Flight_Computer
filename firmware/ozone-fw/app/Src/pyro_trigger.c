@@ -109,7 +109,10 @@ trig_result_t pyro_trigger_arm_session(uint32_t supplied, uint32_t now_ms,
 {
     (void)now_ms;
     if (s_mode != FIRE_MODE_SESSION)         return TRIG_ERR_MODE;
-    if (s_env.is_armed && !s_env.is_armed()) return TRIG_ERR_NOT_ARMED;
+    /* No armed-check here: the session key is just the flight password and is
+     * set at flight-mode entry (arming is a deferred request actioned next
+     * super-loop, so it isn't armed yet at this instant). FIRING still requires
+     * armed + the key + continuity. */
     s_session_key = supplied ? supplied : next_rand();
     if (out_key) *out_key = s_session_key;
     return TRIG_SESSION_SET;

@@ -7,6 +7,7 @@
 #include "adc_sense.h"
 #include "logging.h"
 #include "fatfs.h"
+#include "fcd.h"
 #include <string.h>
 #include <math.h>
 
@@ -493,6 +494,14 @@ void console_task(uint32_t now_ms)
     if (!conn) { s_stream = false; return; }
 
     if (usb_cli_get_line(s_line, sizeof(s_line))) {
+        /* FCD protocol over USB CDC (ground-station testing without a UART
+         * adapter): route whoami/get/set/do lines to the FCD engine; the
+         * single-key menu never uses these words, so there's no clash. */
+        if (!strncmp(s_line, "whoami", 6) || !strncmp(s_line, "get", 3) ||
+            !strncmp(s_line, "set ", 4)   || !strncmp(s_line, "do ", 3)) {
+            fcd_handle_line(s_line, usb_write);
+            return;
+        }
         switch (s_menu) {
             case M_MAIN: dispatch_main(s_line); break;
             case M_TEST: dispatch_test(s_line); break;

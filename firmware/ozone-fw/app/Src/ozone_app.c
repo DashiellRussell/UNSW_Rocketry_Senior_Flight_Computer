@@ -11,6 +11,8 @@
 #include "flight.h"
 #include "usb_cli.h"
 #include "console.h"
+#include "link_uart.h"
+#include "fcd.h"
 
 /* ---- subsystem state ---------------------------------------------- */
 static sensor_suite_t  g_sensors;
@@ -31,6 +33,16 @@ void ozone_app_request_arm(void) { g_arm_request = true; }
 void ozone_app_request_ground_test(int ch) { g_ground_test_request = ch; }
 static void app_disarm(void)      { g_disarm_request = true; }
 static void app_zero_ground(void) { sensors_zero_ground(&g_sensors, &g_sample); }
+
+/* FCD telecom hooks. */
+static void app_log_start(void)   { logging_init(); }
+static void app_log_stop(void)    { logging_close(); }
+static bool app_fire(pyro_channel_t ch)   /* immediate fire after trigger auth */
+{
+    logging_event(HAL_GetTick(), ch == PYRO_CH1 ? "FIRE_DROGUE" : "FIRE_MAIN");
+    indication_set(IND_PYRO_FIRED);
+    return pyro_fire(ch);
+}
 
 /* ---- init --------------------------------------------------------- */
 void ozone_app_init(void)
@@ -94,6 +106,25 @@ void ozone_app_init(void)
         .read_pyro_vbat = adc_read_pyro_vbat,
     };
     console_init(&cctx);
+
+    /* Telecom link: FCD self-describing protocol over USART2 (radio / ESP32
+     * hub). Enables UART RX + streams telemetry + accepts ground commands.
+     * Pyro fire requests go through pyro_trigger (fire_mode handshake); the
+     * key switch + continuity in pyro.c remain the hardware guards. */
+    link_uart_init();
+    static const fcd_ctx_t fctx = {
+        .sample         = &g_sample,
+        .flight         = &g_flight,
+        .read_vbat      = adc_read_vbat,
+        .read_pyro_vbat = adc_read_pyro_vbat,
+        .arm            = ozone_app_request_arm,
+        .disarm         = app_disarm,
+        .zero_ground    = app_zero_ground,
+        .fire           = app_fire,
+        .log_start      = app_log_start,
+        .log_stop       = app_log_stop,
+    };
+    fcd_init(&fctx);
 }
 
 /* ---- helpers ------------------------------------------------------ */
@@ -211,6 +242,9 @@ void ozone_app_run(void)
 
     /* 9. USB-C ground console (menus + live stream). Non-blocking. */
     console_task(now);
+
+    /* 10. Telecom FCD link over USART2 (UART commands + telemetry). Non-blocking. */
+    fcd_task(now);
 
     (void)fresh_baro;
 }
