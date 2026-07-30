@@ -26,11 +26,11 @@ bool lis3dh_init(lis3dh_t *dev, int range_g)
     /* CTRL_REG4: BDU=1(0x80) | FS[5:4] | HR=1(0x08). High-resolution mode. */
     uint8_t fs;
     switch (range_g) {
-        case 2:  fs = 0x00; dev->scale = 4.0f  / 1000.0f; break; /* mg/LSB @ HR */
-        case 4:  fs = 0x10; dev->scale = 8.0f  / 1000.0f; break;
-        case 8:  fs = 0x20; dev->scale = 16.0f / 1000.0f; break;
+        case 2:  fs = 0x00; dev->scale = 1.0f  / 1000.0f; break; /* mg/LSB @ HR */
+        case 4:  fs = 0x10; dev->scale = 2.0f  / 1000.0f; break;
+        case 8:  fs = 0x20; dev->scale = 4.0f  / 1000.0f; break;
         case 16:
-        default: fs = 0x30; dev->scale = 48.0f / 1000.0f; break;
+        default: fs = 0x30; dev->scale = 12.0f / 1000.0f; break;
     }
     spi_reg_write(OZ_CS_LIS3DH_PORT, OZ_CS_LIS3DH_PIN, REG_CTRL4,
                   (uint8_t)(0x80 | fs | 0x08));

@@ -1,7 +1,27 @@
 #include "indication.h"
+#include "ozone_config.h"
 
 /* TIM1 ARR = 1000-1 (see CubeMX walkthrough): duty 0..1000. */
 #define PWM_MAX  1000
+
+/* ── RGB channel + brightness mapping ───────────────────────────────────
+ * The fitted 5050 part is pin-order G-R-B (TCWIN TC5050RGBF08), while the
+ * board nets RGB_R/G/B map to TIM1 CH1/CH2/CH3. If a colour comes out wrong on
+ * the bench, change which TIM_CHANNEL each logical colour drives below.
+ * The *_SCALE factors (0..100 %) trim per-channel brightness in software so you
+ * can balance white without touching the 150/100/100 resistors. */
+/* Final map confirmed 2026-06-26 against the schematic pin->colour nets:
+ *   pin 41 = PA8  = TIM1_CH1 = BLUE die
+ *   pin 42 = PA9  = TIM1_CH2 = RED die
+ *   pin 43 = PA10 = TIM1_CH3 = GREEN die
+ * (Earlier guess had RED on CH3 / GREEN on CH2 swapped, so green never lit -
+ *  "green" drove pin 42 = red die. Now each logical colour drives its real pin.) */
+#define RGB_CH_RED     TIM_CHANNEL_2     /* PA9  / pin 42 -> RED die   */
+#define RGB_CH_GREEN   TIM_CHANNEL_3     /* PA10 / pin 43 -> GREEN die */
+#define RGB_CH_BLUE    TIM_CHANNEL_1     /* PA8  / pin 41 -> BLUE die  */
+#define RGB_SCALE_RED    100
+#define RGB_SCALE_GREEN  100
+#define RGB_SCALE_BLUE   100
 
 static ind_state_t s_state = IND_IDLE;
 static bool        s_buzzer_pattern = false;
@@ -10,33 +30,100 @@ static bool        s_buzzer_on = false;
 
 static void rgb_write(uint16_t r, uint16_t g, uint16_t b)
 {
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, r);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, g);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, b);
+    __HAL_TIM_SET_COMPARE(&htim1, RGB_CH_RED,   (uint16_t)(r * RGB_SCALE_RED   / 100));
+    __HAL_TIM_SET_COMPARE(&htim1, RGB_CH_GREEN, (uint16_t)(g * RGB_SCALE_GREEN / 100));
+    __HAL_TIM_SET_COMPARE(&htim1, RGB_CH_BLUE,  (uint16_t)(b * RGB_SCALE_BLUE  / 100));
 }
 
 void indication_init(void)
 {
+    /* CubeMX generated TIM1_CH3 as Output-Compare "timing" mode
+     * (TIM_OCMODE_TIMING in MX_TIM1_Init), which drives NO pin output - so the
+     * GREEN channel (CH3 / PA10 / pin 43) could never light no matter the colour
+     * map. Re-arm CH3 as real PWM here (regen-safe). Permanent fix: in CubeMX
+     * set TIM1 Channel3 = "PWM Generation CH3" and regenerate, then this block
+     * is harmless/redundant. */
+    TIM_OC_InitTypeDef oc = {0};
+    oc.OCMode       = TIM_OCMODE_PWM1;
+    oc.Pulse        = 0;
+    oc.OCPolarity   = TIM_OCPOLARITY_HIGH;
+    oc.OCNPolarity  = TIM_OCNPOLARITY_HIGH;
+    oc.OCFastMode   = TIM_OCFAST_DISABLE;
+    oc.OCIdleState  = TIM_OCIDLESTATE_RESET;
+    oc.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+    HAL_TIM_PWM_ConfigChannel(&htim1, &oc, TIM_CHANNEL_3);
+
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+
+    /* Enable the TIM6 update interrupt here (the CubeMX NVIC checkbox for
+     * "TIM6 global interrupt" was not ticked). This is what makes the buzzer
+     * ISR below actually fire. Doing it in our code keeps it regen-safe.
+     * NOTE: if you ever tick that box in CubeMX, remove our TIM6_DAC_IRQHandler
+     * below to avoid a duplicate-symbol link error. */
+    HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
+
     buzzer_off();              /* TIM6 stays stopped until a tone is requested */
     rgb_write(0, 0, 0);
     s_state = IND_IDLE;
 }
 
-void indication_set(ind_state_t st) { s_state = st; }
+/* TIM6 update IRQ (vector is weak in the startup file; defining it here
+ * overrides it). Routes into HAL -> HAL_TIM_PeriodElapsedCallback -> toggles
+ * the buzzer pin. */
+void TIM6_DAC_IRQHandler(void)
+{
+    HAL_TIM_IRQHandler(&htim6);
+}
+
+/* Continuous armed tone: audible reminder that the pyro rail is live.
+ * Edge-triggered so repeated indication_set(IND_ARMED) calls each loop don't
+ * keep resetting TIM6's counter. */
+void indication_set(ind_state_t st)
+{
+    if (st == s_state) return;
+    if (st == IND_ARMED) {
+        buzzer_tone(OZONE_BUZZER_RESONANCE_HZ);
+    } else if (s_state == IND_ARMED) {
+        buzzer_off();
+    }
+    s_state = st;
+}
+
+void indication_solid(uint16_t r, uint16_t g, uint16_t b) { rgb_write(r, g, b); }
 
 /* ---- startup signalling -------------------------------------------- */
-/* Tones chosen near the CPT-9019S piezo resonance (~4 kHz) so they're loud;
- * pitch still rises/falls audibly to distinguish boot states. */
-#define NOTE_LO   2200u
-#define NOTE_MID  3300u
-#define NOTE_HI   4400u
+/* The CPT-9019S is loudest right at resonance, so keep all tones clustered
+ * tightly around OZONE_BUZZER_RESONANCE_HZ - a small +/- spread is still
+ * audibly distinguishable but stays in the loud part of the response curve.
+ * (The old 2.2/3.3 kHz tones were well off resonance => very quiet.) */
+#define NOTE_LO   (OZONE_BUZZER_RESONANCE_HZ - 600u)   /* ~3400 Hz */
+#define NOTE_MID  (OZONE_BUZZER_RESONANCE_HZ)          /* ~4000 Hz, loudest */
+#define NOTE_HI   (OZONE_BUZZER_RESONANCE_HZ + 500u)   /* ~4500 Hz */
 
 static void beep(uint32_t freq, uint32_t ms)
 {
     buzzer_tone(freq); HAL_Delay(ms); buzzer_off();
+}
+
+/* "Ode to Joy" opening phrase - Beethoven's 9th Symphony main theme
+ * (public domain, composed 1824). ~4.8 s at a moderate quarter-note tempo.
+ * freq_hz==0 is a rest. Blocking; fine for a deliberate ground-op novelty
+ * action, same pattern as indication_post_lamptest(). */
+void buzzer_play_tune(void)
+{
+    static const struct { uint32_t freq_hz, ms; } notes[] = {
+        {330, 300}, {330, 300}, {349, 300}, {392, 300},   /* E E F G   */
+        {392, 300}, {349, 300}, {330, 300}, {294, 300},   /* G F E D   */
+        {262, 300}, {262, 300}, {294, 300}, {330, 300},   /* C C D E   */
+        {330, 450}, {294, 150}, {294, 600},                /* E. D D.  */
+    };
+    for (int i = 0; i < (int)(sizeof(notes) / sizeof(notes[0])); i++) {
+        if (notes[i].freq_hz) beep(notes[i].freq_hz, notes[i].ms);
+        else                  HAL_Delay(notes[i].ms);
+    }
 }
 
 void indication_post_lamptest(void)
@@ -112,10 +199,11 @@ void indication_task(uint32_t now_ms)
             break;
     }
 
-    /* Recovery beep: 200 ms tone every 2 s. */
+    /* Recovery beep: 200 ms tone every 2 s - drive at resonance so the
+     * post-landing locator is as loud as possible. */
     if (s_buzzer_pattern) {
         if (!s_buzzer_on && (now_ms - s_buzzer_last) >= 2000) {
-            buzzer_tone(4000); s_buzzer_on = true; s_buzzer_last = now_ms;
+            buzzer_tone(OZONE_BUZZER_RESONANCE_HZ); s_buzzer_on = true; s_buzzer_last = now_ms;
         } else if (s_buzzer_on && (now_ms - s_buzzer_last) >= 200) {
             buzzer_off(); s_buzzer_on = false; s_buzzer_last = now_ms;
         }

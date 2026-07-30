@@ -1,5 +1,6 @@
 #include "fcd.h"
 #include "pyro_trigger.h"
+#include "indication.h"
 #include "link_uart.h"
 #include "usb_cli.h"              /* also stream FCD over USB CDC (Web Serial) */
 #include "ozone_config.h"
@@ -44,6 +45,7 @@ static const char *DESC =
  "\"actions\":[{\"id\":\"arm\",\"label\":\"Arm\",\"confirm\":\"ARM\"},"
  "{\"id\":\"disarm\",\"label\":\"Disarm\"},"
  "{\"id\":\"identify\",\"label\":\"Identify (blink+beep)\"},"
+ "{\"id\":\"play_tune\",\"label\":\"Play tune\"},"
  "{\"id\":\"preflight\",\"label\":\"Preflight checks\"},"
  "{\"id\":\"log_start\",\"label\":\"Start SD log\"},{\"id\":\"log_stop\",\"label\":\"Stop SD log\"},"
  "{\"id\":\"zero_baro\",\"label\":\"Zero baro\"},"
@@ -137,6 +139,7 @@ static void do_action(char *id, const char *args, void (*wr)(const char *))
                                          wr("ACK zero_baro\r\n"); }
     else if (!strcmp(id, "identify"))  { if (C->identify) C->identify();
                                          wr("ACK identify\r\n"); }
+    else if (!strcmp(id, "play_tune")) { buzzer_play_tune(); wr("ACK play_tune\r\n"); }
     else if (!strcmp(id, "log_start")) { if (C->log_start) C->log_start(); wr("ACK log_start\r\n"); }
     else if (!strcmp(id, "log_stop"))  { if (C->log_stop) C->log_stop();  wr("ACK log_stop\r\n"); }
     else if (!strcmp(id, "preflight")) { run_preflight(wr); }

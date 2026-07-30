@@ -60,7 +60,7 @@ bool pyro_continuity(pyro_channel_t ch)
     uint16_t raw  = adc_read_raw(chan);
     if (raw == 0xFFFF) return false;
     float node_v = ((float)raw / OZONE_ADC_FULL_SCALE) * OZONE_ADC_VREF
-                   * OZONE_PYRO_DIV_RATIO;
+                   * OZONE_PYRO_CONT_DIV_RATIO;
     return node_v > OZONE_CONT_THRESH_V;
 }
 
@@ -70,7 +70,7 @@ uint16_t pyro_cont_node_mv(pyro_channel_t ch)
     uint16_t raw  = adc_read_raw(chan);
     if (raw == 0xFFFF) return 0;
     float node_v = ((float)raw / OZONE_ADC_FULL_SCALE) * OZONE_ADC_VREF
-                   * OZONE_PYRO_DIV_RATIO;
+                   * OZONE_PYRO_CONT_DIV_RATIO;
     return (uint16_t)(node_v * 1000.0f);
 }
 

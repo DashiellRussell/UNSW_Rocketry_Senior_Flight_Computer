@@ -28,6 +28,14 @@
 #define OZONE_VBAT_DIV_RATIO        (133.0f / 33.0f * (5.99f / 5.38f))
 /* PYRO_BATT_SENSE divider (Pyro sheet: R15=10k top, R16=3.3k bottom).      */
 #define OZONE_PYRO_DIV_RATIO        (13.3f / 3.3f)     /* CALIBRATE against DMM */
+/* Continuity divider (R25/R26 ch1, R31/R32 ch2) - a SEPARATE physical divider
+ * from PYRO_BATT_SENSE above, despite sharing the same nominal 10k/3.3k BOM
+ * values. Single-point cal 2026-07-30: with ch1 shorted + armed, firmware
+ * reported node_v=815mV (nominal 13.3/3.3 ratio) while the real rail read
+ * 7.998V on the DMM -> true ratio = 4.0303 * (7.998/0.815) = 39.55. Re-check
+ * at a second voltage/channel; if the error isn't a constant ratio it's an
+ * offset (e.g. wrong resistor populated), not a gain error. */
+#define OZONE_PYRO_CONT_DIV_RATIO   (39.55f)
 #define OZONE_ADC_VREF              (3.30f)
 #define OZONE_ADC_FULL_SCALE        (4095.0f)          /* 12-bit */
 

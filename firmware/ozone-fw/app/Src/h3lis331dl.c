@@ -28,10 +28,10 @@ bool h3lis_init(h3lis_t *dev, int range_g)
     /* CTRL_REG4: BDU=1(0x80) | FS[5:4]. 00=100g, 01=200g, 11=400g. */
     uint8_t fs;
     switch (range_g) {
-        case 100: fs = 0x00; dev->scale = 100.0f / 32768.0f * 2.0f; break;
-        case 200: fs = 0x10; dev->scale = 200.0f / 32768.0f * 2.0f; break;
+        case 100: fs = 0x00; dev->scale = 100.0f / 32768.0f; break;
+        case 200: fs = 0x10; dev->scale = 200.0f / 32768.0f; break;
         case 400:
-        default:  fs = 0x30; dev->scale = 400.0f / 32768.0f * 2.0f; break;
+        default:  fs = 0x30; dev->scale = 400.0f / 32768.0f; break;
     }
     spi_reg_write(OZ_CS_H3LIS_PORT, OZ_CS_H3LIS_PIN, REG_CTRL4, (uint8_t)(0x80 | fs));
 

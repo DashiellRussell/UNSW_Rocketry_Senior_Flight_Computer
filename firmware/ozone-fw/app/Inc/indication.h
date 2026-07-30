@@ -25,6 +25,10 @@ void indication_init(void);
 void indication_set(ind_state_t st);
 void indication_task(uint32_t now_ms);
 
+/* Drive the RGB LED to a solid colour (each 0..1000). Used by the console
+ * lamp test so it can light one channel and print its name in sync. */
+void indication_solid(uint16_t r, uint16_t g, uint16_t b);
+
 /* ---- startup signalling (blocking, boot-time only) ---------------- */
 /* Lamp test: flash Red, Green, Blue in turn so you can confirm all three
  * RGB channels work right after soldering. */
@@ -45,5 +49,10 @@ void indication_error(bool on);
 void buzzer_tone(uint32_t freq_hz);
 void buzzer_off(void);
 void buzzer_recovery_pattern(bool enable);
+
+/* Play the "Ode to Joy" opening phrase (Beethoven, public domain) -
+ * blocking, ~4.8 s. Ground-op novelty/identify helper, triggered from the
+ * console or the FCD "play_tune" action. */
+void buzzer_play_tune(void);
 
 #endif /* INDICATION_H */
